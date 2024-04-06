@@ -1,0 +1,12 @@
+.parameters_for_search {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 80px;
+    width: 20%;
+    margin-left: 2.5%;
+
+    .parameter {
+        padding: 10px 0;
+    }
+}

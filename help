@@ -1,0 +1,114 @@
+// let user = async (url: string, description: string = 'location') => {
+  //   let a = await fetch(url)
+  //     .then(data => data.json())
+  //     .then(res => console.log(`${description}:`, res))
+  // }
+
+  // let getCode = () => {
+  //   let code = ''
+  //   let arr: any = []
+  //   let text = (window.location.href).split('')
+  //   text.map((x, i) => {
+  //     if (x == '=') {
+  //       for (let id = i; id < text.length; id++) {
+  //         if (text[id] !== '&') {
+  //           arr.push(text[id])
+  //         } else {
+  //           text.length = id
+  //         }
+  //       }
+  //     }
+  //   })
+  //   arr.shift()
+  //   return code = arr.join('')
+  // }
+
+
+
+  // let getToken = async (
+  //   url: string,
+  //   client_id: string = 'IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA',
+  //   client_secret: string = 'IHD3Q3BJ1ESOH3TSNRRL6CHUH4NBO4S91O6MF13QF6QPM386K4NFQSTRJH4M56MS',
+  //   description: string = 'получение токена'
+  // ) => {
+  //   let datas = {
+  //     client_id: `${client_id}`,
+  //     client_secret: `${client_secret}`,
+  //     code: `${getCode()}`,
+  //     grant_type: 'authorization_code',
+  //     redirect_uri: 'http://localhost:3000'
+  //   }
+  //   console.log(datas)
+
+  //   let a = await fetch(`${url}?grant_type=authorization_code&client_id=${client_id}&redirect_uri=${datas.redirect_uri}&client_secret=${client_secret}&code=${getCode()}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 YaBrowser/24.1.0.0 Safari/537.36',
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     },
+  //     mode: 'no-cors',
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch(error => console.error('Ошиб-очка:', error));
+
+  //   getToken('https://api.hh.ru/token')
+  // }
+
+  // let listJob = () => {
+  //   let a = fetch('https://api.hh.ru/vacancies', {
+  //     method: 'GET',
+  //     headers: {
+  //       'HH-User-Agent': 'JobSearch (maxim0ruseev@gmail.com)'
+  //     }
+  //   }).then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch(error => console.error('Ошиб-очка:', error));
+  // }
+
+  // listJob()
+
+  // let openJob = () => {
+  //   let a = fetch('https://api.hh.ru/vacancies/95394462', {
+  //     method: 'GET',
+  //     headers: {
+  //       'HH-User-Agent': 'JobSearch (maxim0ruseev@gmail.com)'
+  //     }
+  //   }).then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch(error => console.error('Ошиб-очка:', error));
+  // }
+
+  // openJob()
+
+  // let me = () => {
+  //   let a = fetch('https://api.hh.ru/me', {
+  //     method: 'GET',
+  //     headers: {
+  //       'HH-User-Agent': 'JobSearch (maxim0ruseev@gmail.com)'
+  //     }
+  //   }).then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch(error => console.error('Ошиб-очка:', error));
+  // }
+
+  // me()
+
+
+
+
+  // curl -k -X POST -H "Content-Type:application/x-www-form-urlencoded" -d "grant_type=authorization_code&client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA&client_secret=IHD3Q3BJ1ESOH3TSNRRL6CHUH4NBO4S91O6MF13QF6QPM386K4NFQSTRJH4M56MS&redirect_uri=http://localhost:3000&code=90E523C1D926BD32E94DBF9A04585394D4FB122DB0EE83A610D18888914531A5" https://hh.ru/oauth/token
+  // curl -k -X POST -H "Content-Type:application/x-www-form-urlencoded" -d "client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA&response_type=code&skip_choose_account=True&redirect_uri=http://localhost:3000" https://hh.ru/oauth/authorize
+
+
+
+
+
+
+  // let a = await fetch(`${url}?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&code=${code}`, {
+  //   method: 'POST',
+  //   headers: {
+  //     // 'User-Agent': 'JobSearch',
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   }
+  // })
