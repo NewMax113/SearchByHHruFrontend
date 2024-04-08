@@ -1,18 +1,23 @@
-import React from 'react'
-
+import React, { useEffect, useRef, useState } from 'react'
 import style from '../style/style.module.scss'
+import { useSelector } from 'react-redux'
+import { IRootState } from '../../Parameters_job_openings/model/reducer'
+import { VacancyMap } from './Vacancy'
+
+
 
 export const List_job_openings = () => {
-    return (
-        <>
-            <div>Найдено: 100 вакансий</div>
-            <div className={style.list_job_openings}>
-                <div className={style.vacancy}>Вакансия. Открыть. Добавить в избранное</div>
-                <div className={style.vacancy}>Вакансия. Открыть. Добавить в избранное</div>
-                <div className={style.vacancy}>Вакансия. Открыть. Добавить в избранное</div>
-                <div className={style.vacancy}>Вакансия. Открыть. Добавить в избранное</div>
-            </div>
-        </>
+    let vacancies = useSelector<IRootState, any>(state => state.job_openingReducer.job_opening_Array)
 
-    )
+return (
+    <>
+        {/* <div>{vacancies[0] && <>Найдено: {vacancies[0].length} вакансий</>}</div> */}
+        <div className={style.list_job_openings}>
+            {vacancies.length < 1
+                ? <div>Загрузка</div>
+                : vacancies[0].map((vacancy: any, index: number) => <VacancyMap vacancy={vacancy}/>)}
+        </div>
+    </>
+
+)
 }

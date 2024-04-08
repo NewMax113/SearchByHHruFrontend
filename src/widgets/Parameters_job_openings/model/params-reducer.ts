@@ -43,6 +43,7 @@ let params = createSlice({
                     // let oblastData = (oblast: any) => oblast.map((oblast: IRegion, index: number) => state.citys.push(oblast.name))
                     // regionData()
                     setCity(0, state.regions, state.citys)
+                    console.log('отраб')
                     break;
 
                 case 'Беларусь':
