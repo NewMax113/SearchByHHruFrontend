@@ -13,6 +13,7 @@ export const getElementVacancy = async (id: number) => {
             .catch(err => null)
         return {
             name: vacancy.name !== null ? vacancy.name : null,
+            city: vacancy.area !== null ? vacancy.area.name : null,
             description: vacancy.description !== null ? vacancy.description : null,
             salary: vacancy.salary !== null 
             ? {

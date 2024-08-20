@@ -20,17 +20,26 @@ export const Search_job_openings = () => {
   let textInput = (e: ChangeEvent<HTMLInputElement>) => setWord(e.target.value)
 
   const searchWord = async (word: string) => {
-    let selectedVacancies = await fetch(`https://api.hh.ru/vacancies?text=${word}&area=113`, {
-      method: 'GET',
-      headers: {
-        'HH-User-Agent': 'JobSearch (maxim0ruseev@gmail.com)'
-      },
-    })
+    // let selectedVacancies = await fetch(`https://api.hh.ru/vacancies?text=${word}&area=113`, {
+    //   method: 'GET',
+    //   headers: {
+    //     'HH-User-Agent': 'JobSearch (maxim0ruseev@gmail.com)'
+    //   },
+    // })
+    //   .then(response => response.json())
+    //   .then((data) => {return {
+    //     found: data.found,
+    //     items: data.items
+    //   }})
+    //   .catch(err => console.log('Ошибочка:', err))
+    // await dispatch (newObjectVacancyThunk(sortVacancies(selectedVacancies)))
+
+    let selectedVacancies = await fetch(`http://localhost:3000/`)
       .then(response => response.json())
-      // .then(data => console.log(sortVacancies(data)))
-      .then((data) => data)
+      .then(data => data)
       .catch(err => console.log('Ошибочка:', err))
-    await dispatch (newObjectVacancyThunk(sortVacancies(selectedVacancies)))
+
+    await dispatch (newObjectVacancyThunk(selectedVacancies))
   }
 
 
