@@ -5,6 +5,7 @@ import App from './app/App';
 import { Provider } from 'react-redux';
 import { store } from './widgets/Parameters_job_openings/model/reducer';
 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
