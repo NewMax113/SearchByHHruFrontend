@@ -39,7 +39,7 @@ export const Search_job_openings = () => {
       .then(data => data)
       .catch(err => console.log('Ошибочка:', err))
 
-    await dispatch (newObjectVacancyThunk(selectedVacancies))
+    await dispatch(newObjectVacancyThunk(selectedVacancies))
   }
 
 
@@ -88,18 +88,35 @@ export const Search_job_openings = () => {
 
 
   return (
-    <div className={style.search}>
-      <input
-        type="text"
-        placeholder='Поиск вакансии'
-        className={style.input}
-        onChange={textInput}
-      />
-      <button
-        className={style.btn}
-        onClick={() => searchWord(word)}>
-        Поиск
-      </button>
+    // <div className={style.search}>
+    //   <input
+    //     type="text"
+    //     placeholder='Поиск вакансии'
+    //     className={style.input}
+    //     onChange={textInput}
+    //   />
+    //   <button
+    //     className={style.btn}
+    //     onClick={() => searchWord(word)}>
+    //     Поиск
+    //   </button>
+    // </div>
+
+    <div className={'flex justify-center mt-1'}>
+      <div className={'flex justify-between w-2/4'}>
+        <input
+          type="text"
+          placeholder='Поиск вакансии'
+          className={'border-2 mx-1.5 w-full px-1 rounded-md'}
+          onChange={textInput}
+        />
+        <button className={"font-semibold tracking-wide bg-gray-800 text-white rounded-md px-4 py-2 hover:bg-gray-700 right-0 "}>
+          Поиск
+        </button>
+      </div>
     </div>
+
   )
 }
+
+
