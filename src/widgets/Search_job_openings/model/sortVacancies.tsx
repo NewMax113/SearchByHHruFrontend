@@ -13,7 +13,7 @@ export const sortVacancies = async (vacancies: any) => {
     }))
 
     console.log('vacanciesMap:', vacanciesMap)
-    return vacanciesMap
+    return [vacanciesMap, vacancies.pages]
 }
 
 //     //вариант решения 2
