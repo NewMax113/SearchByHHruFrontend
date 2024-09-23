@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
 
+
 interface IinitialState {
     regions: null | any,
     citys: any[] | any,
@@ -18,49 +19,114 @@ let initialState: IinitialState = {
     regionSelected: 'Россия'
 }
 
-let setCity = (num: number, region: any, citys: any) => {
-    let regionData = () => region[num].areas.map((region: IRegion, index: number) => citys.push(region.name))
+let setCity = (regions: any, allСities: string, region?: string) => {
+    if (allСities.length > 0 && allСities.length < 3) {
+        return []
+    }
+
+    let regionData = () => {
+        let arr: any = []
+        if (region === 'Россия') {
+            regions[0].areas.map((region2: IRegion, index: number) => {
+
+                if (region2.areas.length === 0) {
+                    console.log('ВЫЗОВ1')
+                    arr.push(region2.name)
+                    for (let i = 0; i < region2.areas.length; i++) {
+                        //debugger
+                        if (region2.areas[i].id.length < 4) {
+                            arr.push(region2.areas[i].name)
+                        }
+                    }
+                }
+                else if (allСities.length < 1) {
+                    console.log('ВЫЗОВ2')
+                    for (let i = 0; i < region2.areas.length; i++) {
+                        //debugger
+                        if (region2.areas[i].id.length < 4) {
+                            arr.push(region2.areas[i].name)
+                        }
+                    }
+                }
+                else {
+                    console.log('ВЫЗОВ3')
+                    //debugger
+                    for (let i = 0; i < region2.areas.length; i++) {
+                        arr.push(region2.areas[i].name)
+                    }
+                }
+            })
+        }
+        console.log(sortArr(findWordsContainingSyllable(allСities, arr)))
+        return sortArr(findWordsContainingSyllable(allСities, arr))
+    }
+
+    let sortArr = (arr: string[]): string[] => {
+        if (arr.length <= 1) {
+            return arr
+        }
+
+        let arrLeft = []
+        let arrRight = []
+        let mid = Math.floor(arr.length / 2)
+        let center = arr[mid]
+
+        for (let i = 0; i < arr.length; i++) {
+            if (i === mid) {
+                continue
+            }
+            if (arr[i] < center) {
+                arrLeft.push(arr[i])
+            } else {
+                arrRight.push(arr[i])
+            }
+        }
+
+        return [...sortArr(arrLeft), center, ...sortArr(arrRight)]
+    }
+
+    function findWordsContainingSyllable(syllable: any, words: any) {
+        const result = [];
+    
+        for (let i = 0; i < words.length; i++) {
+            if (words[i].startsWith(syllable)) {
+                result.push(words[i]);
+            }
+        }
+    
+        return result;
+    }
+
+    return regions.length && regionData()
+
     // let regionData = () => region[num].areas.map((region: IRegion, index: number) => oblastData(region.areas))
     // let oblastData = (oblast: any) => oblast.map((oblast: IRegion, index: number) => citys.push(oblast.name))
-    regionData()
+    
+
 }
 
+//поробовать сделать без case, напрямую выбор
 let params = createSlice({
     name: 'paramsSearch',
     initialState,
     reducers: {
         setRegions(state, action: PayloadAction<any>) {
             state.regions = action.payload
-            //console.log(state.regions)
         },
         setRegionsArray(state, action: PayloadAction<any>) {
             //console.log(state.regions)
             switch (action.payload) {
                 case 'Россия':
                     state.regionSelected = 'Россия'
-                    state.citys = []
-                    // let regionData = () => state.regions[0].areas.map((region: IRegion, index: number) => oblastData(region.areas))
-                    // let oblastData = (oblast: any) => oblast.map((oblast: IRegion, index: number) => state.citys.push(oblast.name))
-                    // regionData()
-                    setCity(0, state.regions, state.citys)
+                    state.citys = setCity(state.regions, '', 'Россия')
                     console.log('отраб')
                     break;
 
                 case 'Беларусь':
                     state.regionSelected = 'Беларусь'
-                    state.citys = []
-                    // let regionData = () => state.regions[1].areas.map((region: IRegion, index: number) => oblastData(region.areas))
-                    // let oblastData = (oblast: any) => oblast.map((oblast: IRegion, index: number) => state.citys.push(oblast.name))
-                    // regionData()
-                    setCity(4, state.regions, state.citys)
+                    state.citys = setCity(state.regions, '', 'Беларусь')
                     break;
             }
-
-            //лучше отправлять запрос на каждый выбор или сразу из полученных данных выбирать
-            // const regionData = () => action.payload.map((region: IRegion, index: number) => state.city.push(oblastData(region.areas)))
-            // const oblastData = (oblast: any) => oblast.map((oblast: IRegion, index: number) => cityData(oblast.areas))
-            // const cityData = (city: any) => city.map((city: IRegion, index: number) => city.name)
-            // regionData()
         },
         setRegionSelected(state, action: PayloadAction<any>) {
             switch (action.payload) {
@@ -71,9 +137,14 @@ let params = createSlice({
                     state.regionSelected = 'Беларусь'
                     break;
             }
+        },
+
+        observAllCities(state, action: PayloadAction<string>) {
+            state.citys = setCity(state.regions, action.payload, state.regionSelected)
         }
     },
 })
 
+
 export default params.reducer
-export const { setRegions, setRegionsArray, setRegionSelected } = params.actions
+export const { setRegions, setRegionsArray, setRegionSelected, observAllCities } = params.actions

@@ -18,10 +18,9 @@ export const Search_job_openings = () => {
   const dispatch: any = useDispatch<AppDispatch>()
   let vacancy = useSelector<IRootState, any>(state => console.log(state.job_openingReducer.job_opening_Array))
   let pages = useSelector<IRootState, any>(state => state.pages.page)
-  console.log(pages)
-
   let textInput = (e: ChangeEvent<HTMLInputElement>) => setWord(e.target.value)
 
+  const start = performance.now();
   const searchWord = async (word: string) => {
     let selectedVacancies: any = await fetch(`https://api.hh.ru/vacancies?text=${word}&area=113&per_page=6&page=${pages}`, {
       method: 'GET',
@@ -30,19 +29,23 @@ export const Search_job_openings = () => {
       },
     })
       .then(response => response.json())
-      .then((data) => {return {
-        pages: {
-          pages: data.pages,
-          page: data.page,
-          found: data.found
-        },
-        items: data.items
-      }})
+      .then((data) => {
+        return {
+          pages: {
+            pages: data.pages,
+            page: data.page,
+            found: data.found
+          },
+          items: data.items
+        }
+      })
       .catch(err => console.log('Ошибочка:', err))
-      console.log( await sortVacancies(selectedVacancies))
-      let vacancies = await sortVacancies(selectedVacancies)
-    dispatch (newObjectVacancyThunk(vacancies[0]))
-    dispatch (setPage(vacancies[1]))
+    let vacancies = await sortVacancies(selectedVacancies)
+    dispatch(newObjectVacancyThunk(vacancies[0]))
+    dispatch(setPage(vacancies[1]))
+
+    const end = performance.now();
+    console.log(`searchWord: ${end - start} ms`);
 
     // let selectedVacancies = await fetch(`http://localhost:3000/`)
     //   .then(response => response.json())

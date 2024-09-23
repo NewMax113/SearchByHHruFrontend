@@ -10,12 +10,11 @@ export const List_job_openings = () => {
     let vacancies = useSelector<IRootState, any>(state => state.job_openingReducer.job_opening_Array)
     let pages = useSelector<IRootState, any>(state => state.pages.found)
     const dispatch: any = useDispatch<AppDispatch>()
-    console.log(vacancies[0])
-    console.log(pages)
 
     const minusPage = () => {
         dispatch(pageMinus())
     }
+
     const plusPage = () => {
         dispatch(pagePlus())
     }

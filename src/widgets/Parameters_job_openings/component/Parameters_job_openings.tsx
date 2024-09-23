@@ -9,13 +9,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, IRootState } from '../../Parameters_job_openings/model/reducer'
 import { getRegions } from '../../Parameters_job_openings/model/getRegions'
 import { setRegions, setRegionsArray, setRegionSelected } from '../../Parameters_job_openings/model/params-reducer'
-import { Select } from './Select'
+import { Select1 } from './Select1'
+import { Select2 } from './Select2'
+import { InputValue } from './InputValue'
+import { RadioWorkExperience } from './radio'
+import { CheckboxFormWork } from './CheckboxFormWork'
 
 export const Parameters_job_openings: FC = () => {
     const dispatch: any = useDispatch<AppDispatch>()
     const city = useSelector<IRootState, any>(state => state.params.citys)
     const regions = useSelector<IRootState, any>(state => state.params.regions)
     let [dropDownOptions, setDropDownOptions] = useState<boolean>(false)
+    const workExperience: string[] = ['Нет опыта', '1-3', '3+']
+    const formatWork: string[] = ['Полный', 'Сменный', 'Частичный', 'Удаленный']
+    console.log(regions)
+    console.log(city)
 
     const btnDropDown = () => {
         setDropDownOptions(!dropDownOptions)
@@ -23,15 +31,16 @@ export const Parameters_job_openings: FC = () => {
     console.log(dropDownOptions)
 
     useEffect(() => {
+        console.log('Бесконечно')
         let setReg = async () => {
-            dispatch(setRegions(await getRegions()))
-            dispatch(setRegionsArray('Россия'))
+            await dispatch(setRegions(await getRegions()))
+            await dispatch(setRegionsArray('Россия'))
         }
         setReg()
 
 
     }, [])
-
+//неправильно работает выбор
 
 
     return (
@@ -86,7 +95,7 @@ export const Parameters_job_openings: FC = () => {
         <>
             <div className='absolute custom-left-neg-4 custom-top-neg-14 text-4xl cursor-pointer text-gray-400 hover:text-black' onClick={btnDropDown}>◸</div>
 
-            <div className={dropDownOptions ? "bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl fixed top-0" : "bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl fixed top-0 hidden" }>
+            <div className={dropDownOptions ? "bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl fixed top-0" : "bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl fixed top-0 hidden"}>
                 <h2 className="text-2xl font-medium mb-4">Параметры</h2>
                 <form>
                     <div className="mb-4">
@@ -96,48 +105,34 @@ export const Parameters_job_openings: FC = () => {
                     </div>
                     <div className="mb-4">
                         <label htmlFor="region" className="block text-gray-700 font-medium mb-2">Регион:</label>
-                        <select id="region" name="region"
-                            className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-                            <option value="">Россия</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <Select1 regions={regions} />
                     </div>
                     <div className="mb-4">
                         <label htmlFor="city" className="block text-gray-700 font-medium mb-2">Город:</label>
-                        <select id="city" name="city"
-                            className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-                            <option value="">Россия</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <Select2 city={city} />
                     </div>
                     <div className="mb-4">
                         <label htmlFor="number" className="block text-gray-700 font-medium mb-2">Зарплата:</label>
-                        <input placeholder='От' type="number" id="number" name="number"
-                            className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required />
-                        <input placeholder='До' type="number" id="number" name="number"
-                            className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required />
+                        <InputValue />
+                        <InputValue />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 font-medium mb-2">Требуемый опыт работы:</label>
                         <div className="flex flex-wrap -mx-2">
                             <div className="px-2 w-1/3">
-                                <label htmlFor="animal-cat" className="block text-gray-700 font-medium mb-2">
-                                    <input type="checkbox" id="animal-cat" name="animal[]" value="cat" className="mr-2" />Нет опыта
+                                <label htmlFor="radio1" className="block text-gray-700 font-medium mb-2">
+                                    <input type="radio" id="radio1" name="work-experience" value="cat" className="mr-2" />Нет опыта
                                 </label>
                             </div>
                             <div className="px-2 w-1/3">
-                                <label htmlFor="animal-dog" className="block text-gray-700 font-medium mb-2">
-                                    <input type="checkbox" id="animal-dog" name="animal[]" value="dog"
+                                <label htmlFor="radio2" className="block text-gray-700 font-medium mb-2">
+                                    <input type="radio" id="radio2" name="work-experience" value="dog"
                                         className="mr-2" />1-3
                                 </label>
                             </div>
                             <div className="px-2 w-1/3">
-                                <label htmlFor="animal-bird" className="block text-gray-700 font-medium mb-2">
-                                    <input type="checkbox" id="animal-bird" name="animal[]" value="bird" className="mr-2" />3+
+                                <label htmlFor="radio3" className="block text-gray-700 font-medium mb-2">
+                                    <input type="radio" id="radio3" name="work-experience" value="bird" className="mr-2" />3+
                                 </label>
                             </div>
                         </div>
@@ -146,24 +141,24 @@ export const Parameters_job_openings: FC = () => {
                         <label className="block text-gray-700 font-medium mb-2">График работы:</label>
                         <div className="flex flex-wrap -mx-2">
                             <div className="px-2 w-1/4">
-                                <label htmlFor="animal-cat" className="block text-gray-700 font-medium mb-2">
-                                    <input type="checkbox" id="animal-cat" name="animal[]" value="cat" className="mr-2" />Полный
+                                <label htmlFor="checkbox1" className="block text-gray-700 font-medium mb-2">
+                                    <input type="checkbox" id="checkbox1" name="work-schedule" value="cat" className="mr-2" />Полный
                                 </label>
                             </div>
                             <div className="px-2 w-1/4">
-                                <label htmlFor="animal-dog" className="block text-gray-700 font-medium mb-2">
-                                    <input type="checkbox" id="animal-dog" name="animal[]" value="dog"
+                                <label htmlFor="checkbox2" className="block text-gray-700 font-medium mb-2">
+                                    <input type="checkbox" id="checkbox2" name="work-schedule" value="dog"
                                         className="mr-2" />Сменный
                                 </label>
                             </div>
                             <div className="px-2 w-1/4">
-                                <label htmlFor="animal-bird" className="block text-gray-700 font-medium mb-2">
-                                    <input type="checkbox" id="animal-bird" name="animal[]" value="bird" className="mr-2" />Частичный
+                                <label htmlFor="checkbox3" className="block text-gray-700 font-medium mb-2">
+                                    <input type="checkbox" id="checkbox3" name="work-schedule" value="bird" className="mr-2" />Частичный
                                 </label>
                             </div>
                             <div className="px-2 w-1/4">
-                                <label htmlFor="animal-bird" className="block text-gray-700 font-medium mb-2">
-                                    <input type="checkbox" id="animal-bird" name="animal[]" value="bird" className="mr-2" />Удаленынй
+                                <label htmlFor="checkbox4" className="block text-gray-700 font-medium mb-2">
+                                    <input type="checkbox" id="checkbox4" name="animal[]" value="bird" className="mr-2" />Удаленынй
                                 </label>
                             </div>
                         </div>

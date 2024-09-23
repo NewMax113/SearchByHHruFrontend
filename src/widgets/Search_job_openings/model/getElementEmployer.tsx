@@ -12,13 +12,13 @@ export const getElementEmployer = async (id: number) => {
             .then(data => data)
             .catch(err => null)
         return {
-            name: selectedVacancies.name,
-            logo_urls: selectedVacancies.logo_urls.original,
-            type: selectedVacancies.type,
-            trusted: selectedVacancies.trusted,
-            accredited_it_employer: selectedVacancies.accredited_it_employer,
-            site_url: selectedVacancies.site_url,
-            open_vacancies: selectedVacancies.open_vacancies,
+            name: selectedVacancies?.name || null,
+            logo_urls: selectedVacancies?.logo_urls?.original  || null,
+            type: selectedVacancies?.type || null,
+            trusted: selectedVacancies?.trusted || null,
+            accredited_it_employer: selectedVacancies?.accredited_it_employer || null,
+            site_url: selectedVacancies?.site_url || null,
+            open_vacancies: selectedVacancies?.open_vacancies || null,
         }
         //добавить проверки
     } catch (e) {
