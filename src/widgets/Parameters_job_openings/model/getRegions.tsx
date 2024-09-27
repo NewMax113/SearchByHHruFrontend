@@ -1,7 +1,3 @@
-import { FC } from "react";
-import { setRegions } from "./params-reducer";
-
-
 export const getRegions = async () => {
   try {
     let selectedVacancies = await fetch(`https://api.hh.ru/areas`, {

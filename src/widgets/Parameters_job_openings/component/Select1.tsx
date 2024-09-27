@@ -4,8 +4,7 @@ import { AppDispatch } from '../model/reducer'
 import { setRegions, setRegionsArray, setRegionSelected } from '../model/params-reducer'
 
 
-export const Select1: FC<any> = (regions): any => {
-    //console.log(regions.regions)
+const Select1: FC<any> = ({regions}): any => {
     let [city, setCity] = useState('Россия')
     const dispatch: any = useDispatch<AppDispatch>()
 
@@ -14,7 +13,9 @@ export const Select1: FC<any> = (regions): any => {
                         setCity(e.target.value)
                         dispatch(setRegionsArray(e.target.value))
                         }}>
-            {regions.regions.length > 0 ? regions.regions.map((x: any) => <option value={x.name} >{x.name}</option>) : <div>Загрузка</div>}
+            {(regions.length > 0 && regions) ? regions.map((x: any) => <option value={x.name} >{x.name}</option>) : <div>Загрузка</div>}
         </select>
     )
 }
+
+export default Select1
