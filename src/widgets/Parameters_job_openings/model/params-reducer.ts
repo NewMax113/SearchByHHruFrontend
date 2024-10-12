@@ -57,7 +57,6 @@ let setCity = (regions: any, allСities: string, region?: string) => {
                 }
             })
         }
-        console.log(sortArr(findWordsContainingSyllable(allСities, arr)))
         return sortArr(findWordsContainingSyllable(allСities, arr))
     }
 
@@ -70,7 +69,6 @@ let setCity = (regions: any, allСities: string, region?: string) => {
         let arrRight = []
         let mid = Math.floor(arr.length / 2)
         let center = arr[mid]
-
         for (let i = 0; i < arr.length; i++) {
             if (i === mid) {
                 continue
@@ -81,28 +79,20 @@ let setCity = (regions: any, allСities: string, region?: string) => {
                 arrRight.push(arr[i])
             }
         }
-
         return [...sortArr(arrLeft), center, ...sortArr(arrRight)]
     }
 
     function findWordsContainingSyllable(syllable: any, words: any) {
         const result = [];
-    
         for (let i = 0; i < words.length; i++) {
-            if (words[i].startsWith(syllable)) {
+            if (words[i].toLowerCase().startsWith(syllable.toLowerCase())) {
                 result.push(words[i]);
             }
         }
-    
         return result;
     }
 
     return regions.length && regionData()
-
-    // let regionData = () => region[num].areas.map((region: IRegion, index: number) => oblastData(region.areas))
-    // let oblastData = (oblast: any) => oblast.map((oblast: IRegion, index: number) => citys.push(oblast.name))
-    
-
 }
 
 //поробовать сделать без case, напрямую выбор

@@ -1,18 +1,21 @@
-import React, {useState} from 'react'
+import { useState } from 'react'
 import { ChangeEvent } from 'react'
 
 const InputValue = () => {
-//сделать как хук, а из InputValue сделать обычный Input и добавить хук
-    let [value, setValue] = useState<string>('')
+    let [value, setValue] = useState<any>('')
+
     const valueInput = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
-        setValue(e.target.value)
+        let num:string | number = parseInt(e.target.value.replace(/\D/g, ''));
+        console.log(Number.isNaN(num))
+        num = Number.isNaN(num) ? '' : num.toLocaleString()
+        num.length <= 10 && num[0] !== '0' && setValue(`${num}`) 
     }
 
     return (
-        <input placeholder='От' type="number" id="number" name="number"
-            className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400 mt-1" required onChange={valueInput} />
+        <input type="text" value={value}
+            className="border-b-2 border-gray-400 text-center p-0.5 focus:outline-none focus:border-blue-400 mt-1 w-2/5" onChange={valueInput} />
     )
 }
 
 export default InputValue
+

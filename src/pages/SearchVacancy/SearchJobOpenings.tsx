@@ -15,10 +15,10 @@ export const SearchVacancy = () => {
         <List_job_openings />
       </div>
       <div>
-        
-        <Parameters_job_openings />
+        {/* <Parameters_job_openings /> */}
       </div>
 
     </>
   )
 }
+ 
