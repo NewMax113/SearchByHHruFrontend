@@ -12,7 +12,7 @@ export const Parameters_job_openings: FC<any> = ({ setDarkeningTheBackground }) 
         city: '',
         earning: {
             earningsFrom: '',
-            earningUpTo: ''
+            earningUpTo: '',
         },
         workExperience: [],
         workSchedule: [],
@@ -74,7 +74,7 @@ export const Parameters_job_openings: FC<any> = ({ setDarkeningTheBackground }) 
                                 </div>
                             </div>
                         </div>
-                        <div className="mb-4">
+                        <div>
                             <label className="block text-gray-700 font-medium mb-2">График работы:</label>
                             <div className="flex flex-wrap -mx-2">
                                 <div className=" w-1/4">
