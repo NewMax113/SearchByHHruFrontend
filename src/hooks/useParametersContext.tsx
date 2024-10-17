@@ -18,8 +18,8 @@ const ParametersContext = createContext<{
         country: 'Россия',
         city: '',
         earning: '',
-        workExperience: [],
-        workSchedule: [],
+        workExperience: {noExp: false, minExp: false, maxExp: false},
+        workSchedule: {full: false, replaceable: false, remote: false,}, //полный, сменный, удаленный
     },
     updateParameter: () => {}
 });

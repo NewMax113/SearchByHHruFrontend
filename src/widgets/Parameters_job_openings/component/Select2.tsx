@@ -11,21 +11,27 @@ interface Select {
     nameLabel: string
     htmlFor: string
 }
+
 const Select2: FC<Select> = ({ city }) => {
     const dispatch: any = useDispatch<AppDispatch>()
     let [text, setText] = useState<string>('')
-    const { parameters, updateParameter } = useParameters();
+    const { updateParameter } = useParameters();
+
     const textInput = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log('СРАБОТАЛО!', e.target.value)
         setText(e.target.value)
-        
     }
 
-    useEffect(()=> {
-        if (city.length === 1) {
+    let checkingValidityCity = () => {
+        if (text === city[0]) {
             updateParameter({ city: city[0] })
+        } else {
+            alert('Вы ввели некорректные данные')
+            if (city.length === 1) {
+                alert(`Могу предложить ${city[0]}`)
+                setText(city[0])
+            }
         }
-    }, [city])
+    }
 
     useEffect(() => {
         if (text) {
@@ -37,7 +43,7 @@ const Select2: FC<Select> = ({ city }) => {
         }
     }, [text])
 
-
+    
     return (
         <div>
             <input
@@ -45,7 +51,9 @@ const Select2: FC<Select> = ({ city }) => {
                 list="ice-cream-flavors"
                 id="ice-cream-choice"
                 name="ice-cream-choice"
+                value={text}
                 onChange={textInput}
+                onBlur={checkingValidityCity}
             />
             <datalist className='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400' id="ice-cream-flavors">
                 {(city.length > 0 && city)

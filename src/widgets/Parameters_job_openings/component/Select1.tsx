@@ -7,7 +7,7 @@ import { useParameters } from '../../../hooks/useParametersContext'
 
 const Select1: FC<any> = ({regions}): any => {
     let [city, setCity] = useState('Россия')
-    const { parameters, updateParameter } = useParameters();
+    const { updateParameter } = useParameters();
     const setParams = () => {
         updateParameter({country: city})
     }
