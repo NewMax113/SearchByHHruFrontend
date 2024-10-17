@@ -14,7 +14,11 @@ export const SearchVacancy = () => {
         <Search_job_openings />
         <List_job_openings />
       </div>
-      <Parameters_job_openings />
+      <div>
+        {/* <Parameters_job_openings /> */}
+      </div>
+
     </>
   )
 }
+ 
