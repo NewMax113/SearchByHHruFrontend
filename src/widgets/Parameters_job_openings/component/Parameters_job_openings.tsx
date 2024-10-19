@@ -54,14 +54,14 @@ export const Parameters_job_openings: FC<any> = ({ setDarkeningTheBackground }) 
                             <div className="mb-4">
                                 <label className="block text-gray-700 font-medium mb-2">Требуемый опыт работы:</label>
                                 <div className="flex flex-wrap -mx-2">
-                                    <div className="px-2 w-1/3">
-                                        <Input switchInput={false} typeInput='radio' value='Нет опыта' text='Нет опыта' id='radio1' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
+                                    <div className="px-2">
+                                        <Input typeInput='radio' value='Нет опыта' text='Нет опыта' id='radio1' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
                                     </div>
-                                    <div className="px-2 w-1/3">
-                                        <Input switchInput={false} typeInput='radio' value='1-3' text='1-3' id='radio2' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
+                                    <div className="px-2">
+                                        <Input typeInput='radio' value='1-3' text='1-3' id='radio2' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
                                     </div>
-                                    <div className="px-2 w-1/3">
-                                        <Input switchInput={false} typeInput='radio' value='3+' text='3+' id='radio3' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
+                                    <div className="px-2">
+                                        <Input typeInput='radio' value='3+' text='3+' id='radio3' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
                                     </div>
                                 </div>
                             </div>
@@ -69,16 +69,16 @@ export const Parameters_job_openings: FC<any> = ({ setDarkeningTheBackground }) 
                                 <label className="block text-gray-700 font-medium mb-2">График работы:</label>
                                 <div className="flex flex-wrap -mx-2">
                                     <div>
-                                        <Input switchInput={false} typeInput='button' value='Полный' id='checkbox1' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classInput='mr-2 py-2 px-2 cursor-pointer' />
+                                        <Input typeInput='button' value='Полный' id='checkbox1' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classInput='mr-2 py-2 px-2 cursor-pointer' />
                                     </div>
                                     <div >
-                                        <Input switchInput={false} typeInput='button' value='Сменный' id='checkbox2' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classInput='mr-2 py-2 px-2 cursor-pointer' />
+                                        <Input typeInput='button' value='Сменный' id='checkbox2' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classInput='mr-2 py-2 px-2 cursor-pointer' />
                                     </div>
                                     {/* <div >
-                                        <Input switchInput={false} typeInput='button' value='Частичный' id='checkbox3' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classInput='mr-2 py-2 px-2 cursor-pointer' />
+                                        <Input typeInput='button' value='Частичный' id='checkbox3' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classInput='mr-2 py-2 px-2 cursor-pointer' />
                                     </div> */}
                                     <div>
-                                        <Input switchInput={false} typeInput='button' value='Удаленынй' id='checkbox4' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classInput='mr-2 py-2 px-2 cursor-pointer' />
+                                        <Input typeInput='button' value='Удаленынй' id='checkbox4' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classInput='mr-2 py-2 px-2 cursor-pointer' />
                                     </div>
                                 </div>
                             </div>

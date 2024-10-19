@@ -1,11 +1,24 @@
 import React, { createContext, FC, useContext, useState } from 'react';
 
+interface IWorkExperience {
+    noExp: boolean,
+    minExp: boolean,
+    maxExp: boolean
+}
+
+interface IWorkSchedule {
+    full: boolean,
+    replaceable: boolean,
+    remote: boolean
+}
+
+
 interface IObjectParams {
     country: string,
     city: string,
     earning: string,
-    workExperience: object,
-    workSchedule: object,
+    workExperience: IWorkExperience,
+    workSchedule: IWorkSchedule,
     modification?: object
 }
 
@@ -29,8 +42,8 @@ export const ParametersProvider: FC<{ children: React.ReactNode }> = ({ children
         country: 'Россия',
         city: '',
         earning: '',
-        workExperience: [],
-        workSchedule: [],
+        workExperience: {noExp: false, minExp: false, maxExp: false},
+        workSchedule: {full: false, replaceable: false, remote: false},
     });
 
     const updateParameter = (value: object) => {
@@ -39,8 +52,7 @@ export const ParametersProvider: FC<{ children: React.ReactNode }> = ({ children
             ...value,
         }));
     };
-    console.log(children)
-    console.log(parameters)
+
     return (
         <ParametersContext.Provider value={{ parameters, updateParameter }}>
             {children}
