@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
-import { getElementEmployer } from "./getElementEmployer"
-import { getElementVacancy } from "./getElementVacancy"
 import { newObjectVacancyThunk } from "./newObjectVacancy-thunk"
 
 interface IVacancy {
@@ -34,7 +32,7 @@ let initialState: IinitialState = {
     job_opening_Array: []
 }
 
-let job_openingReducer = createSlice({
+let jobOpeningReducer = createSlice({
     name: 'paramsSearch',
     initialState,
     reducers: {
@@ -61,5 +59,5 @@ let job_openingReducer = createSlice({
     }
 })
 
-export default job_openingReducer.reducer
-export const { getListVacancies } = job_openingReducer.actions
+export default jobOpeningReducer.reducer
+export const { getListVacancies } = jobOpeningReducer.actions

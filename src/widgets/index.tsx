@@ -1,9 +1,9 @@
-import { List_job_openings } from "./List_job_openings/component/List_job_openings";
-import { Search_job_openings } from "./Search_job_openings/component/Search_job_openings";
-import { Parameters_job_openings } from "./Parameters_job_openings/component/Parameters_job_openings";
+import ListJobOpenings from "./list-job-openings/component/ListJobOpenings";
+import SearchJobOpenings from "./search-job-openings/component/SearchJobOpenings";
+import ParametersJobOpenings from "./parameters-job-openings/component/ParametersJobOpenings";
 
 export {
-    List_job_openings,
-    Search_job_openings,
-    Parameters_job_openings
+    ListJobOpenings,
+    SearchJobOpenings,
+    ParametersJobOpenings
 }

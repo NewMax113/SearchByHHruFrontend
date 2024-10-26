@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
 import { ChangeEvent } from 'react'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../model/reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, IRootState } from '../model/reducer'
 import { observAllCities } from '../model/params-reducer'
 import { useParameters } from '../../../hooks/useParametersContext'
+import Input from '../../../ui/Input'
 
 interface Select {
     city: any
@@ -14,8 +15,10 @@ interface Select {
 
 const Select2: FC<Select> = ({ city }) => {
     const dispatch: any = useDispatch<AppDispatch>()
-    let [text, setText] = useState<string>('')
-    const { updateParameter } = useParameters();
+    let paramenersRedux = useSelector<IRootState, any>(state => state.params.parameters)
+    const { parameters, updateParameter } = useParameters();
+    let [text, setText] = useState<string>(parameters.city)
+
 
     const textInput = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
@@ -43,10 +46,19 @@ const Select2: FC<Select> = ({ city }) => {
         }
     }, [text])
 
-    
     return (
         <div>
-            <input
+            <Input
+                typeInput='text'
+                classInput='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400'
+                list='ice-cream-flavors'
+                id='ice-cream-choice'
+                name='ice-cream-choice'
+                value={text}
+                onchange={textInput}
+                onBlur={checkingValidityCity} />
+            {/* <input
+                type='text'
                 className='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400'
                 list="ice-cream-flavors"
                 id="ice-cream-choice"
@@ -54,7 +66,7 @@ const Select2: FC<Select> = ({ city }) => {
                 value={text}
                 onChange={textInput}
                 onBlur={checkingValidityCity}
-            />
+            /> */}
             <datalist className='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400' id="ice-cream-flavors">
                 {(city.length > 0 && city)
                     ? city.map((x: any) => <option value={x}>{x}</option>)

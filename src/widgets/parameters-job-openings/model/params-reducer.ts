@@ -5,7 +5,9 @@ import { PayloadAction } from "@reduxjs/toolkit"
 interface IinitialState {
     regions: null | any,
     citys: any[] | any,
-    regionSelected: string
+    regionSelected: string,
+    parameters: IObjectParams,
+    parametersPresent: boolean
 }
 
 interface IRegion {
@@ -13,10 +15,40 @@ interface IRegion {
     name: string
 }
 
+interface IWorkExperience {
+    noExp: boolean,
+    minExp: boolean,
+    maxExp: boolean
+}
+
+interface IWorkSchedule {
+    full: boolean,
+    replaceable: boolean,
+    remote: boolean
+}
+
+
+interface IObjectParams {
+    country: string,
+    city: string,
+    earning: string,
+    workExperience: IWorkExperience,
+    workSchedule: IWorkSchedule,
+    modification?: object
+}
+
 let initialState: IinitialState = {
     regions: [],
     citys: [],
-    regionSelected: 'Россия'
+    regionSelected: 'Россия',
+    parameters: {
+        country: 'Россия',
+        city: '',
+        earning: '',
+        workExperience: {noExp: false, minExp: false, maxExp: false},
+        workSchedule: {full: false, replaceable: false, remote: false,}, //полный, сменный, удаленный
+    },
+    parametersPresent: false
 }
 
 let setCity = (regions: any, allСities: string, region?: string) => {
@@ -131,10 +163,25 @@ let params = createSlice({
 
         observAllCities(state, action: PayloadAction<string>) {
             state.citys = setCity(state.regions, action.payload, state.regionSelected)
+        },
+
+        setParametersRequest(state, action: PayloadAction<IObjectParams>){
+            state.parameters = action.payload
+            state.parametersPresent = true
+        },
+        resetParameters(state){
+            state.parameters = {
+                country: 'Россия',
+                city: '',
+                earning: '',
+                workExperience: {noExp: false, minExp: false, maxExp: false},
+                workSchedule: {full: false, replaceable: false, remote: false,},
+            }
+            state.parametersPresent = false
         }
     },
 })
 
 
 export default params.reducer
-export const { setRegions, setRegionsArray, setRegionSelected, observAllCities } = params.actions
+export const { setRegions, setRegionsArray, setRegionSelected, observAllCities, setParametersRequest, resetParameters } = params.actions

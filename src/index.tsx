@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './app/App';
 import { Provider } from 'react-redux';
-import { store } from './widgets/Parameters_job_openings/model/reducer';
+import { store } from './widgets/parameters-job-openings/model/reducer';
 
 
 const root = ReactDOM.createRoot(

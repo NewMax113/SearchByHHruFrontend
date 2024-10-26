@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import { ChangeEvent } from 'react'
+import { FC, useState, ChangeEvent } from 'react'
 import { useParameters } from '../../../hooks/useParametersContext'
+import Input from '../../../ui/Input'
 
-const InputValue = () => {
-    let [value, setValue] = useState<any>('')
-    const { updateParameter } = useParameters();
+const MoneyInputModalContainer: FC = () => {
+    const { parameters, updateParameter } = useParameters();
+    let [value, setValue] = useState<any>(parameters.earning)
 
     const valueInput = (e: ChangeEvent<HTMLInputElement>) => {
         let num: string | number = parseInt(e.target.value.replace(/\D/g, ''));
@@ -18,14 +18,15 @@ const InputValue = () => {
     }
 
     return (
-        <input
-            type="text"
+        <Input
             value={value}
+            typeInput={'text'}
             onBlur={setParams}
-            className="border-b-2 border-gray-400 text-center p-0.5 focus:outline-none focus:border-blue-400 mt-1 w-2/5"
-            onChange={valueInput} />
+            onchange={valueInput}
+            classInput={"border-b-2 border-gray-400 text-center p-0.5 focus:outline-none focus:border-blue-400 mt-1 w-2/5"}
+        />
     )
 }
 
-export default InputValue
+export default MoneyInputModalContainer
 

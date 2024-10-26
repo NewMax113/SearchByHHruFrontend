@@ -1,8 +1,8 @@
 import { FC, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, IRootState } from '../widgets/Parameters_job_openings/model/reducer'
-import { setRegions, setRegionsArray } from '../widgets/Parameters_job_openings/model/params-reducer'
-import { getRegions } from '../widgets/Parameters_job_openings/model/getRegions'
+import { AppDispatch, IRootState } from '../widgets/parameters-job-openings/model/reducer'
+import { setRegions, setRegionsArray } from '../widgets/parameters-job-openings/model/params-reducer'
+import { getRegions } from '../widgets/parameters-job-openings/model/getRegions'
 
 let useParametersJob = () => {
     const dispatch: any = useDispatch<AppDispatch>()

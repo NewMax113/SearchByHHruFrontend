@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SearchVacancy } from '../pages/SearchVacancy';
-import { Parameters_job_openings } from '../widgets';
-// import puppeteer from 'puppeteer';
+import { ParametersJobOpenings } from '../widgets';
+import { ParametersProvider } from '../hooks/useParametersContext';
 
 const App = () => {
   let [darkeningTheBackground, setDarkeningTheBackground] = useState<boolean>(false)
@@ -15,7 +15,9 @@ const App = () => {
       <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''} onClick={handler}>
         <SearchVacancy />
       </div>
-      <Parameters_job_openings setDarkeningTheBackground={setDarkeningTheBackground} />
+      <ParametersProvider>
+        <ParametersJobOpenings setDarkeningTheBackground={setDarkeningTheBackground} />
+      </ParametersProvider>
     </>
   );
 }

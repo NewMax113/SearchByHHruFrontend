@@ -1,14 +1,11 @@
 import { FC } from "react"
+import { IButton } from "../app/type/type"
 
-interface IButton {
-    style: string
-    text: string
-    onClickF?: () => void
-}
 
-const Button: FC<IButton> = ({style, text, onClickF}) => {
+const Button: FC<IButton> = ({ classButton, text, click }) => {
+
     return (
-        <button className={`${style}`} onClick={onClickF}>
+        <button type="button" className={classButton} onClick={click}>
             {text}
         </button>
     )

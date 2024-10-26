@@ -5,17 +5,17 @@ import React, {
 import style from '../style/style.module.scss'
 import { sortVacancies } from '../model/sortVacancies'
 import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../../Parameters_job_openings/model/reducer'
-import { getListVacancies } from '../model/job_opening-reducer'
+import { AppDispatch } from '../../parameters-job-openings/model/reducer'
+import { getListVacancies } from '../model/job-opening-reducer'
 import { useSelector } from 'react-redux'
-import { IRootState } from '../../Parameters_job_openings/model/reducer'
+import { IRootState } from '../../parameters-job-openings/model/reducer'
 import { newObjectVacancyThunk } from '../model/newObjectVacancy-thunk'
 
 
 export const Search_job_openings = () => {
   let [word, setWord] = useState<string>('')
   const dispatch: any = useDispatch<AppDispatch>()
-  let vacancy = useSelector<IRootState, any>(state => console.log(state.job_openingReducer.job_opening_Array))
+  let vacancy = useSelector<IRootState, any>(state => console.log(state.jobOpeningReducer.job_opening_Array))
 
   let textInput = (e: ChangeEvent<HTMLInputElement>) => setWord(e.target.value)
 
