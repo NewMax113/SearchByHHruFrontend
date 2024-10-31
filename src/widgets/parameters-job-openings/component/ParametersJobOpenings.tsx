@@ -36,9 +36,9 @@ const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
     //salary=105000(дненег)&
     //area=78&(самара)
     //search_field=name&search_field=company_name&search_field=description&(искать по названиям в заголовке, описании)
-    //experience=between1And3&(опыт работы от 1-3 лет)
+    //experience=between1And3&(опыт работы от 1-3 лет)experience=noExperience(нету опыта)experience=between3And6(3-6лет)experience=moreThan6(более 6 лет)
     //schedule=fullDay&schedule=remote&schedule=shift&(полный, удаленный, сменный)
-    //
+    //area=1&area=1530(город)
     //
     //
     //
@@ -87,7 +87,7 @@ const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
                             </div>
                         </div>
                         <div>
-                            <Button classButton={"bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"} text={'Принять'} click={() => (dispatch(setParametersRequest(parameters), console.log('я вызвался!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')))}></Button>
+                            <Button classButton={"bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"} text={'Принять'} onClick={() => (dispatch(setParametersRequest(parameters), console.log('я вызвался!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')))}></Button>
                             {/* <Button style={"ml-1 border text-black px-4 py-2 rounded-lg hover:bg-slate-100"} text={'Сбросить'}></Button> */}
                         </div>
                     </form>

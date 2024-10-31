@@ -7,7 +7,7 @@ const Input: FC<IInput> = ({
     list,
     value,
     onBlur,
-    onchange,
+    onChange,
     typeInput,
     classInput,
     placeholder,
@@ -23,7 +23,7 @@ const Input: FC<IInput> = ({
             value={value}
             onBlur={onBlur}
             type={typeInput}
-            onChange={onchange}
+            onChange={onChange}
             className={classInput}
             onClick={onClickInput}
             checked={checkedInput}

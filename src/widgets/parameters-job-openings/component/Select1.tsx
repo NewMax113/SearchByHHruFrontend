@@ -17,9 +17,11 @@ const Select1: FC<any> = ({ regions }): any => {
         updateParameter({ country: city })
     }
     const dispatch: any = useDispatch<AppDispatch>()
+    
 
     useEffect(() => {
         for (let index = 0; index < regions.length; index++) {
+            console.log(regions)
             setValue(value => [...value, regions[index].name])
         }
     }, [regions])
@@ -32,7 +34,7 @@ const Select1: FC<any> = ({ regions }): any => {
             valueSelect={city}
             valueOption={value}
             classSelect='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400'
-            onchange={e => {
+            onChange={e => {
                 setCity(e.target.value);
                 dispatch(setRegionsArray(e.target.value));
                 setParams();

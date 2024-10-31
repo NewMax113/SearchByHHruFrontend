@@ -1,0 +1,35 @@
+import { useEffect, useState } from "react"
+
+const useFetch = (url: string, word: string, pages: number, area: number, params: any, requestBody: object,) => {
+    let [data, setData] = useState<any>()
+    let [error, setError] = useState<any>('')
+
+    useEffect(() => {
+        let fetchData = async () => {
+            try {
+                await fetch(`${url}?text=${word}&page=${pages}${params}`, requestBody)
+                    .then(response => response.json())
+                    .then((data) => {
+                        setData({
+                            pages: {
+                                pages: data.pages,
+                                page: data.page,
+                                found: data.found
+                            },
+                            items: data.items
+                        })
+                    })
+                    .catch(err => console.log('Ошибочка:', err))
+            }
+            catch (err) {
+                setError("Произошла ошибка при загрузке данных.");
+                console.log("Ошибочка:", err);
+            }
+        }
+        fetchData()
+    }, [url, pages, word, area, params])
+    console.log(data)
+    return data
+}
+
+export default useFetch

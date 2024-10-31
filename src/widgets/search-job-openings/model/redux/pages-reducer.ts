@@ -28,6 +28,7 @@ let pagesReducer = createSlice({
         setPage (state, actions: PayloadAction<any>) {
             state.found = actions.payload.found
             state.pages = actions.payload.pages
+            state.page = actions.payload.page
             console.log(actions.payload)
         },
         pagePlus (state) {

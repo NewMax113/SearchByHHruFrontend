@@ -8,8 +8,6 @@ let useParametersJob = () => {
     const dispatch: any = useDispatch<AppDispatch>()
     const city = useSelector<IRootState, any>(state => state.params.citys)
     const regions = useSelector<IRootState, any>(state => state.params.regions)
-    console.log(regions)
-    console.log(city)
 
     useEffect(() => {
         console.log('Бесконечно')

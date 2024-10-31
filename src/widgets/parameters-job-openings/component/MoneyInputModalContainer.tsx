@@ -14,7 +14,7 @@ const MoneyInputModalContainer: FC = () => {
     }
 
     const setParams = () => {
-        updateParameter({ earning: value })
+        updateParameter({ earning: value.replace(/\D/g, '') })
     }
 
     return (
@@ -22,7 +22,7 @@ const MoneyInputModalContainer: FC = () => {
             value={value}
             typeInput={'text'}
             onBlur={setParams}
-            onchange={valueInput}
+            onChange={valueInput}
             classInput={"border-b-2 border-gray-400 text-center p-0.5 focus:outline-none focus:border-blue-400 mt-1 w-2/5"}
         />
     )

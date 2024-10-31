@@ -3,7 +3,6 @@ import { getElementEmployer } from './getElementEmployer'
 import { getElementVacancy } from './getElementVacancy'
 
 export const sortVacancies = async (vacancies: any) => {
-    console.log(vacancies)
     const start = performance.now();
     let vacanciesMap = await Promise.all(vacancies.items.map(async (vacancy: any, index: number) => {
         return {
@@ -12,7 +11,6 @@ export const sortVacancies = async (vacancies: any) => {
         }
     }))
     const end = performance.now();
-console.log(`Получение Вакансий и Работодеталя: ${end - start} ms`);
 
     console.log('vacanciesMap:', vacanciesMap)
     return [vacanciesMap, vacancies.pages]

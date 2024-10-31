@@ -11,13 +11,13 @@ export interface IInput {
     checkedInput?: boolean
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => any
     onClickInput?: () => any
-    onchange?: (e: ChangeEvent<HTMLInputElement>) => any
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => any
 }
 
 export interface IButton {
     text: string
     classButton: string
-    click?: () => any
+    onClick?: () => any
 }
 
 export interface ISelect {
@@ -28,5 +28,14 @@ export interface ISelect {
     id?: string
     name?: string
     valueSelect?: string
-    onchange?: (e: ChangeEvent<HTMLInputElement>) => any
+    onChange?: (e: any) => any
+}
+
+export interface IFetch {
+    url: string,
+    text: string,
+    pages: number,
+    area: number,
+    params: any,
+    requestBody: object
 }

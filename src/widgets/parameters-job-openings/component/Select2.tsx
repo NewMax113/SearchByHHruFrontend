@@ -55,18 +55,8 @@ const Select2: FC<Select> = ({ city }) => {
                 id='ice-cream-choice'
                 name='ice-cream-choice'
                 value={text}
-                onchange={textInput}
-                onBlur={checkingValidityCity} />
-            {/* <input
-                type='text'
-                className='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400'
-                list="ice-cream-flavors"
-                id="ice-cream-choice"
-                name="ice-cream-choice"
-                value={text}
                 onChange={textInput}
-                onBlur={checkingValidityCity}
-            /> */}
+                onBlur={checkingValidityCity} />
             <datalist className='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400' id="ice-cream-flavors">
                 {(city.length > 0 && city)
                     ? city.map((x: any) => <option value={x}>{x}</option>)

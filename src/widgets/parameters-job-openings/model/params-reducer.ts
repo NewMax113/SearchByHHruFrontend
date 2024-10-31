@@ -62,27 +62,21 @@ let setCity = (regions: any, allСities: string, region?: string) => {
             regions[0].areas.map((region2: IRegion, index: number) => {
 
                 if (region2.areas.length === 0) {
-                    console.log('ВЫЗОВ1')
                     arr.push(region2.name)
                     for (let i = 0; i < region2.areas.length; i++) {
-                        //debugger
                         if (region2.areas[i].id.length < 4) {
                             arr.push(region2.areas[i].name)
                         }
                     }
                 }
                 else if (allСities.length < 1) {
-                    console.log('ВЫЗОВ2')
                     for (let i = 0; i < region2.areas.length; i++) {
-                        //debugger
                         if (region2.areas[i].id.length < 4) {
                             arr.push(region2.areas[i].name)
                         }
                     }
                 }
                 else {
-                    console.log('ВЫЗОВ3')
-                    //debugger
                     for (let i = 0; i < region2.areas.length; i++) {
                         arr.push(region2.areas[i].name)
                     }
@@ -141,7 +135,6 @@ let params = createSlice({
                 case 'Россия':
                     state.regionSelected = 'Россия'
                     state.citys = setCity(state.regions, '', 'Россия')
-                    console.log('отраб')
                     break;
 
                 case 'Беларусь':
