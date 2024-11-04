@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useParameters } from '../../../hooks/useParametersContext'
-import Input from '../../../ui/Input'
+import { Input } from '../../../ui'
 
 interface IInput {
     typeInput: string

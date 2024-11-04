@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, IRootState } from '../model/reducer'
 import { setRegionsArray } from '../model/params-reducer'
 import { useParameters } from '../../../hooks/useParametersContext'
-import Select from '../../../ui/select'
+import { Select } from '../../../ui'
 
 //НЕ РАБОТАЕТ ВЫБОР СТРАНЫ!\\
 const Select1: FC<any> = ({ regions }): any => {

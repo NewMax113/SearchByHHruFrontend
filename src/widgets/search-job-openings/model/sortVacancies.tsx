@@ -7,7 +7,7 @@ export const sortVacancies = async (vacancies: any) => {
     let vacanciesMap = await Promise.all(vacancies.items.map(async (vacancy: any, index: number) => {
         return {
             vacancy: await getElementVacancy(vacancy.id),
-            employer: await getElementEmployer(vacancy.employer.id)
+            //employer: await getElementEmployer(vacancy.employer.id)
         }
     }))
     const end = performance.now();

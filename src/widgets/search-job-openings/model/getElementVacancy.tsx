@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const getElementVacancy = async (id: number) => {
     try {
         let vacancy = await fetch(`https://api.hh.ru/vacancies/${id}`, {
@@ -24,6 +22,7 @@ export const getElementVacancy = async (id: number) => {
                 : null,
             schedule: vacancy?.schedule?.name || null,
             experience: vacancy?.experience?.name || null,
+            employer: vacancy?.employer?.name || null,
             alternate_url: vacancy?.alternate_url || null,
         }
         //добавить проверки

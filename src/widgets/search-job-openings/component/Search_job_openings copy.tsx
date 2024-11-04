@@ -6,10 +6,10 @@ import style from '../style/style.module.scss'
 import { sortVacancies } from '../model/sortVacancies'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../parameters-job-openings/model/reducer'
-import { getListVacancies } from '../model/job-opening-reducer'
+import { setListVacancies } from '../model/job-opening-reducer'
 import { useSelector } from 'react-redux'
 import { IRootState } from '../../parameters-job-openings/model/reducer'
-import { newObjectVacancyThunk } from '../model/newObjectVacancy-thunk'
+
 
 
 export const Search_job_openings = () => {
@@ -39,7 +39,7 @@ export const Search_job_openings = () => {
       .then(data => console.log(data))
       .catch(err => console.log('Ошибочка:', err))
 
-    await dispatch(newObjectVacancyThunk(selectedVacancies))
+    //await dispatch(newObjectVacancyThunk(selectedVacancies))
   }
 
 

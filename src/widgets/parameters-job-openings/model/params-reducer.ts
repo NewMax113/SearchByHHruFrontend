@@ -170,7 +170,7 @@ let params = createSlice({
                 workExperience: {noExp: false, minExp: false, maxExp: false},
                 workSchedule: {full: false, replaceable: false, remote: false,},
             }
-            state.parametersPresent = false
+            state.parametersPresent = false  
         }
     },
 })

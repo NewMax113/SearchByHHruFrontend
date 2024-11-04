@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 
-const useFetch = (url: string, word: string, pages: number, area: number, params: any, requestBody: object,) => {
+const useFetch = (url: string, word: string, pages: number, perPageMax: number, area: number = 113, params: any, requestBody: object, setLoading: any) => {
     let [data, setData] = useState<any>()
     let [error, setError] = useState<any>('')
 
     useEffect(() => {
         let fetchData = async () => {
             try {
-                await fetch(`${url}?text=${word}&page=${pages}${params}`, requestBody)
+                await fetch(`${url}?text=${word}&page=${pages}&per_page=${perPageMax}${params}`, requestBody)
                     .then(response => response.json())
                     .then((data) => {
                         setData({

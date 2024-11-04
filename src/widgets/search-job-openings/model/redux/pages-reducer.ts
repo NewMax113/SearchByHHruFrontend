@@ -13,7 +13,7 @@ interface IinitialState {
 
 let initialState: IinitialState = {
     pages: 0, //стр всего
-    found: 0, //эл всего
+    found: 0, //максимум элементов
     found_now: 6, //элементов на данный момент на стр.
     page: 0, //стр на данынй момет (начинается с 0)
     per_page_max: 6, //кол-во элеметов которое покажем на странице
@@ -26,7 +26,7 @@ let pagesReducer = createSlice({
     initialState,
     reducers: {
         setPage (state, actions: PayloadAction<any>) {
-            state.found = actions.payload.found
+            state.found = actions.payload.found > 1998 ? '>1998' : actions.payload.found
             state.pages = actions.payload.pages
             state.page = actions.payload.page
             console.log(actions.payload)

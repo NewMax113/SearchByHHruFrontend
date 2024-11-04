@@ -6,12 +6,12 @@ import {
 
 
 export const SearchVacancy = () => {
-  let [loading, setLoading] = useState<boolean>(false)
+  let [loading, setLoading] = useState<boolean>(true)
 
   return (
       <div>
         <SearchJobOpenings setLoading={setLoading}/>
-        <ListJobOpenings loading={loading}/>
+        <ListJobOpenings loading={loading} setLoading={setLoading}/>
       </div>
   )
 }

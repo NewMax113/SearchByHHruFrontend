@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
-import { newObjectVacancyThunk } from "./newObjectVacancy-thunk"
+
 
 interface IVacancy {
     // id: number,
@@ -36,28 +36,14 @@ let jobOpeningReducer = createSlice({
     name: 'paramsSearch',
     initialState,
     reducers: {
-        getListVacancies(state, action: PayloadAction<any>) {
+        setListVacancies(state, action: PayloadAction<any>) {
             console.log(action.payload)
-            // let vacanciesMap = action.payload.items.map(async(vacancy: any, index: number) => {
-            //     state.job_opening_Array.push(
-            //         {
-            //             vacancy: await getElementVacancy(vacancy.id),
-            //             employer: await getElementEmployer(vacancy.employer.id)
-            //         }
-            //     )
-            // })
             state.job_opening_Array = []
             state.job_opening_Array.push(action.payload)
         }
     },
-    extraReducers: builder => {
-        builder.addCase(newObjectVacancyThunk.fulfilled.type, (state, action: PayloadAction<any>) => {
-            state.job_opening_Array = []
-            state.job_opening_Array.push(action.payload)
-            console.log(action.payload)
-        });
-    }
+
 })
 
 export default jobOpeningReducer.reducer
-export const { getListVacancies } = jobOpeningReducer.actions
+export const { setListVacancies } = jobOpeningReducer.actions

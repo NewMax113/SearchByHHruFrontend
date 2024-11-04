@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, IRootState } from '../model/reducer'
 import { observAllCities } from '../model/params-reducer'
 import { useParameters } from '../../../hooks/useParametersContext'
-import Input from '../../../ui/Input'
+import { Input } from '../../../ui'
 
 interface Select {
     city: any

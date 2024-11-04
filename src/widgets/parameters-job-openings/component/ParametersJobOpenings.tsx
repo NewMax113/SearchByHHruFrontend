@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import Select1 from './Select1'
 import Select2 from './Select2'
-import Button from '../../../ui/button'
+import { Button } from '../../../ui'
 import useParametersJob from '../../../hooks/useParametersJob'
 import { useParameters } from '../../../hooks/useParametersContext'
 import { setParametersRequest } from '../model/params-reducer'

@@ -1,6 +1,6 @@
 import { FC, useState, ChangeEvent } from 'react'
 import { useParameters } from '../../../hooks/useParametersContext'
-import Input from '../../../ui/Input'
+import { Input } from '../../../ui';
 
 const MoneyInputModalContainer: FC = () => {
     const { parameters, updateParameter } = useParameters();
