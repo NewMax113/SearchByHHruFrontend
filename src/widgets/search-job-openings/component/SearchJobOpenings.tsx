@@ -20,6 +20,32 @@ const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
   let pages = useSelector<IRootState, any>(state => !observerText ? state.pages.page : 0)
   let perPageMax = useSelector<IRootState, any>(state => state.pages.per_page_max)
 
+  // const searchWord = async () => {
+  //   await fetch(`http://localhost:3000/?text=${text}&page=${pages}&per_page=${perPageMax}${telo}`)
+  //     .then(res => res.json())
+  //     .then(data => console.log(data))
+  //     .catch(er => console.log('er'))
+  // }
+  // // const searchWord2 = async () => {
+  //   await fetch('http://localhost:3000/feedback', {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       userId: 1,
+  //       title: "Fix my bugs",
+  //       completed: false
+  //     })})
+    
+
+  //     // .then(res => res.text())
+  //     // .then(data => console.log(data))
+  //     // .catch(er => console.log('er'))
+  // }
+
+
+  // useEffect(() => {
+  //   searchWord()
+  // }, [])
+
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
   const handleClick = () => {
@@ -32,18 +58,12 @@ const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
     }
   }
 
-  let selectedVacancies = useFetch('https://api.hh.ru/vacancies', text, pages, perPageMax, 113, telo,
-    {
-      method: 'GET',
-      headers: {
-        'HH-User-Agent': 'JobSearch (maxim0ruseev@gmail.com)'
-      }
-    }, setLoading)
+  let selectedVacancies = useFetch('http://localhost:3000/', text, pages, perPageMax, 113, telo)
 
   const requestResponse = async () => {
-    let vacancies = await sortVacancies(selectedVacancies)
+    //let vacancies = await sortVacancies(selectedVacancies)
     await dispatch(setPage(!observerText ? selectedVacancies.pages : { ...selectedVacancies.pages, page: 0 }))
-    await dispatch(setListVacancies(vacancies[0]))
+    await dispatch(setListVacancies(selectedVacancies.items))
     setObserverText(false)
     setLoading(false)
     console.log(selectedVacancies)
