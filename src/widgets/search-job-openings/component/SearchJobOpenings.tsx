@@ -6,45 +6,20 @@ import { setPage } from '../model/redux/pages-reducer'
 import { Input, Button } from '../../../ui'
 import useFetch from '../../../hooks/useFetch'
 import { setListVacancies } from '../model/job-opening-reducer'
+import useCreateUrlParams from '../../../hooks/useCreateUrlParams'
 
 
 const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
   let [text, setText] = useState<string>('')
   let [observerText, setObserverText] = useState<boolean>(false)
   let [textInput, setTextInput] = useState<string>('')
-  let [telo, setTelo] = useState<string>('')
+  //let [telo, setTelo] = useState<string>('')
   const dispatch: any = useDispatch<AppDispatch>()
   let parametersPresent = useSelector<IRootState, boolean>(state => state.params.parametersPresent)
   let parameters = useSelector<IRootState, any>(state => state.params.parameters)
   let obj = useSelector<IRootState, any>(state => state.params.parameters)
   let pages = useSelector<IRootState, any>(state => !observerText ? state.pages.page : 0)
   let perPageMax = useSelector<IRootState, any>(state => state.pages.per_page_max)
-
-  // const searchWord = async () => {
-  //   await fetch(`http://localhost:3000/?text=${text}&page=${pages}&per_page=${perPageMax}${telo}`)
-  //     .then(res => res.json())
-  //     .then(data => console.log(data))
-  //     .catch(er => console.log('er'))
-  // }
-  // // const searchWord2 = async () => {
-  //   await fetch('http://localhost:3000/feedback', {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       userId: 1,
-  //       title: "Fix my bugs",
-  //       completed: false
-  //     })})
-    
-
-  //     // .then(res => res.text())
-  //     // .then(data => console.log(data))
-  //     // .catch(er => console.log('er'))
-  // }
-
-
-  // useEffect(() => {
-  //   searchWord()
-  // }, [])
 
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
@@ -57,11 +32,11 @@ const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
       setLoading(false)
     }
   }
+  let telo = useCreateUrlParams(parametersPresent, parameters, obj)
 
   let selectedVacancies = useFetch('http://localhost:3000/', text, pages, perPageMax, 113, telo)
 
   const requestResponse = async () => {
-    //let vacancies = await sortVacancies(selectedVacancies)
     await dispatch(setPage(!observerText ? selectedVacancies.pages : { ...selectedVacancies.pages, page: 0 }))
     await dispatch(setListVacancies(selectedVacancies.items))
     setObserverText(false)
@@ -69,26 +44,27 @@ const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
     console.log(selectedVacancies)
   }
 
-  useEffect(() => {
-    setTelo('')
-    if (parametersPresent) {
-      for (let key in obj) {
-        const value = obj[key];
 
-        if (typeof value === 'object') {
-          if (value.noExp) setTelo(telo => `${telo}&experience=noExperience`);
-          if (value.minExp) setTelo(telo => `${telo}&experience=between1And3`);
-          if (value.maxExp) setTelo(telo => `${telo}&experience=between3And6`);
-          if (value.full) setTelo(telo => `${telo}&schedule=fullDay`);
-          if (value.replaceable) setTelo(telo => `${telo}&schedule=shift`);
-          if (value.remote) setTelo(telo => `${telo}&schedule=remote`);
-        }
-        else if (key === 'earning' && value) {
-          setTelo(telo => `${telo}&salary=${value}&only_with_salary=true`);
-        }
-      }
-    }
-  }, [parametersPresent, parameters])
+  // useEffect(() => {
+  //   setTelo('')
+  //   if (parametersPresent) {
+  //     for (let key in obj) {
+  //       const value = obj[key];
+
+  //       if (typeof value === 'object') {
+  //         if (value.noExp) setTelo(telo => `${telo}&experience=noExperience`);
+  //         if (value.minExp) setTelo(telo => `${telo}&experience=between1And3`);
+  //         if (value.maxExp) setTelo(telo => `${telo}&experience=between3And6`);
+  //         if (value.full) setTelo(telo => `${telo}&schedule=fullDay`);
+  //         if (value.replaceable) setTelo(telo => `${telo}&schedule=shift`);
+  //         if (value.remote) setTelo(telo => `${telo}&schedule=remote`);
+  //       }
+  //       else if (key === 'earning' && value) {
+  //         setTelo(telo => `${telo}&salary=${value}&only_with_salary=true`);
+  //       }
+  //     }
+  //   }
+  // }, [parametersPresent, parameters])
 
   useEffect(() => {
     if (selectedVacancies) {
