@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
-import Select1 from './Select1'
-import Select2 from './Select2'
+import Select1 from './CountrySelectionContainer'
+import Select2 from './CitySelectionContainer'
 import { Button } from '../../../ui'
 import useParametersJob from '../../../hooks/useParametersJob'
 import { useParameters } from '../../../hooks/useParametersContext'
@@ -19,8 +19,8 @@ const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
     const btnDropDown = () => {
         setDropDownOptions(!dropDownOptions)
         setDarkeningTheBackground(!dropDownOptions)
-
     }
+
     const modalClose = (e: any) => {
         document.addEventListener('mouseup', function (e) {
             let container: any = document.getElementById('modal');

@@ -13,7 +13,8 @@ interface Select {
     htmlFor: string
 }
 
-const Select2: FC<Select> = ({ city }) => {
+const CitySelectionContainer: FC<Select> = ({ city }) => {
+    console.log(city)
     const dispatch: any = useDispatch<AppDispatch>()
     let paramenersRedux = useSelector<IRootState, any>(state => state.params.parameters)
     const { parameters, updateParameter } = useParameters();
@@ -67,4 +68,4 @@ const Select2: FC<Select> = ({ city }) => {
     )
 }
 
-export default Select2
+export default CitySelectionContainer

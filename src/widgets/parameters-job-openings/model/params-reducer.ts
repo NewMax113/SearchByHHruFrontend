@@ -45,8 +45,8 @@ let initialState: IinitialState = {
         country: 'Россия',
         city: '',
         earning: '',
-        workExperience: {noExp: false, minExp: false, maxExp: false},
-        workSchedule: {full: false, replaceable: false, remote: false,}, //полный, сменный, удаленный
+        workExperience: { noExp: false, minExp: false, maxExp: false },
+        workSchedule: { full: false, replaceable: false, remote: false, }, //полный, сменный, удаленный
     },
     parametersPresent: false
 }
@@ -55,10 +55,11 @@ let setCity = (regions: any, allСities: string, region?: string) => {
     if (allСities.length > 0 && allСities.length < 3) {
         return []
     }
+    console.log(region && regions)
 
     let regionData = () => {
         let arr: any = []
-        if (region === 'Россия') {
+        if (region) {
             regions[0].areas.map((region2: IRegion, index: number) => {
 
                 if (region2.areas.length === 0) {
@@ -118,6 +119,7 @@ let setCity = (regions: any, allСities: string, region?: string) => {
         return result;
     }
 
+    console.log(regions.length && regionData())
     return regions.length && regionData()
 }
 
@@ -130,7 +132,6 @@ let params = createSlice({
             state.regions = action.payload
         },
         setRegionsArray(state, action: PayloadAction<any>) {
-            //console.log(state.regions)
             switch (action.payload) {
                 case 'Россия':
                     state.regionSelected = 'Россия'
@@ -158,19 +159,19 @@ let params = createSlice({
             state.citys = setCity(state.regions, action.payload, state.regionSelected)
         },
 
-        setParametersRequest(state, action: PayloadAction<IObjectParams>){
+        setParametersRequest(state, action: PayloadAction<IObjectParams>) {
             state.parameters = action.payload
             state.parametersPresent = true
         },
-        resetParameters(state){
+        resetParameters(state) {
             state.parameters = {
                 country: 'Россия',
                 city: '',
                 earning: '',
-                workExperience: {noExp: false, minExp: false, maxExp: false},
-                workSchedule: {full: false, replaceable: false, remote: false,},
+                workExperience: { noExp: false, minExp: false, maxExp: false },
+                workSchedule: { full: false, replaceable: false, remote: false, },
             }
-            state.parametersPresent = false  
+            state.parametersPresent = false
         }
     },
 })

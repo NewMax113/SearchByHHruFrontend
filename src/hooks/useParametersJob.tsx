@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, IRootState } from '../widgets/parameters-job-openings/model/reducer'
 import { setRegions, setRegionsArray } from '../widgets/parameters-job-openings/model/params-reducer'
@@ -10,10 +10,12 @@ let useParametersJob = () => {
     const regions = useSelector<IRootState, any>(state => state.params.regions)
 
     useEffect(() => {
-        console.log('Бесконечно')
+       console.log('вызов')
         let setReg = async () => {
-            await dispatch(setRegions(await getRegions()))
-            await dispatch(setRegionsArray('Россия'))
+            let region = setRegions(await getRegions())
+            console.log(setRegionsArray(region))
+            await dispatch(region)
+            //await dispatch(setRegionsArray(region))
         }
         setReg()
     }, [])
