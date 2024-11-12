@@ -1,51 +1,43 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { ChangeEvent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, IRootState } from '../model/reducer'
-import { observAllCities } from '../model/params-reducer'
+import { useSelector } from 'react-redux'
+import { IRootState } from '../model/reducer'
 import { useParameters } from '../../../hooks/useParametersContext'
 import { Input } from '../../../ui'
+import useSearchWord from '../../../hooks/useSearchWord'
 
-interface Select {
-    city: any
-    classLabel: string
-    nameLabel: string
-    htmlFor: string
-}
 
-const CitySelectionContainer: FC<Select> = ({ city }) => {
-    console.log(city)
-    const dispatch: any = useDispatch<AppDispatch>()
-    let paramenersRedux = useSelector<IRootState, any>(state => state.params.parameters)
+const CitySelectionContainer: FC = () => {
+    let listCities = useSelector<IRootState, any>(state => state.params.listCities)
     const { parameters, updateParameter } = useParameters();
-    let [text, setText] = useState<string>(parameters.city)
+    let [text, setText] = useState<string>(parameters.city.city)
+    let sortCities = useSearchWord(listCities.cities, text)
 
+    useEffect(() => {
+        const resetText = () => {
+            if (!parameters.city.city) {
+                setText('')
+            }
+        }
+        resetText()
+    }, [listCities.country])
 
     const textInput = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
     }
 
     let checkingValidityCity = () => {
-        if (text === city[0]) {
-            updateParameter({ city: city[0] })
+        if (text === sortCities[0]?.name) {
+            updateParameter({ city: { id: sortCities[0].id, city: sortCities[0].name } })
         } else {
             alert('Вы ввели некорректные данные')
-            if (city.length === 1) {
-                alert(`Могу предложить ${city[0]}`)
-                setText(city[0])
+            setText('')
+            if (sortCities.length === 1) {
+                alert(`Могу предложить ${sortCities[0].name}`)
+                setText(sortCities[0].name)
             }
         }
     }
-
-    useEffect(() => {
-        if (text) {
-            dispatch(observAllCities(text))
-
-        } else {
-            console.log('ELSE2ELSE2ELSE2ESLE2')
-            dispatch(observAllCities(''))
-        }
-    }, [text])
 
     return (
         <div>
@@ -59,9 +51,9 @@ const CitySelectionContainer: FC<Select> = ({ city }) => {
                 onChange={textInput}
                 onBlur={checkingValidityCity} />
             <datalist className='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400' id="ice-cream-flavors">
-                {(city.length > 0 && city)
-                    ? city.map((x: any) => <option value={x}>{x}</option>)
-                    : <div>Загрузка</div>}
+                {(sortCities.length > 0 && sortCities)
+                    ? sortCities.map((x: any) => <option value={x.name}>{x.name}</option>)
+                    : listCities.cities.map((x: any) => <option value={x.name}>{x.name}</option>)}
             </datalist>
         </div>
 

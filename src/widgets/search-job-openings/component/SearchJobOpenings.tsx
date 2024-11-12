@@ -9,25 +9,25 @@ import useRedirectRequestResponse from '../../../hooks/useRedirectRequestRespons
 
 const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
   let [text, setText] = useState<string>('')
-  let [observerText, setObserverText] = useState<boolean>(false)
+  let [resetPages, setResetPages] = useState<boolean>(false)
   let [textInput, setTextInput] = useState<string>('')
   let parametersPresent = useSelector<IRootState, boolean>(state => state.params.parametersPresent)
   let parameters = useSelector<IRootState, any>(state => state.params.parameters)
   let obj = useSelector<IRootState, any>(state => state.params.parameters)
-  let pages = useSelector<IRootState, any>(state => !observerText ? state.pages.page : 0)
+  let pages = useSelector<IRootState, any>(state => !resetPages ? state.pages.page : 0)
   let perPageMax = useSelector<IRootState, any>(state => state.pages.per_page_max)
+  let telo = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages)
 
-  let telo = useCreateUrlParams(parametersPresent, parameters, obj)
   let selectedVacancies = useFetch('http://localhost:3000/', text, pages, perPageMax, 113, telo)
-  
-  useRedirectRequestResponse(selectedVacancies, setObserverText, observerText, setLoading)
+
+  useRedirectRequestResponse(selectedVacancies, setResetPages, resetPages, setLoading)
 
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
   const handleClick = () => {
     if (textInput !== text) {
       setText(textInput)
-      setObserverText(true)
+      setResetPages(true)
       setLoading(true)
     } else {
       setLoading(false)

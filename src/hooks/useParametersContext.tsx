@@ -14,8 +14,8 @@ interface IWorkSchedule {
 
 
 interface IObjectParams {
-    country: string,
-    city: string,
+    country: {id: number, country: string},
+    city: {id: number | null, city: string},
     earning: string,
     workExperience: IWorkExperience,
     workSchedule: IWorkSchedule,
@@ -28,8 +28,8 @@ const ParametersContext = createContext<{
 }>
 ({
     parameters: {
-        country: 'Россия',
-        city: '',
+        country: {id: 113, country: 'Россия'},
+        city: {id: null, city: ''},
         earning: '',
         workExperience: {noExp: false, minExp: false, maxExp: false},
         workSchedule: {full: false, replaceable: false, remote: false,}, //полный, сменный, удаленный
@@ -39,8 +39,8 @@ const ParametersContext = createContext<{
 
 export const ParametersProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     const [parameters, setParameters] = useState<IObjectParams>({ //нужно указать верный тип
-        country: 'Россия',
-        city: '',
+        country: {id: 113, country: 'Россия'},
+        city: {id: null, city: ''},
         earning: '',
         workExperience: {noExp: false, minExp: false, maxExp: false},
         workSchedule: {full: false, replaceable: false, remote: false},
