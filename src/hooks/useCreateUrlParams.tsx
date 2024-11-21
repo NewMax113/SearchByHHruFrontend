@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, setResetPages: any) => {
-  let [telo, setTelo] = useState<string>('')
+  let [telo, setTelo] = useState<string | null>('')
 
   useEffect(() => {
     setTelo('')
@@ -25,7 +25,6 @@ const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, s
       setResetPages(true)
     }
   }, [parametersPresent, parameters])
-  
   return telo
 }
 

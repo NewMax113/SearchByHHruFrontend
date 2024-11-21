@@ -1,13 +1,16 @@
 import { useState, ChangeEvent, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { IRootState } from '../../parameters-job-openings/model/reducer'
+import { AppDispatch, IRootState } from '../../parameters-job-openings/model/reducer'
 import { Input, Button } from '../../../ui'
 import useFetch from '../../../hooks/useFetch'
 import useCreateUrlParams from '../../../hooks/useCreateUrlParams'
 import useRedirectRequestResponse from '../../../hooks/useRedirectRequestResponse'
+import useGetCookie from '../../../hooks/useGetCookie'
+import { useDispatch } from 'react-redux'
+import { setPage } from '../model/redux/pages-reducer'
 
 
-const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
+const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any, setBeingVacansies: any }) => {
   let [text, setText] = useState<string>('')
   let [resetPages, setResetPages] = useState<boolean>(false)
   let [textInput, setTextInput] = useState<string>('')
@@ -17,11 +20,21 @@ const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
   let pages = useSelector<IRootState, any>(state => !resetPages ? state.pages.page : 0)
   let perPageMax = useSelector<IRootState, any>(state => state.pages.per_page_max)
   let telo = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages)
+  let token = useGetCookie('token')
+  let addTokenTelo = `${telo}&token=${token}`
+  const dispatch: any = useDispatch<AppDispatch>()
+  console.log(telo)
+  
 
-  let selectedVacancies = useFetch('http://localhost:3000/', text, pages, perPageMax, 113, telo)
+  let {data, error} = useFetch('http://localhost:3001/', text, pages, perPageMax, 113, addTokenTelo)
+if (error) {
+  setBeingVacansies(false)
+  console.log(error)
+} else {
+  setBeingVacansies(true)
+}
 
-  useRedirectRequestResponse(selectedVacancies, setResetPages, resetPages, setLoading)
-
+useRedirectRequestResponse(data, setResetPages, resetPages, setLoading)
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
   const handleClick = () => {

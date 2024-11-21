@@ -27,7 +27,7 @@ let pagesReducer = createSlice({
     reducers: {
         setPage (state, actions: PayloadAction<any>) {
             state.found = actions.payload.found > 1998 ? '>1998' : actions.payload.found
-            state.pages = actions.payload.pages
+            state.pages = actions.payload.pages-1
             state.page = actions.payload.page
             console.log(actions.payload)
         },

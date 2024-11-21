@@ -5,7 +5,7 @@ import { VacancyMap } from './Vacancy'
 import { Select } from '../../../ui'
 
 
-const ListJobOpenings = ({ loading, setLoading }: { loading: boolean, setLoading: any }) => {
+const ListJobOpenings = ({ loading, setLoading, beingVacansies }: { loading: boolean, setLoading: any, beingVacansies: boolean }) => {
     let vacancies = useSelector<IRootState, any>(state => state.jobOpeningReducer.job_opening_Array)
     let pages = useSelector<IRootState, any>(state => state.pages.found)
     let page = useSelector<IRootState, any>(state => state.pages.page)
@@ -20,6 +20,10 @@ const ListJobOpenings = ({ loading, setLoading }: { loading: boolean, setLoading
     const plusPage = () => {
         dispatch(pagePlus())
         maxPage > page && setLoading(true)
+    }
+
+    if (!beingVacansies) {
+        return (<div>ВАкансий нету(</div>)
     }
 
     return (
@@ -50,7 +54,7 @@ const ListJobOpenings = ({ loading, setLoading }: { loading: boolean, setLoading
                     </div>
                     <div className={"max-w-screen-xl p-8"}>
                         <div className={"sm:grid lg:grid-cols-3 sm:grid-cols-2 gap-10"}>
-                            {vacancies[0] && vacancies[0].map((vacancy: any) => <VacancyMap vacancy={vacancy.vacancy} />)}
+                            {vacancies[0].map((vacanciesList: any) => <VacancyMap vacancy={vacanciesList.vacancy} />)}
                         </div>
                     </div>
                     <div className={'text-4xl cursor-pointer text-gray-400 hover:text-black'}
