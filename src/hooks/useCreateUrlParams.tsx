@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 
-const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, setResetPages: any) => {
-  let [telo, setTelo] = useState<string | null>('')
+const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, setResetPages: any, pages: any, perPageMax: any, token: any) => {
+  let defaultParams = `?page=${pages}&per_page=${perPageMax}${token && `&token=${token}`}`
+  let [bodyRequest, setBodyRequest] = useState<string | null>(defaultParams)
 
   useEffect(() => {
-    setTelo('')
+    setBodyRequest(defaultParams)
     if (parametersPresent) {
-      obj.city.city ? setTelo(telo => `${telo}&area=${obj.city.id}`) : setTelo(telo => `${telo}&area=${obj.country.id}`)
-
+      obj.city.city ? setBodyRequest(body => `${body}&area=${obj.city.id}`) : setBodyRequest(body => `${body}&area=${obj.country.id}`)
       for (let key in obj) {
         const value = obj[key];
         if (typeof value === 'object') {
-          value.noExp && setTelo(telo => `${telo}&experience=noExperience`);
-          value.minExp && setTelo(telo => `${telo}&experience=between1And3`);
-          value.maxExp && setTelo(telo => `${telo}&experience=between3And6`);
-          value.full && setTelo(telo => `${telo}&schedule=fullDay`);
-          value.replaceable && setTelo(telo => `${telo}&schedule=shift`);
-          value.remote && setTelo(telo => `${telo}&schedule=remote`);
+          value.noExp && setBodyRequest(body => `${body}&experience=noExperience`);
+          value.minExp && setBodyRequest(body => `${body}&experience=between1And3`);
+          value.maxExp && setBodyRequest(body => `${body}&experience=between3And6`);
+          value.full && setBodyRequest(body => `${body}&schedule=fullDay`);
+          value.replaceable && setBodyRequest(body => `${body}&schedule=shift`);
+          value.remote && setBodyRequest(body => `${body}&schedule=remote`);
         }
         else if (key === 'earning' && value) {
-          setTelo(telo => `${telo}&salary=${value}&only_with_salary=true`);
+          setBodyRequest(body => `${body}&salary=${value}&only_with_salary=true`);
         }
       }
       setResetPages(true)
     }
-  }, [parametersPresent, parameters])
-  return telo
+  }, [parametersPresent, parameters, pages, token])
+  return bodyRequest
 }
 
 export default useCreateUrlParams

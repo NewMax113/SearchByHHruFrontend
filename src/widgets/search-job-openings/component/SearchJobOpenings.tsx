@@ -19,17 +19,18 @@ const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any,
   let obj = useSelector<IRootState, any>(state => state.params.parameters)
   let pages = useSelector<IRootState, any>(state => !resetPages ? state.pages.page : 0)
   let perPageMax = useSelector<IRootState, any>(state => state.pages.per_page_max)
-  let telo = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages)
   let token = useGetCookie('token')
-  let addTokenTelo = `${telo}&token=${token}`
-  const dispatch: any = useDispatch<AppDispatch>()
-  console.log(telo)
+  let bodyRequest = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages, pages, perPageMax, token)
+  console.log(bodyRequest)
+  let {data, error} = useFetch('http://localhost:3001/', bodyRequest, 'GET',
+    {
+      'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },)
   
-
-  let {data, error} = useFetch('http://localhost:3001/', text, pages, perPageMax, 113, addTokenTelo)
 if (error) {
-  setBeingVacansies(false)
   console.log(error)
+  setBeingVacansies(false)
 } else {
   setBeingVacansies(true)
 }

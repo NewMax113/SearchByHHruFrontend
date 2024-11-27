@@ -1,35 +1,49 @@
 import { useEffect, useState } from "react"
 
-const useFetch = (url: string, word: string, pages: number, perPageMax: number, area: number = 113, params: any) => {
+const useFetch = (url: string, body: any, method: string, headers: any) => {
     let [data, setData] = useState<any>(null)
     let [error, setError] = useState<any>(null)
+    let [loading, setLoading] = useState<any>(null)
 
     useEffect(() => {
+        
         let fetchData = async () => {
             try {
-                await fetch(`${url}?text=${word}&page=${pages}&per_page=${perPageMax}${params}`)
+                await fetch(`${url}${body}`, {
+                    method: method,
+                    headers:  {...headers} 
+                })
                     .then(response => {
                         if (!response.ok) {
+                            setLoading(false)
                             const errorMessage = response.json();
-                            throw new Error(`Ошибка ${response.status}: ${errorMessage}`);
+                            console.log('кетч2')
+                            errorMessage.then(e => {
+                                setError({ err_status: response.status, err_description: e.error });
+                            })
                         } else {
+                            
                             return response.json()
                         }
                     })
                     .then((data) => {
-                        console.log(data)
+                        if (data) {
+                           setLoading(true) 
+                        }
+                        
                         setData(data)
                     })
-
             }
             catch (error: any) {
-                setError(error.message);
+                setLoading(false)
+                setError('Ошибка сети');
+                //throw error
             }
         }
         fetchData()
-    }, [url, pages, word, area, params])
-    console.log(data)
-    return {data, error}
+    }, [url, body])
+
+    return { data, error, loading }
 }
 
 export default useFetch
