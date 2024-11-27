@@ -1,8 +1,5 @@
 import { FC, useState } from 'react'
-import Select1 from './Select1'
-import Select2 from './Select2'
 import { Button } from '../../../ui'
-import useParametersJob from '../../../hooks/useParametersJob'
 import { useParameters } from '../../../hooks/useParametersContext'
 import { setParametersRequest } from '../model/params-reducer'
 import { useDispatch } from 'react-redux'
@@ -10,17 +7,19 @@ import { AppDispatch } from '../model/reducer'
 import RadioInputContainer from './RadioInputContainer'
 import ButtonInputContainer from './ButtonInputContainer'
 import MoneyInputModalContainer from './MoneyInputModalContainer'
+import CountrySelectionContainer from './CountrySelectionContainer'
+import CitySelectionContainer from './CitySelectionContainer'
 
 const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
     const dispatch: any = useDispatch<AppDispatch>()
     let { parameters } = useParameters()
-    let { city, regions } = useParametersJob()
     let [dropDownOptions, setDropDownOptions] = useState<boolean>(false)
+    
     const btnDropDown = () => {
         setDropDownOptions(!dropDownOptions)
         setDarkeningTheBackground(!dropDownOptions)
-
     }
+
     const modalClose = (e: any) => {
         document.addEventListener('mouseup', function (e) {
             let container: any = document.getElementById('modal');
@@ -31,23 +30,6 @@ const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
             }
         });
     }
-    //https://samara.hh.ru/search/vacancy?
-    //text=React(текст поиска)&
-    //salary=105000(дненег)&
-    //area=78&(самара)
-    //search_field=name&search_field=company_name&search_field=description&(искать по названиям в заголовке, описании)
-    //experience=between1And3&(опыт работы от 1-3 лет)experience=noExperience(нету опыта)experience=between3And6(3-6лет)experience=moreThan6(более 6 лет)
-    //schedule=fullDay&schedule=remote&schedule=shift&(полный, удаленный, сменный)
-    //area=1&area=1530(город)
-    //
-    //
-    //
-    //
-    //
-    //https://samara.hh.ru/search/vacancy?hhtmFrom=main&hhtmFromLabel=vacancy_search_line&search_field=name&search_field=company_name&search_field=description&enable_snippets=true&schedule=fullDay&schedule=remote&schedule=shift&experience=between1And3&text=react&salary=105000
-    //https://samara.hh.ru/search/vacancy?hhtmFrom=main&hhtmFromLabel=vacancy_search_line&enable_snippets=true&schedule=fullDay&schedule=remote&
-    //https://samara.hh.ru/search/vacancy?text=React&area=78&hhtmFrom=main&hhtmFromLabel=vacancy_search_line
-    //https://samara.hh.ru/search/vacancy?L_save_area=true&text=React&excluded_text=&area=78&salary=100000&currency_code=RUR&experience=between1And3&schedule=shift&schedule=flexible&order_by=relevance&search_period=0&items_on_page=50&hhtmFrom=vacancy_search_filter
 
     return (
         <div id='modal' onClick={modalClose}>
@@ -59,11 +41,11 @@ const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
                     <form>
                         <div className="mb-4">
                             <label htmlFor="region" className="block text-gray-700 font-medium mb-2">Регион:</label>
-                            <Select1 regions={regions} />
+                            <CountrySelectionContainer />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="city" className="block text-gray-700 font-medium mb-2">Город:</label>
-                            <Select2 city={city} classLabel='block text-gray-700 font-medium mb-2' nameLabel='Город:' htmlFor='city' />
+                            <CitySelectionContainer />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="number" className="block text-gray-700 font-medium mb-2">Уровеь дохода:
