@@ -22,20 +22,24 @@ const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any,
   let token = useGetCookie('token')
   let bodyRequest = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages, pages, perPageMax, token)
   console.log(bodyRequest)
-  let {data, error} = useFetch('http://localhost:3001/', bodyRequest, 'GET',
+  let { data, error } = useFetch('http://localhost:3001/',
+    bodyRequest,
+    'GET',
     {
       'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
       'Content-Type': 'application/x-www-form-urlencoded'
-    },)
-  
-if (error) {
-  console.log(error)
-  setBeingVacansies(false)
-} else {
-  setBeingVacansies(true)
-}
+    },
+    null
+  )
 
-useRedirectRequestResponse(data, setResetPages, resetPages, setLoading)
+  if (error) {
+    console.log(error)
+    setBeingVacansies(false)
+  } else {
+    setBeingVacansies(true)
+  }
+
+  useRedirectRequestResponse(data, setResetPages, resetPages, setLoading)
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
   const handleClick = () => {

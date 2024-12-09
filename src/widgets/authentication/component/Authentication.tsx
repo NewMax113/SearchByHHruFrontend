@@ -1,7 +1,7 @@
 import { FC } from "react"
 
 const Authentication: FC<any> = () => {
-    console.log('вызов2')
+    console.log('вызов Authentication!!!!!!!!!!!')
     return (
         <div className="h-screen flex">
             <div className="w-full relative flex">

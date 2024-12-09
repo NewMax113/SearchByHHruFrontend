@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, setResetPages: any, pages: any, perPageMax: any, token: any) => {
-  let defaultParams = `?page=${pages}&per_page=${perPageMax}${token && `&token=${token}`}`
+  let defaultParams = `?page=${pages}&per_page=${perPageMax}${token ? `&token=${token}` : ''}`
   let [bodyRequest, setBodyRequest] = useState<string | null>(defaultParams)
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const useFetch = (url: string, body: any, method: string, headers: any) => {
+const useFetch = (url: string, linkBody: any, method: string, headers: any, bodyPost: any) => {
     let [data, setData] = useState<any>(null)
     let [error, setError] = useState<any>(null)
     let [loading, setLoading] = useState<any>(null)
@@ -8,10 +8,12 @@ const useFetch = (url: string, body: any, method: string, headers: any) => {
     useEffect(() => {
         
         let fetchData = async () => {
+            console.log(JSON.stringify({...bodyPost}), 'пост')
             try {
-                await fetch(`${url}${body}`, {
+                await fetch(`${url}${linkBody}`, {
                     method: method,
-                    headers:  {...headers} 
+                    headers:  {...headers},
+                    body: bodyPost ? JSON.stringify(bodyPost) : null
                 })
                     .then(response => {
                         if (!response.ok) {
@@ -30,7 +32,7 @@ const useFetch = (url: string, body: any, method: string, headers: any) => {
                         if (data) {
                            setLoading(true) 
                         }
-                        
+                        console.log(data)
                         setData(data)
                     })
             }
@@ -41,7 +43,7 @@ const useFetch = (url: string, body: any, method: string, headers: any) => {
             }
         }
         fetchData()
-    }, [url, body])
+    }, [url, linkBody, bodyPost])
 
     return { data, error, loading }
 }

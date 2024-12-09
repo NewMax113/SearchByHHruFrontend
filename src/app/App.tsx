@@ -18,7 +18,7 @@ const App = () => {
     &client_secret=IHD3Q3BJ1ESOH3TSNRRL6CHUH4NBO4S91O6MF13QF6QPM386K4NFQSTRJH4M56MS
     &redirect_uri=http://localhost:3000`
   )
-
+  let [observRenderCookie, setBbservRenderCookie] = useState<boolean>(false)
   const getCookie = useGetCookie('token')
   const getCookieRef = useGetCookie('refresh_token')
   let { data, error, loading } = useFetch('https://api.hh.ru/token',
@@ -28,6 +28,7 @@ const App = () => {
       'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
       'Content-Type': 'application/x-www-form-urlencoded'
     },
+    null
   )
 
   const handler = (e: any) => {
@@ -37,11 +38,13 @@ const App = () => {
 
   const addingTokenToCookie = () => {
     if (data?.access_token) {
+      setBbservRenderCookie(true)
       setCookie('token', data.access_token, data.expires_in * 1000)
       setCookie('refresh_token', data.refresh_token, 86400000)
     }
 
     else if (!getCookie && getCookieRef) {
+      console.log('вызов !getCookie && getCookieRef')
       setBody(
         `?code=${a}
         &grant_type=refresh_token
@@ -54,12 +57,17 @@ const App = () => {
   }
 
   useEffect(() => {
+    if (loading) {
+      console.log('вызов useEffect')
     addingTokenToCookie()
+    }
   }, [loading])
+
+  console.log(loading, data?.access_token, getCookie, getCookieRef)
 
   return (
     <>
-      {(loading || getCookie) ? (
+      {(getCookie) ? (
         <>
           <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''} onClick={handler}>
             <SearchVacancy />
@@ -69,7 +77,7 @@ const App = () => {
           </ParametersProvider>
         </>
       )
-        : (loading !== null && error) && (<Authentication />)
+        : (loading === false) && (<Authentication />)
       }
     </>
   );
