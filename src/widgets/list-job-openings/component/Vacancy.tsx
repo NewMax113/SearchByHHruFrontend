@@ -119,7 +119,7 @@ export const VacancyMap = ({ vacancy }: any) => {
                                             style={{ width: `${count}%`, backgroundColor: `rgb(${color.colorRGBOne}, ${color.colorRGBTwo}, 0)` }}></div>
                                     </div>
                                     <div>
-                                        <div>{saveResultVacancy.revenueObj.year
+                                        <div>{saveResultVacancy?.revenueObj?.year
                                             ? `Прибыль за ${saveResultVacancy.revenueObj.year} составила ${saveResultVacancy.revenueObj.value}${saveResultVacancy.revenueObj.scale} (${saveResultVacancy.revenueObj.growth})`
                                             : 'Не нашлось информации о прибыли'}
                                         </div>
