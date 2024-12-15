@@ -6,8 +6,17 @@
   .custom-left-neg-4 {
     left: -4px;
   }
+
   .custom-top-neg-14 {
     top: -13px;
+  }
+
+  .border-l-1 {
+    border-left: 1px solid rgb(230, 230, 230)
+  }
+
+  .border-r-1 {
+    border-right: 1px solid rgb(243, 243, 243)
   }
 }
 

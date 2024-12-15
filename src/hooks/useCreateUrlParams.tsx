@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
-const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, setResetPages: any, pages: any, perPageMax: any, token: any) => {
-  let defaultParams = `?page=${pages}&per_page=${perPageMax}${token ? `&token=${token}` : ''}`
+const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, setResetPages: any, pages: any, perPageMax: any, text: any, token: any) => {
+  let defaultParams = `?page=${pages}&per_page=${perPageMax}${text ? `&text=${text}` : ''}${token ? `&token=${token}` : ''}`
   let [bodyRequest, setBodyRequest] = useState<string | null>(defaultParams)
 
   useEffect(() => {
+    console.log(parametersPresent, parameters, pages, text, token, 'Вызова useCreateUrlParams!!!!!!')
     setBodyRequest(defaultParams)
     if (parametersPresent) {
       obj.city.city ? setBodyRequest(body => `${body}&area=${obj.city.id}`) : setBodyRequest(body => `${body}&area=${obj.country.id}`)
@@ -22,9 +23,14 @@ const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, s
           setBodyRequest(body => `${body}&salary=${value}&only_with_salary=true`);
         }
       }
-      setResetPages(true)
+      
     }
-  }, [parametersPresent, parameters, pages, token])
+  }, [parametersPresent, parameters, pages, text, token])
+
+  useEffect(()=> {
+    setResetPages(true)
+  }, [parametersPresent, parameters, text, token])
+
   return bodyRequest
 }
 

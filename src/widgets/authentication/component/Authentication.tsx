@@ -2,6 +2,7 @@ import { FC } from "react"
 
 const Authentication: FC<any> = () => {
     console.log('вызов Authentication!!!!!!!!!!!')
+    localStorage.clear();
     return (
         <div className="h-screen flex">
             <div className="w-full relative flex">

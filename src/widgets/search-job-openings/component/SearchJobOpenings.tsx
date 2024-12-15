@@ -20,8 +20,9 @@ const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any,
   let pages = useSelector<IRootState, any>(state => !resetPages ? state.pages.page : 0)
   let perPageMax = useSelector<IRootState, any>(state => state.pages.per_page_max)
   let token = useGetCookie('token')
-  let bodyRequest = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages, pages, perPageMax, token)
+  let bodyRequest = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages, pages, perPageMax, text, token)
   console.log(bodyRequest)
+  console.log(text, resetPages, 'был рендер')
   let { data, error } = useFetch('http://localhost:3001/',
     bodyRequest,
     'GET',
@@ -32,7 +33,9 @@ const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any,
     null
   )
 
-  if (error) {
+  console.log(data)
+
+  if (error && !data) {
     console.log(error)
     setBeingVacansies(false)
   } else {
@@ -43,11 +46,14 @@ const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any,
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
   const handleClick = () => {
+    console.log(text, textInput)
     if (textInput !== text) {
+      console.log('Вызов 1')
       setText(textInput)
       setResetPages(true)
       setLoading(true)
     } else {
+      console.log('Вызов 2')
       setLoading(false)
     }
   }
