@@ -13,7 +13,6 @@ const useRedirectRequestResponse = (selectedVacancies: any, setResetPages: any, 
             await dispatch(setListVacancies(selectedVacancies.items))
             setResetPages(false)
             setLoading(false)
-            console.log(selectedVacancies)
           }
           requestResponse()
         }

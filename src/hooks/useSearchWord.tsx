@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const useSearchWord = (arr: any, syllable: any) => {
     let [cities, setCities] = useState<any>([])
-    console.log(syllable)
     useEffect(() => {
-        if (syllable) {
-            setCities([])
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i].name.toLowerCase().startsWith(syllable.toLowerCase())) {
-                    setCities((cityArr: any) => [...cityArr, { id: arr[i].id, name: arr[i].name }])
+        if (arr.length > 0) {
+            if (syllable) {
+                setCities([])
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i].name.toLowerCase().startsWith(syllable.toLowerCase())) {
+                        setCities((cityArr: any) => [...cityArr, { id: arr[i].id, name: arr[i].name }])
+                    }
                 }
             }
-
         }
-    }, [syllable, arr])
+
+    }, [syllable])
     return syllable ? cities : []
 }
 

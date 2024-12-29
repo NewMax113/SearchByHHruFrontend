@@ -10,7 +10,7 @@ export interface IInput {
     placeholder?: string
     checkedInput?: boolean
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => any
-    onClickInput?: () => any
+    //onClickInput?: (e: ChangeEvent<HTMLInputElement>) => any
     onChange?: (e: ChangeEvent<HTMLInputElement>) => any
 }
 
@@ -27,7 +27,6 @@ export interface ISelect {
     valueOption: string[]
     id?: string
     name?: string
-    valueSelect?: string
     onChange?: (e: any) => any
 }
 

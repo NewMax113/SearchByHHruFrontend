@@ -1,26 +1,25 @@
 import { FC, useEffect, useState } from 'react'
-import { useParameters } from '../../../hooks/useParametersContext'
 import { Select } from '../../../ui'
 import useOutputCitiesList from '../../../hooks/useOutputCitiesList'
 import useGetListCountries from '../../../hooks/useParametersJob'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../model/reducer'
-import { setListCities } from '../model/params-reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, IRootState } from '../model/reducer'
+import { setCountryRedux, setCityRedux, setListCities } from '../model/params-reducer'
 
 
-const CountrySelectionContainer: FC<any> = (): any => {
+const CountrySelectionContainer: FC<{id: string}> = ({id}): any => {
     const dispatch: any = useDispatch<AppDispatch>()
+    let country = useSelector<IRootState, any>(state => state.params.country)
     let [listCountries, setListCountries] = useState<any>(null)
-    let [listNamesCountries, setListNamesCountries] = useState<string[]>([])
-    const { parameters, updateParameter } = useParameters();
-    let [country, setCountry] = useState<string>(parameters.country.country)
-
+    let [listNamesCountries, setListNamesCountries] = useState<string[]>([country.country])
+    let listCities = useOutputCitiesList(listCountries, country.country)
     useGetListCountries(setListCountries)
 
     const pushUpdateParameters = (e: any) => {
         for (let i = 0; i < listCountries.length; i++) {
             if (e.target.value === listCountries[i].name) {
-                updateParameter({ country: { id: listCountries[i].id, country: listCountries[i].name }, city: { id: null, city: '' }, })
+                dispatch(setCityRedux({ id: null, city: null }))
+                dispatch(setCountryRedux({id: listCountries[i].id, country: listCountries[i].name}))
             }
         }
     }
@@ -28,34 +27,31 @@ const CountrySelectionContainer: FC<any> = (): any => {
     useEffect(() => {
         if (listCountries) {
             for (let index = 0; index < listCountries.length; index++) {
-                setListNamesCountries(value => [...value, listCountries[index].name])
+                let namesCounts = listCountries.map((country: any) => country.name);
+                setListNamesCountries(namesCounts)
             }
         }
     }, [listCountries])
 
-    let listCities = useOutputCitiesList(listCountries, country)
-
     useEffect(() => {
         if (listCountries) {
             for (let i = 0; i < listCountries.length; i++) {
-                if (country === listCountries[i].name) {
-                    dispatch(setListCities({ country: { id: listCountries[i].id, country: listCountries[i].name }, cities: listCities }))
+
+                if (country.country === listCountries[i].name) {
+                    dispatch(setListCities(listCities))      
                 }
             }
         }
-
-
     }, [listCities])
 
     return (
         <Select
+        id={id}
             text={listNamesCountries}
             required={true}
-            valueSelect={country}
             valueOption={listNamesCountries}
             classSelect='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400'
             onChange={e => {
-                setCountry(e.target.value);
                 pushUpdateParameters(e)
             }}
         />

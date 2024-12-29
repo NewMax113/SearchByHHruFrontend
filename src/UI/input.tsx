@@ -11,7 +11,7 @@ const Input: FC<IInput> = ({
     typeInput,
     classInput,
     placeholder,
-    onClickInput,
+    //onClickInput,
     checkedInput,
 }) => {
 
@@ -25,7 +25,7 @@ const Input: FC<IInput> = ({
             type={typeInput}
             onChange={onChange}
             className={classInput}
-            onClick={onClickInput}
+            //onClick={onClickInput}
             checked={checkedInput}
             placeholder={placeholder}
         />

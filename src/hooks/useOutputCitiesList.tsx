@@ -9,6 +9,7 @@ const useOutputCitiesList = (listCountry: any, country: string) => {
     useEffect(() => {
         setListCities([])
         if (objCountry) {
+            console.log('Рендер #1 useOutputCitiesList')
             objCountry.areas.map((city: any) => {
                 if (city.areas.length === 0) {
                     setListCities(listCities => [...listCities, { id: city.id, name: city.name }])

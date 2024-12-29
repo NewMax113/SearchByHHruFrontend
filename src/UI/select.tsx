@@ -1,20 +1,21 @@
 import { FC } from 'react'
 import { ISelect } from '../app/type/type'
 
-const Select: FC<ISelect> = ({ id, name, classSelect, required, valueSelect, valueOption, text, onChange }) => {
+const Select: FC<ISelect> = ({ id, name, classSelect, required, valueOption, text, onChange }) => {
     return (
         <select
             id={id}
+            key={id}
             name={name}
             required={required}
-            className={classSelect} 
+            className={classSelect}
             onChange={onChange}
-            value={valueSelect}
-            >
-            {valueOption.map((valueOption, index) =>
+        >
+            {valueOption.map((valueOption) =>
                 <option
+                    key={valueOption}
                     value={valueOption}>
-                    {text[index]}
+                    {valueOption}
                 </option>)}
         </select>
     )

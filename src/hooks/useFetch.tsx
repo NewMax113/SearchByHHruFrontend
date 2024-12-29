@@ -4,13 +4,12 @@ const useFetch = (url: string, linkBody: any, method: string, headers: any, body
     let [data, setData] = useState<any>(null)
     let [error, setError] = useState<any>(null)
     let [loading, setLoading] = useState<any>(null)
-    //console.log(url, linkBody, method)
+
     useEffect(() => {
-        console.log('Вызов фетч')
         let fetchData = async () => {
             console.log(JSON.stringify({...bodyPost}), 'пост')
             try {
-                await fetch(`${url}${linkBody}`, {
+                await fetch(`${url}?${linkBody}`, {
                     method: method,
                     headers:  {...headers},
                     body: bodyPost ? JSON.stringify(bodyPost) : null
@@ -19,12 +18,10 @@ const useFetch = (url: string, linkBody: any, method: string, headers: any, body
                         if (!response.ok) {
                             setLoading(false)
                             const errorMessage = response.json();
-                            console.log('кетч2')
                             errorMessage.then(e => {
                                 setError({ err_status: response.status, err_description: e.error });
                             })
                         } else {
-                            console.log('что это2')
                             return response.json()
                         }
                     })
@@ -32,8 +29,8 @@ const useFetch = (url: string, linkBody: any, method: string, headers: any, body
                         if (data) {
                            setLoading(true) 
                            setData(data)
+                           setError(null)
                         }
-                        console.log(data)
                     })
             }
             catch (error: any) {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SearchVacancy } from '../pages/SearchVacancy';
 import { ParametersJobOpenings } from '../widgets';
-import { ParametersProvider } from '../hooks/useParametersContext';
 import Authentication from '../widgets/authentication/component/Authentication';
 import useGetCookie from '../hooks/useGetCookie';
 import useFetch from '../hooks/useFetch';
@@ -12,7 +11,7 @@ const App = () => {
   const parsedUrl = new URL(window.location.href);
   const a = parsedUrl.searchParams.get("code")
   let [body, setBody] = useState<any>(
-    `?code=${a}
+    `code=${a}
     &grant_type=authorization_code
     &client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA
     &client_secret=IHD3Q3BJ1ESOH3TSNRRL6CHUH4NBO4S91O6MF13QF6QPM386K4NFQSTRJH4M56MS
@@ -46,7 +45,7 @@ const App = () => {
     else if (!getCookie && getCookieRef) {
       console.log('вызов !getCookie && getCookieRef')
       setBody(
-        `?code=${a}
+        `code=${a}
         &grant_type=refresh_token
         &refresh_token=${getCookieRef}
         &client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA
@@ -63,8 +62,6 @@ const App = () => {
     }
   }, [loading])
 
-  console.log(loading, data?.access_token, getCookie, getCookieRef)
-
   return (
     <>
       {(getCookie) ? (
@@ -72,9 +69,7 @@ const App = () => {
           <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''} onClick={handler}>
             <SearchVacancy />
           </div>
-          <ParametersProvider>
             <ParametersJobOpenings setDarkeningTheBackground={setDarkeningTheBackground} />
-          </ParametersProvider>
         </>
       )
         : (loading === false) && (<Authentication />)

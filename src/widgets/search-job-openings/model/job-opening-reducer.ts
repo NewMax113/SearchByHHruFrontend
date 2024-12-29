@@ -25,10 +25,12 @@ interface IJob_opening_Array {
 }
 
 interface IinitialState {
+    text: string,
     job_opening_Array: IJob_opening_Array[]
 }
 
 let initialState: IinitialState = {
+    text: '',
     job_opening_Array: []
 }
 
@@ -40,10 +42,13 @@ let jobOpeningReducer = createSlice({
             console.log(action.payload)
             state.job_opening_Array = []
             state.job_opening_Array.push(action.payload)
+        },
+        setTextRedux(state, action: PayloadAction<string>) {
+            state.text = action.payload
         }
     },
 
 })
 
 export default jobOpeningReducer.reducer
-export const { setListVacancies } = jobOpeningReducer.actions
+export const { setListVacancies, setTextRedux } = jobOpeningReducer.actions

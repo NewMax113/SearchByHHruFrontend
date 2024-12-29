@@ -3,28 +3,41 @@ import { useSelector } from 'react-redux'
 import { AppDispatch, IRootState } from '../../parameters-job-openings/model/reducer'
 import { Input, Button } from '../../../ui'
 import useFetch from '../../../hooks/useFetch'
-import useCreateUrlParams from '../../../hooks/useCreateUrlParams'
 import useRedirectRequestResponse from '../../../hooks/useRedirectRequestResponse'
 import useGetCookie from '../../../hooks/useGetCookie'
 import { useDispatch } from 'react-redux'
-import { setPage } from '../model/redux/pages-reducer'
+import { setBodyRequest } from '../../parameters-job-openings/model/params-reducer'
 
 
 const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any, setBeingVacansies: any }) => {
+  const dispatch: any = useDispatch<AppDispatch>()
+  let body = useSelector<IRootState, any>(state => state.params.requestBody)
+  let city = useSelector<IRootState, any>(state => state.params.city)
+  console.log(body, 'ГОРОД В РЕДАКСЕ')
   let [text, setText] = useState<string>('')
   let [resetPages, setResetPages] = useState<boolean>(false)
   let [textInput, setTextInput] = useState<string>('')
-  let parametersPresent = useSelector<IRootState, boolean>(state => state.params.parametersPresent)
-  let parameters = useSelector<IRootState, any>(state => state.params.parameters)
-  let obj = useSelector<IRootState, any>(state => state.params.parameters)
-  let pages = useSelector<IRootState, any>(state => !resetPages ? state.pages.page : 0)
-  let perPageMax = useSelector<IRootState, any>(state => state.pages.per_page_max)
+  let page = useSelector<IRootState, any>(state => !resetPages ? state.pages.page : 0)
+  let per_page = useSelector<IRootState, any>(state => state.pages.per_page_max)
   let token = useGetCookie('token')
-  let bodyRequest = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages, pages, perPageMax, text, token)
-  console.log(bodyRequest)
-  console.log(text, resetPages, 'был рендер')
+  let bodyRequest = { page, per_page, text, ...body, token }
+
+let cleanBodyPost: any = Object.entries(bodyRequest).reduce((acc: any, [key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((item) => acc.append(key, item));
+    } else {
+      acc.append(key, value);
+    }
+    return acc;
+  }, new URLSearchParams());
+  let queryParams = cleanBodyPost.toString();
+
+  useEffect(() => {
+    setResetPages(true)
+  }, [body])
+
   let { data, error } = useFetch('http://localhost:3001/',
-    bodyRequest,
+    queryParams,
     'GET',
     {
       'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
@@ -33,9 +46,7 @@ const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any,
     null
   )
 
-  console.log(data)
-
-  if (error && !data) {
+  if (error) {
     console.log(error)
     setBeingVacansies(false)
   } else {
@@ -46,14 +57,12 @@ const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any,
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
   const handleClick = () => {
-    console.log(text, textInput)
+    dispatch(setBodyRequest())
     if (textInput !== text) {
-      console.log('Вызов 1')
       setText(textInput)
       setResetPages(true)
       setLoading(true)
     } else {
-      console.log('Вызов 2')
       setLoading(false)
     }
   }

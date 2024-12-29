@@ -1,20 +1,18 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Button } from '../../../ui'
-import { useParameters } from '../../../hooks/useParametersContext'
-import { setParametersRequest } from '../model/params-reducer'
+import { setBodyRequest } from '../model/params-reducer'
 import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../model/reducer'
+import { AppDispatch, IRootState } from '../model/reducer'
 import RadioInputContainer from './RadioInputContainer'
-import ButtonInputContainer from './ButtonInputContainer'
-import MoneyInputModalContainer from './MoneyInputModalContainer'
+import CheckboxInputContainer from './CheckboxInputContainer'
 import CountrySelectionContainer from './CountrySelectionContainer'
 import CitySelectionContainer from './CitySelectionContainer'
+import SalaryInputModalContainer from './SalaryInputModalContainer'
 
 const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
     const dispatch: any = useDispatch<AppDispatch>()
-    let { parameters } = useParameters()
     let [dropDownOptions, setDropDownOptions] = useState<boolean>(false)
-    
+
     const btnDropDown = () => {
         setDropDownOptions(!dropDownOptions)
         setDarkeningTheBackground(!dropDownOptions)
@@ -40,36 +38,35 @@ const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
                     <h2 className="text-2xl font-medium mb-4">Параметры</h2>
                     <form>
                         <div className="mb-4">
-                            <label htmlFor="region" className="block text-gray-700 font-medium mb-2">Регион:</label>
-                            <CountrySelectionContainer />
+                            <label htmlFor="country" className="block text-gray-700 font-medium mb-2">Регион:</label>
+                            <CountrySelectionContainer id={'country'}/>
                         </div>
                         <div className="mb-4">
                             <label htmlFor="city" className="block text-gray-700 font-medium mb-2">Город:</label>
-                            <CitySelectionContainer />
+                            <CitySelectionContainer id={"city"}/>
+                        </div>
+                        <div className="mb-4 flex">
+                            <label htmlFor="money-input" className="block text-gray-700 font-medium">Уровеь дохода:</label>
+                            <SalaryInputModalContainer id={'money-input'} />
                         </div>
                         <div className="mb-4">
-                            <label htmlFor="number" className="block text-gray-700 font-medium mb-2">Уровеь дохода:
-                                <MoneyInputModalContainer />
-                            </label>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-gray-700 font-medium mb-2">Требуемый опыт работы:</label>
+                            <div className="block text-gray-700 font-medium mb-2">Требуемый опыт работы:</div>
                             <div className="flex flex-wrap -mx-2">
-                                <RadioInputContainer typeInput='radio' value='Нет опыта' text='Нет опыта' id='radio1' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
-                                <RadioInputContainer typeInput='radio' value='1-3' text='1-3' id='radio2' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
-                                <RadioInputContainer typeInput='radio' value='3+' text='3+' id='radio3' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
+                                <RadioInputContainer typeInput='radio' value='noExperience' id='Нет опыта' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
+                                <RadioInputContainer typeInput='radio' value='between1And3' id='1-3 года' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
+                                <RadioInputContainer typeInput='radio' value='between3And6' id='3+ года' name='work-experience' classLabel='block text-gray-700 font-medium mb-2 cursor-pointer' classInput='mr-2 cursor-pointer' />
                             </div>
                         </div>
                         <div>
                             <label className="block text-gray-700 font-medium mb-2">График работы:</label>
                             <div className="flex flex-wrap -mx-2">
-                                <ButtonInputContainer typeInput='button' value='Полный' id='checkbox1' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classButton='mr-2 py-2 px-2 cursor-pointer' />
-                                <ButtonInputContainer typeInput='button' value='Сменный' id='checkbox2' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classButton='mr-2 py-2 px-2 cursor-pointer' />
-                                <ButtonInputContainer typeInput='button' value='Удаленынй' id='checkbox4' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2' classButton='mr-2 py-2 px-2 cursor-pointer' />
+                                <CheckboxInputContainer typeInput='checkbox' value='fullDay' id='Полный' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2 px-2 cursor-pointer' classButton='mr-2 py-2 px-2 cursor-pointer' />
+                                <CheckboxInputContainer typeInput='checkbox' value='shift' id='Сменный' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2 px-2 cursor-pointer' classButton='mr-2 py-2 px-2 cursor-pointer' />
+                                <CheckboxInputContainer typeInput='checkbox' value='remote' id='Удаленынй' name='work-schedule' classLabel='flex block text-gray-700 font-medium mb-2 px-2 cursor-pointer' classButton='mr-2 py-2 px-2 cursor-pointer' />
                             </div>
                         </div>
                         <div>
-                            <Button classButton={"bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"} text={'Принять'} onClick={() => (dispatch(setParametersRequest(parameters), console.log('я вызвался!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')))}></Button>
+                            <Button classButton={"bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"} text={'Принять'} onClick={() => (dispatch(setBodyRequest()))}></Button>
                             {/* <Button style={"ml-1 border text-black px-4 py-2 rounded-lg hover:bg-slate-100"} text={'Сбросить'}></Button> */}
                         </div>
                     </form>
