@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { SearchVacancy } from '../pages/SearchVacancy';
+
 import { ParametersJobOpenings } from '../widgets';
-import Authentication from '../widgets/authentication/component/Authentication';
-import useGetCookie from '../hooks/useGetCookie';
-import useFetch from '../hooks/useFetch';
-import setCookie from '../hooks/useSetCookie';
+import Authentication from '../widgets/authentication/Authentication';
+import useGetCookie from '../shared/hooks/useGetCookie';
+import useFetch from '../shared/hooks/useFetch';
+import setCookie from '../shared/hooks/useSetCookie';
+import { SearchVacancy } from '../pages/list-vacancyes-page';
 
 const App = () => {
   let [darkeningTheBackground, setDarkeningTheBackground] = useState<boolean>(false)
