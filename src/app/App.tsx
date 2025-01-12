@@ -1,52 +1,64 @@
-import { useEffect, useState } from 'react';
-
-import { ParametersJobOpenings } from '../widgets';
-import Authentication from '../widgets/authentication/Authentication';
+import { MouseEvent, useEffect, useState } from 'react';
+import { ParametersJobOpenings, Authentication } from '../widgets';
 import useGetCookie from '../shared/hooks/useGetCookie';
 import useFetch from '../shared/hooks/useFetch';
-import setCookie from '../shared/hooks/useSetCookie';
-import { SearchVacancy } from '../pages/list-vacancyes-page';
+import useSetCookie from '../shared/hooks/useSetCookie';
+import { PageStructure } from '../pages/list-vacancyes-page';
+import { DataToken, IDataApp, IToken } from './type/TypeApp';
+
 
 const App = () => {
   let [darkeningTheBackground, setDarkeningTheBackground] = useState<boolean>(false)
   const parsedUrl = new URL(window.location.href);
-  const a = parsedUrl.searchParams.get("code")
-  let [body, setBody] = useState<any>(
-    `code=${a}
+  const code = parsedUrl.searchParams.get("code")
+  let [body, setBody] = useState<string>(
+    `code=${code}
     &grant_type=authorization_code
     &client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA
     &client_secret=IHD3Q3BJ1ESOH3TSNRRL6CHUH4NBO4S91O6MF13QF6QPM386K4NFQSTRJH4M56MS
     &redirect_uri=http://localhost:3000`
   )
-  let [observRenderCookie, setBbservRenderCookie] = useState<boolean>(false)
-  const getCookie = useGetCookie('token')
-  const getCookieRef = useGetCookie('refresh_token')
-  let { data, error, loading } = useFetch('https://api.hh.ru/token',
-    body,
-    'POST',
-    {
+  let [observerToken, setObserverToken] = useState<boolean>(false)
+  let [tokenList, setTokenList] = useState<IToken[]>([{ name: null, value: null, time: null }, { name: null, value: null, time: null }])
+  useSetCookie({
+    name: tokenList[0].name,
+    value: tokenList[0].value,
+    time: tokenList[0].time
+  })
+  useSetCookie({
+    name: tokenList[1].name,
+    value: tokenList[1].value,
+    time: tokenList[1].time
+  })
+  const getCookie = useGetCookie('token', observerToken)
+  const getCookieRef = useGetCookie('refresh_token', observerToken)
+  let { data, error, loading }: IDataApp = useFetch<DataToken>({
+    url: 'https://api.hh.ru/token',
+    linkBody: body,
+    method: 'POST',
+    headers: {
       'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    null
-  )
+    }
+  })
 
-  const handler = (e: any) => {
+  const handler = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     e.preventDefault();
   }
 
   const addingTokenToCookie = () => {
     if (data?.access_token) {
-      setBbservRenderCookie(true)
-      setCookie('token', data.access_token, data.expires_in * 1000)
-      setCookie('refresh_token', data.refresh_token, 86400000)
+      setObserverToken(true)
+      setTokenList([
+        { name: 'token', value: data.access_token, time: data.expires_in * 1000 },
+        { name: 'refresh_token', value: data.refresh_token, time: 86400000 }
+      ])
     }
 
     else if (!getCookie && getCookieRef) {
-      console.log('вызов !getCookie && getCookieRef')
       setBody(
-        `code=${a}
+        `code=${code}
         &grant_type=refresh_token
         &refresh_token=${getCookieRef}
         &client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA
@@ -58,19 +70,19 @@ const App = () => {
 
   useEffect(() => {
     if (loading) {
-      console.log('вызов useEffect')
-    addingTokenToCookie()
+      addingTokenToCookie()
     }
   }, [loading])
+
 
   return (
     <>
       {(getCookie) ? (
         <>
           <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''} onClick={handler}>
-            <SearchVacancy />
+            <PageStructure />
           </div>
-            <ParametersJobOpenings setDarkeningTheBackground={setDarkeningTheBackground} />
+          <ParametersJobOpenings setDarkeningTheBackground={setDarkeningTheBackground} />
         </>
       )
         : (loading === false) && (<Authentication />)

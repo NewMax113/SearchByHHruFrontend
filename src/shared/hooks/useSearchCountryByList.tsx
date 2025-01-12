@@ -1,18 +1,24 @@
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { IListCountry } from "../../pages/type/type";
 
-const useSearchCountryByList = (listCountry: any, country: string, setObjCountry: any) => {
+export interface IUseSearchCountryByList {
+    listCountries: IListCountry[] | []
+    country: string
+    setObjCountry: Dispatch<SetStateAction<IListCountry | null>>
+}
+
+const useSearchCountryByList = ({listCountries, country, setObjCountry}: IUseSearchCountryByList) => {
+
     useEffect(() => {
-        if (listCountry) {
-            console.log('Рендер #2 useSearchCountryByList')
-            for (let index = 0; index < listCountry.length; index++) {
-                if (listCountry[index].name === country) {
-                    setObjCountry({ ...listCountry[index] })
+        if (listCountries) {
+            for (let index = 0; index < listCountries.length; index++) {
+                if (listCountries[index].name === country) {
+                    setObjCountry({ ...listCountries[index] })
                     break;
                 }
             }
         }
-
-    }, [listCountry, country])
+    }, [listCountries, country])
 }
 
 export default useSearchCountryByList

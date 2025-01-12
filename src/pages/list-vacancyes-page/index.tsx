@@ -1,2 +1,1 @@
-import {SearchVacancy} from './SearchJobOpenings'
-export {SearchVacancy}
+export { default as PageStructure} from './PageStructure'

@@ -1,17 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
+import { IinitialStatePages, IActionSetPage } from "../type/TypePage"
 
-interface IinitialState {
-    pages: number
-    found: number
-    found_now: number
-    page: number
-    per_page_max: number
-    per_page_min: number | null,
-    name: string
-}
 
-let initialState: IinitialState = {
+let initialState: IinitialStatePages = {
     pages: 0, //стр всего
     found: 0, //максимум элементов
     found_now: 6, //элементов на данный момент на стр.
@@ -25,8 +17,9 @@ let pagesReducer = createSlice({
     name: 'pagesReducer',
     initialState,
     reducers: {
-        setPage (state, actions: PayloadAction<any>) {
-            state.found = actions.payload.found > 1998 ? '>1998' : actions.payload.found
+        setPage (state, actions: PayloadAction<IActionSetPage>) {
+            console.log(actions.payload)
+            state.found = actions.payload.found
             state.pages = actions.payload.pages-1
             state.page = actions.payload.page
             console.log(actions.payload)

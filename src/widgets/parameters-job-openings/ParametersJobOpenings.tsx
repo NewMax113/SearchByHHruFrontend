@@ -1,16 +1,9 @@
 import { FC, useState } from 'react'
-import { setBodyRequest } from '../model/params-reducer'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../model/reducer'
-import Country from '../../../featrues/parameters-vacancy-feature/components/Country'
-import City from '../../../featrues/parameters-vacancy-feature/components/City'
-import Salary from '../../../featrues/parameters-vacancy-feature/components/Salary'
-import RadioInput from '../../../featrues/parameters-vacancy-feature/components/RadioInput'
-import CheckboxInput from '../../../featrues/parameters-vacancy-feature/components/CheckboxInput'
-import { Button } from '../../../shared/ui'
+import {Country, City, Salary, RadioInput, CheckboxInput, ButtonParametersVacancy} from '../../featrues'
+import { IParametersJobOpenings } from './type/TypeParametersJobOpenings'
 
-const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
-    const dispatch: any = useDispatch<AppDispatch>()
+
+const ParametersJobOpenings: FC<IParametersJobOpenings> = ({ setDarkeningTheBackground }) => {
     let [dropDownOptions, setDropDownOptions] = useState<boolean>(false)
 
     const btnDropDown = () => {
@@ -18,11 +11,11 @@ const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
         setDarkeningTheBackground(!dropDownOptions)
     }
 
-    const modalClose = (e: any) => {
-        document.addEventListener('mouseup', function (e) {
-            let container: any = document.getElementById('modal');
+    const modalClose = () => {
+        document.addEventListener('mouseup', (e: Event) => {
+            let container = document.getElementById('modal') as HTMLDivElement | null;
 
-            if (!container.contains(e.target)) {
+            if (container && !container.contains(e.target as Node)) {
                 setDropDownOptions(false)
                 setDarkeningTheBackground(false)
             }
@@ -66,7 +59,7 @@ const ParametersJobOpenings: FC<any> = ({ setDarkeningTheBackground }) => {
                             </div>
                         </div>
                         <div>
-                            <Button classButton={"bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"} text={'Принять'} onClick={() => (dispatch(setBodyRequest()))}></Button>
+                            <ButtonParametersVacancy/>
                             {/* <Button style={"ml-1 border text-black px-4 py-2 rounded-lg hover:bg-slate-100"} text={'Сбросить'}></Button> */}
                         </div>
                     </form>

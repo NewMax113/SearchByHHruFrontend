@@ -1,6 +1,6 @@
 import { FC } from "react"
 
-const Authentication: FC<any> = () => {
+const Authentication: FC = () => {
     console.log('вызов Authentication!!!!!!!!!!!')
     localStorage.clear();
     return (

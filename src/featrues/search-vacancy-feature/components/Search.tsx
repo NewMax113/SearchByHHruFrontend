@@ -1,48 +1,40 @@
-import { useState, ChangeEvent, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useState, ChangeEvent, useEffect, FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { AppDispatch, IRootState } from '../../../widgets/parameters-job-openings/model/reducer'
-import useGetCookie from '../../../shared/hooks/useGetCookie'
 import useFetch from '../../../shared/hooks/useFetch'
 import useRedirectRequestResponse from '../hooks/useRedirectRequestResponse'
-import { setBodyRequest } from '../../../widgets/parameters-job-openings/model/params-reducer'
-import SearchModelEntity from '../../../entities/search-entity/model/SearchModelEntity'
+import { SearchModelEntity } from '../../../entities'
+import { AppDispatch, IRootState } from '../../../app/model/reducer'
+import { setBodyRequest } from '../../../pages/model/parameters-reducer'
+import { IDataSearch, IDataSearchFetch, ISearch } from '../type/ISearch'
+import useCreatingQueryParameters from '../hooks/useCreatingQueryParameters'
+import useResetPage from '../hooks/useResetPage'
+import { setTextRedux } from '../../../pages/model/job-opening-reducer'
+import { useSelector } from 'react-redux'
 
 
-const Search = ({ setLoading, setBeingVacansies }: { setLoading: any, setBeingVacansies: any }) => {
-  const dispatch: any = useDispatch<AppDispatch>()
-  let body = useSelector<IRootState, any>(state => state.params.requestBody)
-  let [text, setText] = useState<string>('')
-  let [resetPages, setResetPages] = useState<boolean>(false)//
+const Search: FC<ISearch> = ({ setLoading, setBeingVacansies }) => {
+  const dispatch = useDispatch<AppDispatch>()
+  let text = useSelector<IRootState, string>(state => state.jobOpeningReducer.text)
+  console.log(text)
+  //let [text, setText] = useState<string>('')
+  let [resetPages, setResetPages] = useState<boolean>(false)
   let [textInput, setTextInput] = useState<string>('')
-  let page = useSelector<IRootState, any>(state => !resetPages ? state.pages.page : 0)//
-  let per_page = useSelector<IRootState, any>(state => state.pages.per_page_max)//
-  let token = useGetCookie('token')//
-  let bodyRequest = { page, per_page, text, ...body, token }//
 
-  let cleanBodyPost: any = Object.entries(bodyRequest).reduce((acc: any, [key, value]) => {
-    if (Array.isArray(value)) {
-      value.forEach((item) => acc.append(key, item));
-    } else {
-      acc.append(key, value);
-    }
-    return acc;
-  }, new URLSearchParams());
-  let queryParams = cleanBodyPost.toString();
+  const queryParams = useCreatingQueryParameters({resetPages, setResetPages, text})
 
-  useEffect(() => {
-    setResetPages(true)
-  }, [body])
-
-  let { data, error } = useFetch('http://localhost:3001/',
-    queryParams,
-    'GET',
-    {
+  let { data, error }: IDataSearchFetch = useFetch<IDataSearch>({
+    url: 'http://localhost:3001/',
+    linkBody: queryParams,
+    method: 'GET',
+    headers: {
       'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    null
-  )
+    }
+  })
+
+  useResetPage({pages: data?.pages, resetPages, setResetPages})
+
+
 
   if (error) {
     console.log(error)
@@ -51,14 +43,15 @@ const Search = ({ setLoading, setBeingVacansies }: { setLoading: any, setBeingVa
     setBeingVacansies(true)
   }
 
-  useRedirectRequestResponse(data, setResetPages, resetPages, setLoading)
+  useRedirectRequestResponse({data, setLoading})
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
   const handleClick = () => {
     dispatch(setBodyRequest())
     if (textInput !== text) {
-      setText(textInput)
-      setResetPages(true)
+      dispatch(setTextRedux(textInput))
+      //setText(textInput)
+      //setResetPages(true)
       setLoading(true)
     } else {
       setLoading(false)
@@ -66,7 +59,7 @@ const Search = ({ setLoading, setBeingVacansies }: { setLoading: any, setBeingVa
   }
 
   return (
-   <SearchModelEntity textInput={textInput} onChangeEvent={onChangeEvent} handleClick={handleClick}/>
+    <SearchModelEntity textInput={textInput} onChangeEvent={onChangeEvent} handleClick={handleClick} />
   )
 }
 

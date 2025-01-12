@@ -1,24 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
+import { IinitialStateParameters } from "../type/TypeParameters"
 
 
-interface IinitialState {
-    requestBody: {
-        area: string | number,
-        salary?: string,
-        experience?: string,
-        schedule?: string[],
-        only_with_salary: boolean
-    },
-    country: { id: number, country: string },
-    city: { id: null | number, city: null | string },
-    salary: string,
-    experience: string,
-    schedule: string[],
-    listCities: { id: number, name: string }[],
-}
-
-let initialState: IinitialState = {
+let initialState: IinitialStateParameters = {
     requestBody: {
         area: '113',
         only_with_salary: false
@@ -35,23 +20,22 @@ let params = createSlice({
     name: 'paramsSearch',
     initialState,
     reducers: {
-        setListCities(state, action: PayloadAction<any>) {
-            console.log(action.payload)
+        setListCities(state, action: PayloadAction<IinitialStateParameters['listCities']>) {
             state.listCities = action.payload
         },
-        setCountryRedux(state, action: PayloadAction<any>) {
+        setCountryRedux(state, action: PayloadAction<IinitialStateParameters['country']>) {
             state.country = { id: action.payload.id, country: action.payload.country }
         },
         setCityRedux(state, action: PayloadAction<any>) {
             state.city = { id: action.payload.id, city: action.payload.city }
         },
-        setEarningRedux(state, action: PayloadAction<string>) {
+        setEarningRedux(state, action: PayloadAction<IinitialStateParameters['salary']>) {
             state.salary = action.payload
         },
-        setWorkExperienceRedux(state, action: PayloadAction<string>) {
+        setWorkExperienceRedux(state, action: PayloadAction<IinitialStateParameters['experience']>) {
             state.experience = action.payload
         },
-        setWorkScheduleRedux(state, action: PayloadAction<string[]>) {
+        setWorkScheduleRedux(state, action: PayloadAction<IinitialStateParameters['schedule']>) {
             state.schedule = action.payload
         },
         setBodyRequest(state) {

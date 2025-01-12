@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
-import params from "./params-reducer"
-import jobOpeningReducer from "../../search-job-openings/model/job-opening-reducer"
-import pagesReducer from "../../search-job-openings/model/redux/pages-reducer"
+import params from "../../pages/model/parameters-reducer"
+import jobOpeningReducer from "../../pages/model/job-opening-reducer"
+import pagesReducer from '../../pages/model/pages-reducer'
 
 
 let rootReducer = combineReducers({

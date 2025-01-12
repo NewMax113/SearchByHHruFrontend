@@ -1,12 +1,9 @@
-import { useState } from 'react'
-import {
-  ListJobOpenings,
-  SearchJobOpenings,
-} from '../../widgets'
+import { FC, useState } from 'react'
+import { ListJobOpenings, SearchJobOpenings } from '../../widgets'
 import FilteringVacancies from '../../widgets/filtering-vacancies/FilteringVacancies'
 
 
-export const SearchVacancy = () => {
+const PageStructure: FC = () => {
   let [loading, setLoading] = useState<boolean>(true)
   let [beingVacansies, setBeingVacansies] = useState<boolean>(true)
 
@@ -16,9 +13,9 @@ export const SearchVacancy = () => {
         <SearchJobOpenings setLoading={setLoading} setBeingVacansies={setBeingVacansies} />
         <FilteringVacancies loading={loading}></FilteringVacancies>
       </header>
-      <main>
-        <ListJobOpenings loading={loading} setLoading={setLoading} beingVacansies={beingVacansies} />
-      </main>
+      <ListJobOpenings loading={loading} setLoading={setLoading} beingVacansies={beingVacansies} />
     </>
   )
 }
+
+export default PageStructure

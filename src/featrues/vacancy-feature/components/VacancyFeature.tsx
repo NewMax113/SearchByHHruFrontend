@@ -1,32 +1,35 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import useFetch from '../../../shared/hooks/useFetch';
 import { COLOR_CHANGE_STEP, COLOR_COUNTER_LIMITED, COLOR_MAX_RGB, COLOR_START, RELIABILITY_LIMIT } from '../utils/constant';
 import useGetCookie from '../../../shared/hooks/useGetCookie';
-import VacancyModelEntity from '../../../entities/vacancy-entity/model/VacancyModelEntity';
+import { VacancyModelEntity } from '../../../entities';
+import { IFetchVacancyFeature, IJob_opening_Array } from '../../../pages/type/TypeJobOpening';
+import { IColor, IhtmlString } from '../type/IVacancyFeature';
+import { IArgument } from '../../../shared/type/type';
+import { IResultVacancy } from '../../../pages/type/type';
 
 
-
-export const VacancyMap = ({ vacancy }: any) => {
-    const htmlString = vacancy.description;
-    const theObj = { __html: htmlString };
-    let [arg, setArg] = useState<any>('')
-    let [saveResultVacancy, setSaveResultVacancy] = useState<any>(null)
+const VacancyFeature: FC<IJob_opening_Array> = ({ vacancy }) => {
+    const htmlString: string = vacancy.description;
+    const theObj: IhtmlString = { __html: htmlString };
+    let [arg, setArg] = useState<IArgument | null>(null)
+    let [saveResultVacancy, setSaveResultVacancy] = useState<IResultVacancy | null>(null)
     let [window, setWindow] = useState<boolean>(false)
-    let [color, setColor] = useState({ colorRGBOne: COLOR_START, colorRGBTwo: COLOR_MAX_RGB, sumNumberColor: 0 })
-    let token = useGetCookie('token')
-
-    let { data, error, loading } = useFetch('http://localhost:3001/feedback',
-        '',
-        'POST',
-        {
+    let [color, setColor] = useState<IColor>({ colorRGBOne: COLOR_START, colorRGBTwo: COLOR_MAX_RGB, sumNumberColor: 0 })
+    let [count, setCount] = useState<number>(100)
+    const token = useGetCookie('token', true)
+    let { data }: IFetchVacancyFeature = useFetch<IResultVacancy>({
+        url: 'http://localhost:3001/feedback',
+        method: 'POST',
+        headers: {
             'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
             'Content-Type': 'application/json'
         },
-        arg
-    )
+        bodyPost: arg
+    })
 
     const switchFetch = () => {
-        let employer: any = localStorage.getItem(vacancy.employer_id)
+        let employer = localStorage.getItem(vacancy.employer_id) as string
         if (employer) {
             setSaveResultVacancy(JSON.parse(employer))
         } else {
@@ -42,12 +45,12 @@ export const VacancyMap = ({ vacancy }: any) => {
         }
     }, [data])
 
-    let [count, setCount] = useState<any>(100)
+    
 
     useEffect(() => {
         if (window && saveResultVacancy?.reliabilityPercentage) {
             if (count > saveResultVacancy?.reliabilityPercentage && count > RELIABILITY_LIMIT) {
-                const timer = setTimeout(() => {
+                setTimeout(() => {
                     setCount((prevCount: any) => prevCount - 1);
 
                 }, 10);
@@ -83,3 +86,5 @@ export const VacancyMap = ({ vacancy }: any) => {
         />
     )
 }
+
+export default VacancyFeature

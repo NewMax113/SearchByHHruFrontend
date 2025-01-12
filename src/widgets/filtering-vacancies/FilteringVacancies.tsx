@@ -1,12 +1,12 @@
 import { FC } from "react";
-import FilterModelEntity from "../../entities/filter-entity/model/FilterModelEntity";
+import { FilterModelEntity } from "../../entities";
+import { IFilteringVacancies } from "./type/IFilteringVacancies";
 
 
-const FilteringVacancies: FC<any> = ({loading}: {loading: boolean}) => {
-
+const FilteringVacancies: FC<IFilteringVacancies> = ({ loading }) => {
 
     return (
-        <FilterModelEntity loading={loading}/>
+        <FilterModelEntity loading={loading} />
     )
 }
 

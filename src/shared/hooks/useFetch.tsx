@@ -1,13 +1,26 @@
 import { useEffect, useState } from "react"
+import { IArgument } from "../type/type"
 
-const useFetch = (url: string, linkBody: any, method: string, headers: any, bodyPost: any) => {
-    let [data, setData] = useState<any>(null)
-    let [error, setError] = useState<any>(null)
-    let [loading, setLoading] = useState<any>(null)
+
+export interface IUseFetch {
+    url: string
+    linkBody?: string
+    method: string
+    headers: Record<string, string>
+    bodyPost?: IArgument | null
+}
+
+type IError = string | { err_status: number, err_description: string } | null
+type ILoading = boolean | null
+
+const useFetch = <T,>({url, linkBody, method, headers, bodyPost}: IUseFetch) => {
+    let [data, setData] = useState<T | null>(null)
+    let [error, setError] = useState<IError>(null)
+    let [loading, setLoading] = useState<ILoading>(null)
 
     useEffect(() => {
         let fetchData = async () => {
-            console.log(JSON.stringify({...bodyPost}), 'пост')
+
             try {
                 await fetch(`${url}?${linkBody}`, {
                     method: method,

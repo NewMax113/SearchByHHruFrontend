@@ -1,14 +1,15 @@
 import { FC, useState, ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, IRootState } from '../../../widgets/parameters-job-openings/model/reducer';
-import { setEarningRedux } from '../../../widgets/parameters-job-openings/model/params-reducer';
 import { Input } from '../../../shared/ui';
+import { AppDispatch, IRootState } from '../../../app/model/reducer';
+import { setEarningRedux } from '../../../pages/model/parameters-reducer';
 
 
-const Salary: FC<{id: string}> = ({id}) => {
-    const dispatch: any = useDispatch<AppDispatch>()
+const Salary: FC<{ id: string }> = ({ id }) => {
     let salary = useSelector<IRootState, string>(state => state.params.salary)
     let [value, setValue] = useState<string>(salary)
+
+    const dispatch = useDispatch<AppDispatch>()
 
     const setValueInput = (e: ChangeEvent<HTMLInputElement>) => {
         let valueInput = validation(e.target.value)

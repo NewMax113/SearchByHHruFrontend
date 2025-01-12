@@ -1,7 +1,14 @@
-function setCookie(name: string, value: string, time: number) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + time); // Устанавливаем срок хранения в днях
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+import { useEffect } from "react";
+import { IToken } from "../../app/type/TypeApp";
+
+function useSetCookie({ name, value, time }: IToken) {
+    useEffect(() => {
+        if (name && value && time) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + time);
+            document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+        }
+    }, [name, value, time])
 }
 
-export default setCookie
+export default useSetCookie

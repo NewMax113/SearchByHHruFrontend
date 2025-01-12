@@ -1,17 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const useGetCookie = (name: string) => {
-  // useEffect(()=> {
+const useGetCookie = (name: string, observerToken: boolean) => {
+  let [token, setToken] = useState<string>('')
 
-  // }, [name])
-    const cookies = document.cookie.split('; ');
-    for (let cookie of cookies) {
-      const [key, value]: any[] = cookie.split('=');
-      if (key === name) {
-        return decodeURIComponent(value);
+  useEffect(() => {
+      const cookies = document.cookie.split('; ');
+
+      for (let cookie of cookies) {
+        const [key, value]: string[] = cookie.split('=');
+        if (key === name) {
+          setToken(decodeURIComponent(value))
+        }
       }
-    }
-    return null;
+  }, [name, observerToken])
+
+  return token;
 }
 
 export default useGetCookie

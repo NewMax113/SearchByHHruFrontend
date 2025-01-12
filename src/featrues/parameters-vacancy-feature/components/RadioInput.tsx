@@ -1,24 +1,15 @@
 import { ChangeEvent, FC } from 'react'
-import { useDispatch } from 'react-redux'
-import { AppDispatch, IRootState } from '../../../widgets/parameters-job-openings/model/reducer'
-import { useSelector } from 'react-redux'
-import { setWorkExperienceRedux } from '../../../widgets/parameters-job-openings/model/params-reducer'
+import { useDispatch, useSelector } from 'react-redux'
 import { Input } from '../../../shared/ui'
+import { AppDispatch, IRootState } from '../../../app/model/reducer'
+import { setWorkExperienceRedux } from '../../../pages/model/parameters-reducer'
+import { IRadioInput } from '../type/TypesParametersVacancy'
 
 
-interface IInput {
-    typeInput: string
-    text?: string
-    value: string
-    name: string
-    id: string
-    classLabel: string
-    classInput: string
-}
-
-const RadioInput: FC<IInput> = ({ typeInput, value, id, name, classLabel, classInput }) => {
-    const dispatch: any = useDispatch<AppDispatch>()
+const RadioInput: FC<IRadioInput> = ({ typeInput, value, id, name, classLabel, classInput }) => {
     let experience = useSelector<IRootState, string>(state => state.params.experience)
+
+    const dispatch = useDispatch<AppDispatch>()
 
     const handleClick = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setWorkExperienceRedux(e.target.value))

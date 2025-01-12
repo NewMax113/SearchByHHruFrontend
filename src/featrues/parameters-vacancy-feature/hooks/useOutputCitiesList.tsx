@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react"
 import useSearchCountryByList from "../../../shared/hooks/useSearchCountryByList"
+import { IUseOutputCitiesList } from "../type/TypesParametersVacancy"
+import { IListCountry } from "../../../pages/type/type"
 
-const useOutputCitiesList = (listCountry: any, country: string) => {
+
+const useOutputCitiesList = ({listCountries, country}: IUseOutputCitiesList) => {
     let [listCities, setListCities] = useState<{ id: number, name: string }[]>([])
-    let [objCountry, setObjCountry] = useState<any>(null)
-    useSearchCountryByList(listCountry, country, setObjCountry)
+    let [objCountry, setObjCountry] = useState<IListCountry | null>(null)
+    
+    useSearchCountryByList({listCountries, country, setObjCountry})
 
     useEffect(() => {
         setListCities([])
         if (objCountry) {
-            console.log('Рендер #1 useOutputCitiesList')
-            objCountry.areas.map((city: any) => {
+            objCountry.areas.map((city: IListCountry) => {
                 if (city.areas.length === 0) {
                     setListCities(listCities => [...listCities, { id: city.id, name: city.name }])
                     for (let i = 0; i < city.areas.length; i++) {
-                        if (city.areas[i].id.length < 4) {
+                        if (`${city.areas[i].id}`.length < 4) {
                             setListCities(listCities => [...listCities, { id: city.areas[i].id, name: city.areas[i].name }])
                         }
                     }

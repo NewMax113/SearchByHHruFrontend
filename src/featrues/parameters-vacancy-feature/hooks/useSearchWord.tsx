@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
+import { IList, IUseSearchWord } from "../type/TypesParametersVacancy";
 
-const useSearchWord = (arr: any, syllable: any) => {
-    let [cities, setCities] = useState<any>([])
+
+const useSearchWord = ({listCities, text}: IUseSearchWord) => {
+    let [cities, setCities] = useState<IList[] | []>([])
     useEffect(() => {
-        if (arr.length > 0) {
-            if (syllable) {
+        if (listCities.length > 0) {
+            if (text) {
                 setCities([])
-                for (let i = 0; i < arr.length; i++) {
-                    if (arr[i].name.toLowerCase().startsWith(syllable.toLowerCase())) {
-                        setCities((cityArr: any) => [...cityArr, { id: arr[i].id, name: arr[i].name }])
+                for (let i = 0; i < listCities.length; i++) {
+                    if (listCities[i].name.toLowerCase().startsWith(text.toLowerCase())) {
+                        setCities((cityArr: IList[]) => [...cityArr, { id: listCities[i].id, name: listCities[i].name }])
                     }
                 }
             }
         }
 
-    }, [syllable])
-    return syllable ? cities : []
+    }, [text])
+    return text ? cities : []
 }
 
 export default useSearchWord

@@ -1,7 +1,10 @@
 import { FC } from "react"
 import { Input } from "../../../shared/ui"
+import { ICityModalEntity } from "../type/ICityModelEntity"
 
-const CityModalEntity: FC<any> = ({id, text, textInput, checkingValidityCity, sortCities, listCities}) => {
+
+const CityModalEntity: FC<ICityModalEntity> = ({id, text, textInput, checkingValidityCity, sortCities, listCities}) => {
+
     return (
         <>
             <Input
@@ -21,7 +24,7 @@ const CityModalEntity: FC<any> = ({id, text, textInput, checkingValidityCity, so
                 {((sortCities.length > 0 && sortCities)
                     ? sortCities
                     : listCities)
-                    .map((x: any) => <option key={x.name} value={x.name} />)}
+                    .map((city: {name: string}) => <option key={city.name} value={city.name} />)}
             </datalist>
         </>
     )

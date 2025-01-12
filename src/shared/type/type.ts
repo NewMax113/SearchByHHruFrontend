@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, FocusEvent } from "react"
 
 export interface IInput {
     value: string
@@ -9,15 +9,15 @@ export interface IInput {
     classInput?: string
     placeholder?: string
     checkedInput?: boolean
-    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => any
+    onBlur?: (e: FocusEvent<HTMLInputElement>) => void
     //onClickInput?: (e: ChangeEvent<HTMLInputElement>) => any
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => any
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export interface IButton {
     text: string
     classButton: string
-    onClick?: () => any
+    onClick?: () => void
 }
 
 export interface ISelect {
@@ -37,4 +37,12 @@ export interface IFetch {
     area: number,
     params: any,
     requestBody: object
+}
+
+export interface IArgument {
+    name: string | null,
+    city: string,
+    remoteWork: boolean,
+    employer_id: string,
+    token: string | null
 }
