@@ -21,8 +21,10 @@ let pagesReducer = createSlice({
             console.log(actions.payload)
             state.found = actions.payload.found
             state.pages = actions.payload.pages-1
-            state.page = actions.payload.page
             console.log(actions.payload)
+        },
+        newPage (state, actions: PayloadAction<number>) {
+            state.page = actions.payload
         },
         pagePlus (state) {
             if (state.pages > state.page) {
@@ -35,7 +37,7 @@ let pagesReducer = createSlice({
             }
         },
         pageMinus (state) {
-            if (state.page > 0) {
+            if (state.page > 1) {
                 state.page -= 1
                 state.per_page_min = null
                 state.found_now -= state.per_page_max
@@ -45,4 +47,4 @@ let pagesReducer = createSlice({
 })
 
 export default pagesReducer.reducer
-export const { pagePlus, pageMinus, setPage } = pagesReducer.actions
+export const { pagePlus, pageMinus, setPage, newPage } = pagesReducer.actions

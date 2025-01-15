@@ -14,6 +14,7 @@ const ListVacancy: FC<IListVacancy> = ({ beingVacansies, setLoading }) => {
     let page = useSelector<IRootState, number>(state => state.pages.page)
     let maxPage = useSelector<IRootState, number>(state => state.pages.pages)
     const dispatch = useDispatch<AppDispatch>()
+    console.log(page)
 
     const minusPage = () => {
         dispatch(pageMinus())

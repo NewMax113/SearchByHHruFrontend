@@ -5,5 +5,5 @@ export { default as City } from './parameters-vacancy-feature/components/City';
 export { default as Country } from './parameters-vacancy-feature/components/Country';
 export { default as RadioInput } from './parameters-vacancy-feature/components/RadioInput';
 export { default as Salary } from './parameters-vacancy-feature/components/Salary';
-export { default as Search } from './search-vacancy-feature/components/Search';
+export { default as Search } from './search-vacancy-feature/components/SearchContainer';
 export { default as VacancyFeature } from './vacancy-feature/components/VacancyFeature';

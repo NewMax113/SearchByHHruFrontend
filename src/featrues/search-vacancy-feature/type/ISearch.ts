@@ -2,7 +2,7 @@ import { SetStateAction, Dispatch } from "react";
 import { IJob_opening_Array } from "../../../pages/type/TypeJobOpening";
 import { IActionSetPage } from "../../../pages/type/TypePage";
 
-export interface ISearch {
+export interface ISearchContainer  {
   setLoading: Dispatch<SetStateAction<boolean>>,
   setBeingVacansies: Dispatch<SetStateAction<boolean>>
 }
@@ -24,7 +24,6 @@ export interface IUseRedirectRequestResponse {
 }
 
 export interface IUseCreatingQueryParameters {
-  resetPages: boolean,
   text: string,
   setResetPages: Dispatch<SetStateAction<boolean>>
 }

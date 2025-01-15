@@ -1,9 +1,9 @@
 import { FC, FormEvent } from "react"
 import { Button, Input } from "../../../shared/ui";
-import { ISearchModelEntity } from "../type/ISearchModelEntity";
+import { ISearch } from "../type/ISearchModelEntity";
 
 
-const SearchModelEntity: FC<ISearchModelEntity> = ({
+const Search: FC<ISearch> = ({
   textInput,
   onChangeEvent,
   handleClick,
@@ -29,4 +29,4 @@ const SearchModelEntity: FC<ISearchModelEntity> = ({
   )
 }
 
-export default SearchModelEntity
+export default Search
