@@ -7,7 +7,7 @@ const ContentVacancy: FC<IContentVacancy> = ({ vacancy, theObj }) => {
         <div className={"py-4 px-8 relative min-h-96"}>
             <div className='max-h-80 overflow-hidden'>
                 <div>{vacancy.employer}</div>
-                <a href={"#"}>
+                <a href={`${vacancy.alternate_url}`} target="_blank" rel="noopener noreferrer">
                     <h4 className={"text-base mb-3 font-semibold"}><u>{vacancy.name}</u></h4>
                 </a>
                 <div className='flex'>
@@ -30,7 +30,7 @@ const ContentVacancy: FC<IContentVacancy> = ({ vacancy, theObj }) => {
 
             <div className='absolute bottom-px w-4/5'>
                 <hr className={"mt-4 "}></hr>
-                <button className={"text-xs"}>Открыть</button>
+                <a href={vacancy.alternate_url} target="_blank" rel="noopener noreferrer" className={"text-xs cursor-pointer"}>Открыть</a>
                 &nbsp;
             </div>
         </div>

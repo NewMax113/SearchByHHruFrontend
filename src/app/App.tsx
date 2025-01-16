@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ParametersJobOpenings, Authentication } from '../widgets';
 import useGetCookie from '../shared/hooks/useGetCookie';
 import useFetch from '../shared/hooks/useFetch';
@@ -32,7 +32,7 @@ const App = () => {
   })
   const getCookie = useGetCookie('token', observerToken)
   const getCookieRef = useGetCookie('refresh_token', observerToken)
-  let { data, error, loading }: IDataApp = useFetch<DataToken>({
+  let { data, loading }: IDataApp = useFetch<DataToken>({
     url: 'https://api.hh.ru/token',
     linkBody: body,
     method: 'POST',
@@ -41,11 +41,6 @@ const App = () => {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   })
-
-  const handler = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    e.preventDefault();
-  }
 
   const addingTokenToCookie = () => {
     if (data?.access_token) {
@@ -79,7 +74,7 @@ const App = () => {
     <>
       {(getCookie) ? (
         <>
-          <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''} onClick={handler}>
+          <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''}>
             <PageStructure />
           </div>
           <ParametersJobOpenings setDarkeningTheBackground={setDarkeningTheBackground} />
