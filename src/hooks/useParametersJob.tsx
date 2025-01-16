@@ -1,27 +1,13 @@
-import { FC, useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, IRootState } from '../widgets/parameters-job-openings/model/reducer'
-import { setRegions, setRegionsArray } from '../widgets/parameters-job-openings/model/params-reducer'
+import { useEffect } from 'react'
 import { getRegions } from '../widgets/parameters-job-openings/model/getRegions'
 
-let useParametersJob = () => {
-    const dispatch: any = useDispatch<AppDispatch>()
-    const city = useSelector<IRootState, any>(state => state.params.citys)
-    const regions = useSelector<IRootState, any>(state => state.params.regions)
-
+let useGetListCountries = (setListCountries: any) => {
     useEffect(() => {
-        console.log('Бесконечно')
         let setReg = async () => {
-            await dispatch(setRegions(await getRegions()))
-            await dispatch(setRegionsArray('Россия'))
+            setListCountries(await getRegions())
         }
         setReg()
     }, [])
-
-    return {
-        city,
-        regions,
-    }
 }
 
-export default useParametersJob
+export default useGetListCountries

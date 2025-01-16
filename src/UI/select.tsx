@@ -8,7 +8,9 @@ const Select: FC<ISelect> = ({ id, name, classSelect, required, valueSelect, val
             name={name}
             required={required}
             className={classSelect} 
-            onChange={onChange}>
+            onChange={onChange}
+            value={valueSelect}
+            >
             {valueOption.map((valueOption, index) =>
                 <option
                     value={valueOption}>

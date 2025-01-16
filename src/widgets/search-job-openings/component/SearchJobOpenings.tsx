@@ -1,76 +1,52 @@
 import { useState, ChangeEvent, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { sortVacancies } from '../model/sortVacancies'
+import { useSelector } from 'react-redux'
 import { AppDispatch, IRootState } from '../../parameters-job-openings/model/reducer'
-import { setPage } from '../model/redux/pages-reducer'
 import { Input, Button } from '../../../ui'
 import useFetch from '../../../hooks/useFetch'
-import { setListVacancies } from '../model/job-opening-reducer'
 import useCreateUrlParams from '../../../hooks/useCreateUrlParams'
+import useRedirectRequestResponse from '../../../hooks/useRedirectRequestResponse'
+import useGetCookie from '../../../hooks/useGetCookie'
+import { useDispatch } from 'react-redux'
+import { setPage } from '../model/redux/pages-reducer'
 
 
-const SearchJobOpenings = ({ setLoading }: { setLoading: any }) => {
+const SearchJobOpenings = ({ setLoading, setBeingVacansies }: { setLoading: any, setBeingVacansies: any }) => {
   let [text, setText] = useState<string>('')
-  let [observerText, setObserverText] = useState<boolean>(false)
+  let [resetPages, setResetPages] = useState<boolean>(false)
   let [textInput, setTextInput] = useState<string>('')
-  //let [telo, setTelo] = useState<string>('')
-  const dispatch: any = useDispatch<AppDispatch>()
   let parametersPresent = useSelector<IRootState, boolean>(state => state.params.parametersPresent)
   let parameters = useSelector<IRootState, any>(state => state.params.parameters)
   let obj = useSelector<IRootState, any>(state => state.params.parameters)
-  let pages = useSelector<IRootState, any>(state => !observerText ? state.pages.page : 0)
+  let pages = useSelector<IRootState, any>(state => !resetPages ? state.pages.page : 0)
   let perPageMax = useSelector<IRootState, any>(state => state.pages.per_page_max)
+  let token = useGetCookie('token')
+  let bodyRequest = useCreateUrlParams(parametersPresent, parameters, obj, setResetPages, pages, perPageMax, token)
+  console.log(bodyRequest)
+  let {data, error} = useFetch('http://localhost:3001/', bodyRequest, 'GET',
+    {
+      'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },)
+  
+if (error) {
+  console.log(error)
+  setBeingVacansies(false)
+} else {
+  setBeingVacansies(true)
+}
 
+useRedirectRequestResponse(data, setResetPages, resetPages, setLoading)
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => setTextInput(e.target.value)
 
   const handleClick = () => {
     if (textInput !== text) {
       setText(textInput)
-      setObserverText(true)
+      setResetPages(true)
       setLoading(true)
     } else {
       setLoading(false)
     }
   }
-  let telo = useCreateUrlParams(parametersPresent, parameters, obj)
-
-  let selectedVacancies = useFetch('http://localhost:3000/', text, pages, perPageMax, 113, telo)
-
-  const requestResponse = async () => {
-    await dispatch(setPage(!observerText ? selectedVacancies.pages : { ...selectedVacancies.pages, page: 0 }))
-    await dispatch(setListVacancies(selectedVacancies.items))
-    setObserverText(false)
-    setLoading(false)
-    console.log(selectedVacancies)
-  }
-
-
-  // useEffect(() => {
-  //   setTelo('')
-  //   if (parametersPresent) {
-  //     for (let key in obj) {
-  //       const value = obj[key];
-
-  //       if (typeof value === 'object') {
-  //         if (value.noExp) setTelo(telo => `${telo}&experience=noExperience`);
-  //         if (value.minExp) setTelo(telo => `${telo}&experience=between1And3`);
-  //         if (value.maxExp) setTelo(telo => `${telo}&experience=between3And6`);
-  //         if (value.full) setTelo(telo => `${telo}&schedule=fullDay`);
-  //         if (value.replaceable) setTelo(telo => `${telo}&schedule=shift`);
-  //         if (value.remote) setTelo(telo => `${telo}&schedule=remote`);
-  //       }
-  //       else if (key === 'earning' && value) {
-  //         setTelo(telo => `${telo}&salary=${value}&only_with_salary=true`);
-  //       }
-  //     }
-  //   }
-  // }, [parametersPresent, parameters])
-
-  useEffect(() => {
-    if (selectedVacancies) {
-      requestResponse()
-    }
-  }, [selectedVacancies])
 
   return (
     <div className={'flex justify-center mt-1'}>

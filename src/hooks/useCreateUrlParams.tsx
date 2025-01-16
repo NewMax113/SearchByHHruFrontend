@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 
-const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any) => {
-    let [telo, setTelo] = useState<string>('')
-    useEffect(() => {
-        setTelo('')
-        if (parametersPresent) {
-          for (let key in obj) {
-            const value = obj[key];
-    
-            if (typeof value === 'object') {
-              if (value.noExp) setTelo(telo => `${telo}&experience=noExperience`);
-              if (value.minExp) setTelo(telo => `${telo}&experience=between1And3`);
-              if (value.maxExp) setTelo(telo => `${telo}&experience=between3And6`);
-              if (value.full) setTelo(telo => `${telo}&schedule=fullDay`);
-              if (value.replaceable) setTelo(telo => `${telo}&schedule=shift`);
-              if (value.remote) setTelo(telo => `${telo}&schedule=remote`);
-            }
-            else if (key === 'earning' && value) {
-              setTelo(telo => `${telo}&salary=${value}&only_with_salary=true`);
-            }
-          }
+const useCreateUrlParams = (parametersPresent: any, parameters: any, obj: any, setResetPages: any, pages: any, perPageMax: any, token: any) => {
+  let defaultParams = `?page=${pages}&per_page=${perPageMax}${token && `&token=${token}`}`
+  let [bodyRequest, setBodyRequest] = useState<string | null>(defaultParams)
+
+  useEffect(() => {
+    setBodyRequest(defaultParams)
+    if (parametersPresent) {
+      obj.city.city ? setBodyRequest(body => `${body}&area=${obj.city.id}`) : setBodyRequest(body => `${body}&area=${obj.country.id}`)
+      for (let key in obj) {
+        const value = obj[key];
+        if (typeof value === 'object') {
+          value.noExp && setBodyRequest(body => `${body}&experience=noExperience`);
+          value.minExp && setBodyRequest(body => `${body}&experience=between1And3`);
+          value.maxExp && setBodyRequest(body => `${body}&experience=between3And6`);
+          value.full && setBodyRequest(body => `${body}&schedule=fullDay`);
+          value.replaceable && setBodyRequest(body => `${body}&schedule=shift`);
+          value.remote && setBodyRequest(body => `${body}&schedule=remote`);
         }
-      }, [parametersPresent, parameters])
-      return telo
+        else if (key === 'earning' && value) {
+          setBodyRequest(body => `${body}&salary=${value}&only_with_salary=true`);
+        }
+      }
+      setResetPages(true)
+    }
+  }, [parametersPresent, parameters, pages, token])
+  return bodyRequest
 }
 
 export default useCreateUrlParams

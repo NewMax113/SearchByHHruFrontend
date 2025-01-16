@@ -1,37 +1,49 @@
 import { useEffect, useState } from "react"
 
-const useFetch = (url: string, word: string, pages: number, perPageMax: number, area: number = 113, params: any) => {
-    let [data, setData] = useState<any>()
-    let [error, setError] = useState<any>('')
+const useFetch = (url: string, body: any, method: string, headers: any) => {
+    let [data, setData] = useState<any>(null)
+    let [error, setError] = useState<any>(null)
+    let [loading, setLoading] = useState<any>(null)
 
     useEffect(() => {
+        
         let fetchData = async () => {
             try {
-                await fetch(`${url}?text=${word}&page=${pages}&per_page=${perPageMax}${params}`)
-                    .then(response => response.json())
-                    .then((data) => {
-                        console.log(data)
-                        setData({
-                            pages: {
-                                pages: data.pages,
-                                page: data.page,
-                                found: data.found
-                            },
-                            items: data.items
-                        })
+                await fetch(`${url}${body}`, {
+                    method: method,
+                    headers:  {...headers} 
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            setLoading(false)
+                            const errorMessage = response.json();
+                            console.log('кетч2')
+                            errorMessage.then(e => {
+                                setError({ err_status: response.status, err_description: e.error });
+                            })
+                        } else {
+                            
+                            return response.json()
+                        }
                     })
-                    .catch(err => console.log('Ошибочка:', err))
-                
+                    .then((data) => {
+                        if (data) {
+                           setLoading(true) 
+                        }
+                        
+                        setData(data)
+                    })
             }
-            catch (err) {
-                setError("Произошла ошибка при загрузке данных.");
-                console.log("Ошибочка:", err);
+            catch (error: any) {
+                setLoading(false)
+                setError('Ошибка сети');
+                //throw error
             }
         }
         fetchData()
-    }, [url, pages, word, area, params])
-    console.log(data)
-    return data
+    }, [url, body])
+
+    return { data, error, loading }
 }
 
 export default useFetch
