@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react'
-import useFetch from '../../../shared/hooks/useFetch';
 import { COLOR_CHANGE_STEP, COLOR_COUNTER_LIMITED, COLOR_MAX_RGB, COLOR_START, RELIABILITY_LIMIT } from '../utils/constant';
 import useGetCookie from '../../../shared/hooks/useGetCookie';
 import { VacancyModelEntity } from '../../../entities';
-import { IFetchVacancyFeature, IJob_opening_Array } from '../../../pages/type/TypeJobOpening';
+import { IJob_opening_Array } from '../../../pages/type/TypeJobOpening';
 import { IColor, IhtmlString } from '../type/IVacancyFeature';
 import { IArgument } from '../../../shared/type/type';
 import { IResultVacancy } from '../../../pages/type/type';
+import { useFetchSearchResultsQuery } from '../../search-vacancy-feature/hooks/useFetchSearchResultsQuery';
 
 
 const VacancyFeature: FC<IJob_opening_Array> = ({ vacancy }) => {
@@ -14,28 +14,34 @@ const VacancyFeature: FC<IJob_opening_Array> = ({ vacancy }) => {
     const theObj: IhtmlString = { __html: htmlString };
     let [arg, setArg] = useState<IArgument | null>(null)
     let [saveResultVacancy, setSaveResultVacancy] = useState<IResultVacancy | null>(null)
-    let [window, setWindow] = useState<boolean>(false)
     let [color, setColor] = useState<IColor>({ colorRGBOne: COLOR_START, colorRGBTwo: COLOR_MAX_RGB, sumNumberColor: 0 })
     let [count, setCount] = useState<number>(100)
     const token = useGetCookie('token', true)
-    let { data }: IFetchVacancyFeature = useFetch<IResultVacancy>({
-        url: 'http://localhost:3001/feedback',
+    const { data, isLoading } = useFetchSearchResultsQuery({
+        url: '/feedback',
         method: 'POST',
         headers: {
             'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
             'Content-Type': 'application/json'
         },
-        bodyPost: arg
+        queryParams: arg
     })
 
-    const switchFetch = () => {
-        let employer = localStorage.getItem(vacancy.employer_id) as string
-        if (employer) {
-            setSaveResultVacancy(JSON.parse(employer))
-        } else {
-            setArg({ name: vacancy.employer, city: vacancy.city, remoteWork: vacancy.schedule === 'Удаленная работа' ? true : false, employer_id: vacancy.employer_id, token })
+    useEffect(() => {
+        if (vacancy && token) {
+            const switchFetch = () => {
+                let employer = localStorage.getItem(vacancy.employer_id) as string
+                if (employer) {
+                    setSaveResultVacancy(JSON.parse(employer))
+                }
+            }
+            switchFetch()
         }
-        setWindow(!window)
+
+    }, [token, vacancy])
+    
+    const onClickHandle = () => {
+        setArg({ name: vacancy.employer, city: vacancy.city, remoteWork: vacancy.schedule === 'Удаленная работа' ? true : false, employer_id: vacancy.employer_id, token })
     }
 
     useEffect(() => {
@@ -45,13 +51,13 @@ const VacancyFeature: FC<IJob_opening_Array> = ({ vacancy }) => {
         }
     }, [data])
 
-    
+
 
     useEffect(() => {
-        if (window && saveResultVacancy?.reliabilityPercentage) {
+        if (saveResultVacancy?.reliabilityPercentage) {
             if (count > saveResultVacancy?.reliabilityPercentage && count > RELIABILITY_LIMIT) {
                 setTimeout(() => {
-                    setCount((prevCount: any) => prevCount - 1);
+                    setCount((prevCount: number) => prevCount - 1);
 
                 }, 10);
             }
@@ -71,18 +77,17 @@ const VacancyFeature: FC<IJob_opening_Array> = ({ vacancy }) => {
                 }
             }
         }
-    }, [count, window, saveResultVacancy])
+    }, [count, saveResultVacancy])
 
     return (
         <VacancyModelEntity
-            window={window}
             vacancy={vacancy}
             theObj={theObj}
-            switchFetch={switchFetch}
-            setWindow={setWindow}
             saveResultVacancy={saveResultVacancy}
             count={count}
             color={color}
+            isLoading={isLoading}
+            onClickHandle={onClickHandle}
         />
     )
 }

@@ -14,6 +14,7 @@ export interface IVacancy {
     salary: { from: number | null, to: number | null, currency: string | null } | null,
     trusted: boolean
     schedule?: string
+    img: string | null
 }
 
 export interface IJob_opening_Array {

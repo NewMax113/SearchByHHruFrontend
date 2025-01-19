@@ -6,11 +6,11 @@ import { IListJobOpenings } from './type/IListJobOpenings'
 const ListJobOpenings: FC<IListJobOpenings> = ({ loading, setLoading, beingVacansies }) => {
 
     return (
-        <main>
+        <div className='min-h-main'>
             {!loading
                 ? <ListVacancy beingVacansies={beingVacansies} setLoading={setLoading} />
                 : '...'}
-        </main>
+        </div>
     )
 }
 

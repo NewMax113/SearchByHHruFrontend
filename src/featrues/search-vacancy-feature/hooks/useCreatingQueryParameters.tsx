@@ -22,7 +22,7 @@ const useCreatingQueryParameters = () => {
         return acc;
     }, new URLSearchParams());
 
-    let queryParams: string = filterRequestObject.toString();
+    let queryParams: string = `?${filterRequestObject.toString()}`;
 
     return queryParams
 }

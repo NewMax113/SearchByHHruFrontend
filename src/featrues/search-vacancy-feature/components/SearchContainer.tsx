@@ -18,9 +18,16 @@ const SearchContainer: FC<ISearchContainer> = ({ setLoading, setBeingVacansies }
 
   let [textInput, setTextInput] = useState<string>('')
 
-  const queryParams = useCreatingQueryParameters()
+  const url = useCreatingQueryParameters()
 
-  const { data, error } = useFetchSearchResultsQuery(queryParams)
+  const { data, error } = useFetchSearchResultsQuery({
+    url,
+    method: 'GET',
+    headers: {
+      'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    }
+  })
 
   if (error) {
     console.log(error)

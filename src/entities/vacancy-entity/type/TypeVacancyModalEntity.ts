@@ -1,17 +1,15 @@
-import { Dispatch, SetStateAction } from "react";
 import { IColor, IhtmlString } from "../../../featrues/vacancy-feature/type/IVacancyFeature";
 import { IVacancy } from "../../../pages/type/TypeJobOpening";
 import { IResultVacancy } from "../../../pages/type/type";
 
 export interface IVacancyModelEntity {
-    window: boolean,
     vacancy: IVacancy,
     theObj: IhtmlString,
-    switchFetch: () => void,
-    setWindow: Dispatch<SetStateAction<boolean>>,
     saveResultVacancy: IResultVacancy | null,
     count: number,
-    color: IColor
+    color: IColor,
+    isLoading: boolean,
+    onClickHandle: ()=>void
 }
 
 export interface IContentVacancy {
@@ -20,10 +18,9 @@ export interface IContentVacancy {
 }
 
 export interface IModalVacancy {
-    window: boolean,
-    switchFetch: () => void,
-    setWindow: Dispatch<SetStateAction<boolean>>,
     saveResultVacancy: IResultVacancy | null,
     count: number,
-    color: IColor
+    color: IColor,
+    isLoading: boolean,
+    onClickHandle: ()=>void
 }

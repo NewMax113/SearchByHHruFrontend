@@ -1,18 +1,60 @@
-import { FC } from "react"
-import { IContentVacancy } from "../type/TypeVacancyModalEntity"
+import { FC, useState } from "react"
+import { IContentVacancy, IVacancyModelEntity } from "../type/TypeVacancyModalEntity"
+import ModalVacancy from "./ModalVacancy"
 
 
-const ContentVacancy: FC<IContentVacancy> = ({ vacancy, theObj }) => {
+const ContentVacancy: FC<IVacancyModelEntity> = ({ vacancy,
+    theObj,
+    saveResultVacancy,
+    count,
+    color
+}) => {
+    const [desc, setDesc] = useState<boolean>(false)
+
+    if (desc) {
+        return (
+            <>
+                <div className="h-auto overflow-auto ml-4 mb-7">
+                    <p
+                        dangerouslySetInnerHTML={theObj}
+                        className={"mb-2 text-sm"}
+                    ></p>
+                </div>
+                <div className='absolute bottom-px w-4/5 mx-4'>
+                    <hr className={"mt-4 "}></hr>
+                    <a href={vacancy.alternate_url} target="_blank" rel="noopener noreferrer" className={"text-xs cursor-pointer"}>Открыть</a>
+                    <button onClick={() => setDesc(!desc)} className={"text-xs cursor-pointer"}>Описание</button>
+                    &nbsp;
+                </div>
+            </>
+
+
+        )
+    }
+
     return (
-        <div className={"py-4 px-8 relative min-h-96"}>
-            <div className='max-h-80 overflow-hidden'>
-                <div>{vacancy.employer}</div>
+        <div className={"py-2 px-4 relative min-h-96 w-full"}>
+            <div className='max-h-48 overflow-auto'>
                 <a href={`${vacancy.alternate_url}`} target="_blank" rel="noopener noreferrer">
-                    <h4 className={"text-base mb-3 font-semibold"}><u>{vacancy.name}</u></h4>
+                    <h4 className={"w-full text-center text-base mb-3 font-semibold text-ellipsis line-clamp-2 h-12"}><u>{vacancy.name}</u></h4>
                 </a>
+                <div className="relative group w-full flex items-center">
+                    <div
+                        className="mr-2.5 h-16 w-16 aspect-ratio border rounded-full bg-no-repeat mb-3"
+                        style={{ backgroundImage: vacancy.img ? `url(${vacancy.img})` : '', backgroundSize: 'contain', backgroundPosition: 'center' }}>
+
+                    </div>
+
+                    <div className="w-4/6 max-h-12 text-base mb-1 font-semibold text-ellipsis line-clamp-2 h-16 ">{vacancy.employer}</div>
+                    <div className="absolute w-full bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-sm p-2 rounded">{vacancy.employer}</div>
+
+
+
+                </div>
                 <div className='flex'>
                     <div className='text-xs mr-4'>{vacancy.city}</div>
-                    <div className='text-xs'>{vacancy.schedule}</div>
+                    <div className='text-xs mr-4'>{vacancy.schedule}</div>
+                    <div className='text-xs'>{vacancy.experience}</div>
                 </div>
 
                 <div className='text-sm'>
@@ -23,14 +65,16 @@ const ContentVacancy: FC<IContentVacancy> = ({ vacancy, theObj }) => {
                                 ? <div>От {vacancy.salary.from} {vacancy.salary.currency}</div>
                                 : <div>До {vacancy.salary.to} {vacancy.salary.currency}</div>))
                         : <div>З/п не указана</div>}</div>
-                <p dangerouslySetInnerHTML={theObj} className={"mb-2 text-sm text-gray-600 after:content[''] after:absolute after:w-full after:bottom-0 after:left-0 after:h-20 after:pointer-events-none after:bg-gradient-to-b after:from-transparent after:to-white"}>
-
-                </p>
             </div>
+            {/* <ModalVacancy
+                saveResultVacancy={saveResultVacancy}
+                count={count}
+                color={color} isLoading onClick></ModalVacancy> */}
 
             <div className='absolute bottom-px w-4/5'>
                 <hr className={"mt-4 "}></hr>
                 <a href={vacancy.alternate_url} target="_blank" rel="noopener noreferrer" className={"text-xs cursor-pointer"}>Открыть</a>
+                <button onClick={() => setDesc(!desc)} className={"text-xs cursor-pointer"}>Описание</button>
                 &nbsp;
             </div>
         </div>

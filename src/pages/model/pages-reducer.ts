@@ -6,9 +6,9 @@ import { IinitialStatePages, IActionSetPage } from "../type/TypePage"
 let initialState: IinitialStatePages = {
     pages: 0, //стр всего
     found: 0, //максимум элементов
-    found_now: 6, //элементов на данный момент на стр.
+    found_now: 8, //элементов на данный момент на стр.
     page: 0, //стр на данынй момет (начинается с 0)
-    per_page_max: 6, //кол-во элеметов которое покажем на странице
+    per_page_max: 8, //кол-во элеметов которое покажем на странице
     per_page_min: null, //остаток элементов
     name: '' // название в поиске
 }
@@ -20,7 +20,7 @@ let pagesReducer = createSlice({
         setPage (state, actions: PayloadAction<IActionSetPage>) {
             console.log(actions.payload)
             state.found = actions.payload.found
-            state.pages = actions.payload.pages-1
+            state.pages = actions.payload.pages
             console.log(actions.payload)
         },
         newPage (state, actions: PayloadAction<number>) {
@@ -37,7 +37,7 @@ let pagesReducer = createSlice({
             }
         },
         pageMinus (state) {
-            if (state.page > 1) {
+            if (state.page > 0) {
                 state.page -= 1
                 state.per_page_min = null
                 state.found_now -= state.per_page_max

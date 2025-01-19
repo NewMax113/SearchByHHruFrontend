@@ -5,7 +5,7 @@ import { IListCountry } from '../../../pages/type/type';
 
 
 const useGetListCountries = ({ setListCountries }: IUseGetListCountries) => { 
-    const { data, error, loading }: IDataGetListCountries = useFetch<IListCountry[]>({
+    const { data }: IDataGetListCountries = useFetch<IListCountry[]>({
         url: 'https://api.hh.ru/areas',
         linkBody: '',
         method: 'GET',

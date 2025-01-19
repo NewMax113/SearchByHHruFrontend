@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer utilities {
   .custom-left-neg-4 {
     left: -4px;
@@ -18,7 +17,28 @@
   .border-r-1 {
     border-right: 1px solid rgb(243, 243, 243)
   }
+
+  .border-b-1-blue {
+    border-bottom: 2px solid rgb(59, 130, 246)
+  }
+
+  .min-h-100 {
+    min-height: 25rem;
+  }
+
+  .min-h-main {
+    min-height: 52.3rem;
+  }
+
+  .shadow-inside-red {
+    box-shadow: 0px 5px 10px 5px rgba(180, 21, 21, 0.22) inset;
+  }
+  
 }
+
+
+  
+
 
 body {
   overflow-y: scroll;

@@ -10,17 +10,17 @@ const Search: FC<ISearch> = ({
 }) => {
 
   return (
-    <div className={'flex justify-center mt-1'}>
-      <form className={'flex justify-between w-2/4 mt-1'} onSubmit={(e: FormEvent<HTMLFormElement>) => { handleClick(); e.preventDefault() }}>
+    <div className='flex justify-center mt-1 xl:mr-20 sm:mr-8 w-full mx-1'>
+      <form className='flex mt-1 w-full' onSubmit={(e: FormEvent<HTMLFormElement>) => { handleClick(); e.preventDefault() }}>
         <Input
           typeInput='text'
           value={textInput}
           placeholder='Поиск вакансии'
-          onChange={onChangeEvent}
-          classInput='border-2 mx-1.5 w-full px-1 rounded-md'
+          onChange={onChangeEvent} 
+          classInput='w-3/4 px-1 border-b-1-blue focus:outline-0 rounded-l-md min-w-32 '
         />
         <Button
-          classButton='font-semibold tracking-wide bg-gray-800 text-white rounded-md px-4 py-2 hover:bg-gray-700 right-0'
+          classButton='font-semibold tracking-wide bg-blue-500 text-white px-4 py-2 hover:bg-sky-600 right-0 rounded-r-md'
           text='Поиск'
           onClick={handleClick}
         />

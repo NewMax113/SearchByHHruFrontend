@@ -2,16 +2,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
   endpoints: (builder) => ({
     fetchSearchResults: builder.query({
-      query: (queryParams) => ({
-        url: `?${queryParams}`,
-        method: 'GET',
-        headers: {
-          'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+      query: ({url, method, headers, queryParams}) => ({
+        url,
+        method,
+        headers,
+        body: queryParams ? JSON.stringify(queryParams) : undefined,
       }),
     }),
   }),

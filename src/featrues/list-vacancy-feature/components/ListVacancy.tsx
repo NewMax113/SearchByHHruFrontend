@@ -8,10 +8,9 @@ import { IListVacancy } from "./type/IListVacancy"
 import { IJob_opening_Array } from "../../../pages/type/TypeJobOpening"
 
 
-
 const ListVacancy: FC<IListVacancy> = ({ beingVacansies, setLoading }) => {
     let vacancies = useSelector<IRootState, IJob_opening_Array[] | []>(state => state.jobOpeningReducer.job_opening_Array)
-    let page = useSelector<IRootState, number>(state => state.pages.page)
+    let page = useSelector<IRootState, number>(state => state.pages.page + 1)
     let maxPage = useSelector<IRootState, number>(state => state.pages.pages)
     const dispatch = useDispatch<AppDispatch>()
     console.log(page)
@@ -33,22 +32,22 @@ const ListVacancy: FC<IListVacancy> = ({ beingVacansies, setLoading }) => {
     }
 
     return (
-        <div className={'flex items-center p-1.5 justify-center'}>
-            <div className={'cursor-pointer'}>
-                <div className={'text-4xl text-gray-400 hover:text-black'}
+        <div className={'flex items-center p-1.5 justify-center '}>
+            <div className={'cursor-pointer sm:hidden lg:block'}>
+                <div className={'text-4xl text-blue-500 hover:text-pink-500'}
                     onClick={minusPage}>
-                    {page > 0 && '◀'}
+                    {page > 1 && '◀'}
 
                 </div>
             </div>
-            <div className={"max-w-screen-xl p-8"}>
-                <div className={"sm:grid lg:grid-cols-3 sm:grid-cols-2 gap-10"}>
+            <div className={"max-w-screen-xl p-1.5"}>
+                <div className={"sm:grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-3"}>
                     {vacancies.map((vacanciesList: IJob_opening_Array) =>
-                        <VacancyFeature vacancy={vacanciesList.vacancy}/>
+                        <VacancyFeature vacancy={vacanciesList.vacancy} />
                     )}
                 </div>
             </div>
-            <div className={'text-4xl cursor-pointer text-gray-400 hover:text-black'}
+            <div className={'text-4xl cursor-pointer text-blue-500 hover:text-pink-500 sm:hidden lg:block'}
                 onClick={plusPage}>
                 {maxPage > page && '▶'}
             </div>

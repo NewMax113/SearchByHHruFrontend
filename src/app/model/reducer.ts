@@ -10,12 +10,14 @@ let rootReducer = combineReducers({
     jobOpeningReducer: jobOpeningReducer,
     pages: pagesReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
+    //[apiSlice2.reducerPath]: apiSlice2.reducer,
 })
 
 export let store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiSlice.middleware),
+    //getDefaultMiddleware().concat(apiSlice2.middleware),
 })
 
 export type IRootState = ReturnType<typeof rootReducer>
