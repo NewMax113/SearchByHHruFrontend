@@ -14,7 +14,7 @@ const CityModalEntity: FC<ICityModalEntity> = ({id, text, textInput, checkingVal
                 list='list-country'
                 onChange={textInput}
                 onBlur={checkingValidityCity}
-                classInput='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400'
+                classInput='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400 hover:border-emerald-400'
             />
             <datalist
                 key={text}

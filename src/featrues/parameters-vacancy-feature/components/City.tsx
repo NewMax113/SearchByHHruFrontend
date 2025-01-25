@@ -24,6 +24,14 @@ const City: FC<{ id: string }> = ({ id }) => {
         }
     }, [listCities])
 
+    console.log(city, text)
+
+    useEffect(()=> {
+        if (!city.city) {
+            setText('')
+        } 
+    }, [city.city])
+
     const textInput = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
     }

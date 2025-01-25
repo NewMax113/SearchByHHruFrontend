@@ -12,9 +12,9 @@ const PageStructure: FC = () => {
   return (
     <>
       <header>
-        <div className='xl:mx-[18%] sm:mx-[10%] xl:flex md:flex sm:flex  mb-2.5'>
+        <div className='xl:max-w-screen-xl items-center xl:flex md:flex sm:flex p-2 mb-2.5 max-w-screen-xl m-auto lg:max-w-grid-lg sm:max-w-grid-sm'>
           <Logo />
-          <div className='flex w-full p-1 items-end xs:text-xs sm:text-base'>
+          <div className='flex w-full items-end xs:text-xs sm:text-base'>
             <SearchJobOpenings setLoading={setLoading} setBeingVacansies={setBeingVacansies} />
             <Exit />
           </div>

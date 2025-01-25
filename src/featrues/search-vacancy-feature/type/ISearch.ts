@@ -2,7 +2,7 @@ import { SetStateAction, Dispatch } from "react";
 import { IJob_opening_Array } from "../../../pages/type/TypeJobOpening";
 import { IActionSetPage } from "../../../pages/type/TypePage";
 
-export interface ISearchContainer  {
+export interface ISearchContainer {
   setLoading: Dispatch<SetStateAction<boolean>>,
   setBeingVacansies: Dispatch<SetStateAction<boolean>>
 }
@@ -13,13 +13,13 @@ export interface IDataSearch {
 }
 
 export interface IDataSearchFetch {
-    data: IDataSearch | null,
-    error: string | { err_status: number, err_description: string } | null
-    loading: boolean | null
+  data?: IDataSearch | null,
+  error?: { status: number, data: { error: string } }
+  isLoading?: boolean
 }
 
 export interface IUseRedirectRequestResponse {
-  data: IDataSearch | null
+  data?: IDataSearch
   setLoading: Dispatch<SetStateAction<boolean>>
 }
 

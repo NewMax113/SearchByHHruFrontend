@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from 'react'
+import { FC, useState, ChangeEvent, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '../../../shared/ui';
 import { AppDispatch, IRootState } from '../../../app/model/reducer';
@@ -8,6 +8,10 @@ import { setEarningRedux } from '../../../pages/model/parameters-reducer';
 const Salary: FC<{ id: string }> = ({ id }) => {
     let salary = useSelector<IRootState, string>(state => state.params.salary)
     let [value, setValue] = useState<string>(salary)
+
+    useEffect(()=> {
+        setValue(salary)
+    }, [salary])
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -34,7 +38,7 @@ const Salary: FC<{ id: string }> = ({ id }) => {
             typeInput={'text'}
             onBlur={setParams}
             onChange={setValueInput}
-            classInput={"border-b-2 border-gray-400 text-center p-0.5 focus:outline-none focus:border-blue-400 w-2/5"}
+            classInput={"border-b-2 border-gray-400 text-center p-0.5 focus:outline-none focus:border-blue-400 w-2/5 hover:border-emerald-400"}
         />
     )
 }

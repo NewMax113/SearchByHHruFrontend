@@ -58,6 +58,15 @@ let params = createSlice({
                 state.requestBody.schedule = state.schedule
             }
         },
+        resetBodyRequest(state) {
+            state.requestBody.area = '113'
+            state.requestBody.only_with_salary = false
+            state.city = { id: null, city: null }
+            state.country = { id: 113, country: 'Россия' }
+            state.experience = ''
+            state.salary = ''
+            state.schedule = []
+        },
     },
 })
 
@@ -70,5 +79,6 @@ export const {
     setEarningRedux,
     setWorkExperienceRedux,
     setWorkScheduleRedux,
-    setBodyRequest
+    setBodyRequest,
+    resetBodyRequest
 } = params.actions

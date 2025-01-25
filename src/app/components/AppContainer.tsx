@@ -1,13 +1,10 @@
+import App from '../ui/App';
 import { useEffect, useState } from 'react';
-import { ParametersJobOpenings, Authentication } from '../widgets';
-import useGetCookie from '../shared/hooks/useGetCookie';
-import useFetch from '../shared/hooks/useFetch';
-import useSetCookie from '../shared/hooks/useSetCookie';
-import { PageStructure } from '../pages/list-vacancyes-page';
-import { DataToken, IDataApp, IToken } from './type/TypeApp';
+import { DataToken, IDataApp, IToken } from '../type/TypeApp';
+import { useFetch, useGetCookie, useSetCookie } from '../../shared/hooks';
 
 
-const App = () => {
+const AppContainer = () => {
   let [darkeningTheBackground, setDarkeningTheBackground] = useState<boolean>(false)
   const parsedUrl = new URL(window.location.href);
   const code = parsedUrl.searchParams.get("code")
@@ -71,19 +68,8 @@ const App = () => {
 
 
   return (
-    <>
-      {(getCookie) ? (
-        <>
-          <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''}>
-            <PageStructure />
-          </div>
-          <ParametersJobOpenings setDarkeningTheBackground={setDarkeningTheBackground} />
-        </>
-      )
-        : (loading === false) && (<Authentication />)
-      }
-    </>
+    <App darkeningTheBackground={darkeningTheBackground} setDarkeningTheBackground={setDarkeningTheBackground} loading={loading} getCookie={getCookie}/>
   );
 }
 
-export default App;
+export default AppContainer;

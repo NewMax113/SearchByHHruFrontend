@@ -15,6 +15,10 @@ const Country: FC<{ id: string }> = ({ id }) => {
     let [listNamesCountries, setListNamesCountries] = useState<string[]>([country.country])
     let listCities: IList[] = useOutputCitiesList({listCountries, country: country.country})
 
+    useEffect(()=> {
+        setListNamesCountries([country.country])
+    }, [country])
+
     useGetListCountries({ setListCountries })
 
     const dispatch = useDispatch<AppDispatch>()
@@ -54,7 +58,7 @@ const Country: FC<{ id: string }> = ({ id }) => {
             text={listNamesCountries}
             required={true}
             valueOption={listNamesCountries}
-            classSelect='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400'
+            classSelect='border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400 hover:border-emerald-400'
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 pushUpdateParameters(e)
             }}
