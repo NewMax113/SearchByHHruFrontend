@@ -12,7 +12,6 @@ const Input: FC<IInput> = ({
     typeInput,
     classInput,
     placeholder,
-    //onClickInput,
     checkedInput,
 }) => {
 
@@ -26,13 +25,10 @@ const Input: FC<IInput> = ({
             type={typeInput}
             onChange={onChange}
             className={classInput}
-            //onClick={onClickInput}
             checked={checkedInput}
             placeholder={placeholder}
         />
     )
 }
-
-//Изменить везде onchange, onclick на onChange, onClick
 
 export default Input

@@ -21,10 +21,10 @@ export interface IButton {
 }
 
 export interface ISelect {
-    text: string[]
     required: boolean
     classSelect: string
     valueOption: string[]
+    text?: string[]
     id?: string
     name?: string
     onChange?: (e: any) => any
