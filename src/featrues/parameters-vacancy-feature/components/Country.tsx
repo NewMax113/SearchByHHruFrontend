@@ -1,25 +1,23 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import useOutputCitiesList from '../hooks/useOutputCitiesList'
 import useGetListCountries from '../hooks/useGetListCountries'
 import { Select } from '../../../shared/ui'
 import { AppDispatch, IRootState } from '../../../app/model/reducer'
-import { setCityRedux, setCountryRedux, setListCities } from '../../../pages/model/parameters-reducer'
-import { ICountry, IList } from '../type/TypesParametersVacancy'
+import { setCityRedux, setCountryRedux } from '../../../pages/model/parameters-reducer'
+import { ICountry } from '../type/TypesParametersVacancy'
 import { IListCountry } from '../../../pages/type/type'
+import useDispatchListCities from '../hooks/useDispatchListCities'
 
 
 const Country: FC<{ id: string }> = ({ id }) => {
     let country = useSelector<IRootState, ICountry>(state => state.params.country)
     let [listCountries, setListCountries] = useState<IListCountry[] | []>([])
     let [listNamesCountries, setListNamesCountries] = useState<string[]>([country.country])
-    let listCities: IList[] = useOutputCitiesList({listCountries, country: country.country})
-
-    useEffect(()=> {
+    useGetListCountries({ setListCountries })
+    useDispatchListCities({ listCountries, country: country.country })
+    useEffect(() => {
         setListNamesCountries([country.country])
     }, [country])
-
-    useGetListCountries({ setListCountries })
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -40,17 +38,6 @@ const Country: FC<{ id: string }> = ({ id }) => {
             }
         }
     }, [listCountries])
-
-    useEffect(() => {
-        if (listCountries) {
-            for (let i = 0; i < listCountries.length; i++) {
-
-                if (country.country === listCountries[i].name) {
-                    dispatch(setListCities(listCities))
-                }
-            }
-        }
-    }, [listCities])
 
     return (
         <Select

@@ -1,5 +1,5 @@
-export { default as useDeleteCookie} from './useDeleteCookie'
+export { default as useDeleteCookie} from './DeleteCookie'
 export { default as useFetch} from './useFetch'
-export { default as useGetCookie} from './useGetCookie'
+export { default as GetCookie} from '../utils/GetCookie'
 export { default as useSearchCountryByList} from './useSearchCountryByList'
-export { default as useSetCookie} from './useSetCookie'
+export { default as SetCookie} from '../utils/SetCookie'

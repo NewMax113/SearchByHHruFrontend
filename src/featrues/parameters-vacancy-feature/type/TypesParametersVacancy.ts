@@ -54,3 +54,9 @@ export interface IUseSearchWord {
     listCities: IList[],
     text: string
 }
+
+export interface IUseResetCity {
+    listCities: IList[]
+    city: ICity
+    setText: Dispatch<SetStateAction<string>>
+}

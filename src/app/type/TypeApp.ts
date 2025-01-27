@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from "react"
 
 export interface IToken {
-  name: string | null,
-  value: string | null,
-  time: number | null
+  name: string 
+  value: string 
+  time: number 
 }
 
 export interface DataToken {
@@ -20,7 +20,7 @@ export interface IDataApp {
 }
 
 export interface IApp {
-  getCookie: string
+  cookieToken: string
   darkeningTheBackground: boolean
   setDarkeningTheBackground: Dispatch<SetStateAction<boolean>>
   loading: boolean | null
