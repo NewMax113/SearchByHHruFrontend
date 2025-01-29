@@ -15,6 +15,5 @@ root.render(
       <AppContainer />
     </React.StrictMode>
   </Provider>
-
 );
 

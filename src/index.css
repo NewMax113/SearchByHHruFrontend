@@ -27,11 +27,11 @@
   }
 
   .min-h-100 {
-    min-height: 25rem;
+    min-height: 24rem;
   }
 
   .min-h-main {
-    min-height: 52.3rem;
+    min-height: 50.3rem;
   }
 
   .shadow-inside-red {
@@ -64,6 +64,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('фон.jpg');
 }
 
 code {

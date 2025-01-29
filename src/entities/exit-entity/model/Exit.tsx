@@ -1,12 +1,11 @@
 import { FC } from "react"
 import { Button } from "../../../shared/ui"
-import useDeleteCookie from "../../../shared/hooks/useDeleteCookie"
+import DeleteCookie from "../../../shared/utils/DeleteCookie"
+
 
 const Exit: FC = () => {
-    let deleteCookie  = useDeleteCookie()
-
     const handleClick = () => {
-        deleteCookie('token')
+        DeleteCookie('token')
         window.location.reload();
     }
     

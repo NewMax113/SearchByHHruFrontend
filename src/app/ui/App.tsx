@@ -4,11 +4,11 @@ import { PageStructure } from '../../pages/list-vacancyes-page';
 import { IApp } from '../type/TypeApp';
 
 
-const App: FC<IApp> = ({ getCookie, darkeningTheBackground, setDarkeningTheBackground, loading }) => {
-  
+const App: FC<IApp> = ({ cookieToken, darkeningTheBackground, setDarkeningTheBackground, error }) => {
+
   return (
     <>
-      {(getCookie) ? (
+      {(cookieToken) ? (
         <>
           <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''}>
             <PageStructure />
@@ -16,7 +16,7 @@ const App: FC<IApp> = ({ getCookie, darkeningTheBackground, setDarkeningTheBackg
           <ParametersJobOpenings setDarkeningTheBackground={setDarkeningTheBackground} />
         </>
       )
-        : (loading === false) && (<Authentication />)
+        : (error) && (<Authentication />)
       }
     </>
   );

@@ -21,8 +21,8 @@ const VacancyModelEntity: FC<IVacancyModelEntity> = ({
     }
 
     return (
-        <article className={"sm:mb-0 xs:mb-4 rounded flex relative max-w-80 max-h-72 shadow-lg min-h-100 hover:outline hover:outline-1 hover:outline-emerald-400 py-2 relative px-4 w-full"}>
-            <div className="flex flex-col justify-between h-full">
+        <article className={"sm:mb-0 xs:mb-4 bg-white rounded flex relative max-w-80 max-h-72 shadow-lg min-h-100 hover:outline hover:outline-1 hover:outline-emerald-400 py-2 relative px-4 w-full"}>
+            <div className="flex flex-col justify-between">
                 <div className='h-52 overflow-auto flex flex-col justify-between'>
                     <NameVacancy vacancy={vacancy} />
                     <ParametersVacancy vacancy={vacancy} />

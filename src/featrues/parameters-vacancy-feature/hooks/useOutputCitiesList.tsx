@@ -4,11 +4,11 @@ import { IUseOutputCitiesList } from "../type/TypesParametersVacancy"
 import { IListCountry } from "../../../pages/type/type"
 
 
-const useOutputCitiesList = ({listCountries, country}: IUseOutputCitiesList) => {
+const useOutputCitiesList = ({ listCountries, country }: IUseOutputCitiesList) => {
     let [listCities, setListCities] = useState<{ id: number, name: string }[]>([])
     let [objCountry, setObjCountry] = useState<IListCountry | null>(null)
-    
-    useSearchCountryByList({listCountries, country, setObjCountry})
+
+    useSearchCountryByList({ listCountries, country, setObjCountry })
 
     useEffect(() => {
         setListCities([])
@@ -30,7 +30,7 @@ const useOutputCitiesList = ({listCountries, country}: IUseOutputCitiesList) => 
             })
         }
     }, [objCountry])
-    return listCities
+    return { listCities }
 }
 
 export default useOutputCitiesList

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import useSearchWord from '../hooks/useSearchWord'
@@ -6,6 +6,7 @@ import { setCityRedux } from '../../../pages/model/parameters-reducer'
 import { AppDispatch, IRootState } from '../../../app/model/reducer'
 import { CityModalEntity } from '../../../entities'
 import { ICity, IList } from '../type/TypesParametersVacancy'
+import useResetCity from '../hooks/useResetCity'
 
 
 const City: FC<{ id: string }> = ({ id }) => {
@@ -16,21 +17,7 @@ const City: FC<{ id: string }> = ({ id }) => {
 
     const dispatch = useDispatch<AppDispatch>()
 
-    useEffect(() => {
-        if (listCities.length > 0) {
-            if (!city?.city) {
-                setText('')
-            }
-        }
-    }, [listCities])
-
-    console.log(city, text)
-
-    useEffect(()=> {
-        if (!city.city) {
-            setText('')
-        } 
-    }, [city.city])
+    useResetCity({listCities, city, setText})
 
     const textInput = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
@@ -40,7 +27,7 @@ const City: FC<{ id: string }> = ({ id }) => {
         if (text === sortCities[0]?.name) {
             dispatch(setCityRedux({ id: sortCities[0].id || null, city: sortCities[0].name || null }))
 
-        } else {
+        } else if (text.length > 0) {
             alert('Вы ввели некорректные данные')
             setText('')
             dispatch(setCityRedux({ id: null, city: null }))

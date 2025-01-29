@@ -1,74 +1,22 @@
 import App from '../ui/App';
-import { useEffect, useState } from 'react';
-import { DataToken, IDataApp, IToken } from '../type/TypeApp';
-import { useFetch, useGetCookie, useSetCookie } from '../../shared/hooks';
+import { useState } from 'react';
+import useSavingTokenViaTheApi from '../hooks/useSavingTokenViaTheApi';
 
 
 const AppContainer = () => {
   let [darkeningTheBackground, setDarkeningTheBackground] = useState<boolean>(false)
   const parsedUrl = new URL(window.location.href);
   const code = parsedUrl.searchParams.get("code")
-  let [body, setBody] = useState<string>(
-    `code=${code}
-    &grant_type=authorization_code
-    &client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA
-    &client_secret=IHD3Q3BJ1ESOH3TSNRRL6CHUH4NBO4S91O6MF13QF6QPM386K4NFQSTRJH4M56MS
-    &redirect_uri=http://localhost:3000`
-  )
-  let [observerToken, setObserverToken] = useState<boolean>(false)
-  let [tokenList, setTokenList] = useState<IToken[]>([{ name: null, value: null, time: null }, { name: null, value: null, time: null }])
-  useSetCookie({
-    name: tokenList[0].name,
-    value: tokenList[0].value,
-    time: tokenList[0].time
-  })
-  useSetCookie({
-    name: tokenList[1].name,
-    value: tokenList[1].value,
-    time: tokenList[1].time
-  })
-  const getCookie = useGetCookie('token', observerToken)
-  const getCookieRef = useGetCookie('refresh_token', observerToken)
-  let { data, loading }: IDataApp = useFetch<DataToken>({
-    url: 'https://api.hh.ru/token',
-    linkBody: body,
-    method: 'POST',
-    headers: {
-      'User-Agent': 'JobSearch (maxim0ruseev@gmail.com)',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
 
-  const addingTokenToCookie = () => {
-    if (data?.access_token) {
-      setObserverToken(true)
-      setTokenList([
-        { name: 'token', value: data.access_token, time: data.expires_in * 1000 },
-        { name: 'refresh_token', value: data.refresh_token, time: 86400000 }
-      ])
-    }
-
-    else if (!getCookie && getCookieRef) {
-      setBody(
-        `code=${code}
-        &grant_type=refresh_token
-        &refresh_token=${getCookieRef}
-        &client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA
-        &client_secret=IHD3Q3BJ1ESOH3TSNRRL6CHUH4NBO4S91O6MF13QF6QPM386K4NFQSTRJH4M56MS
-        &redirect_uri=http://localhost:3000`
-      )
-    }
-  }
-
-  useEffect(() => {
-    if (loading) {
-      addingTokenToCookie()
-    }
-  }, [loading])
-
-
+  const { cookieToken, isLoading, error } = useSavingTokenViaTheApi({ code })
+console.log(cookieToken, isLoading, error)
   return (
-    <App darkeningTheBackground={darkeningTheBackground} setDarkeningTheBackground={setDarkeningTheBackground} loading={loading} getCookie={getCookie}/>
+    <App
+      darkeningTheBackground={darkeningTheBackground}
+      setDarkeningTheBackground={setDarkeningTheBackground}
+      cookieToken={cookieToken}
+      error={error}
+    />
   );
 }
 

@@ -42,7 +42,7 @@ export interface IRadioInput {
 export interface IDataGetListCountries {
     data: IListCountry[] | null,
     error: string | { err_status: number, err_description: string } | null,
-    loading: boolean | null 
+    isLoading: boolean 
 }
 
 export interface IUseOutputCitiesList {
@@ -53,4 +53,10 @@ export interface IUseOutputCitiesList {
 export interface IUseSearchWord {
     listCities: IList[],
     text: string
+}
+
+export interface IUseResetCity {
+    listCities: IList[]
+    city: ICity
+    setText: Dispatch<SetStateAction<string>>
 }
