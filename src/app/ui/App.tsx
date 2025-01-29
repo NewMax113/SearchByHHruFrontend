@@ -9,7 +9,7 @@ const App: FC<IApp> = ({ cookieToken, darkeningTheBackground, setDarkeningTheBac
 
   return (
     <>
-      {(cookieToken) ? (
+      {(cookieToken || loading) ? (
         <>
           <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''}>
             <PageStructure />
