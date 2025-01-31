@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { ParametersJobOpenings, Authentication } from '../../widgets';
 import { PageStructure } from '../../pages/list-vacancyes-page';
 import { IApp } from '../type/TypeApp';
-import { GetCookie } from '../../shared/hooks';
 
 
 const App: FC<IApp> = ({ cookieToken, darkeningTheBackground, setDarkeningTheBackground, error }) => {
