@@ -1,9 +1,5 @@
-import { List_job_openings } from "./List_job_openings/component/List_job_openings";
-import { Search_job_openings } from "./Search_job_openings/component/Search_job_openings";
-import { Parameters_job_openings } from "./Parameters_job_openings/component/Parameters_job_openings";
-
-export {
-    List_job_openings,
-    Search_job_openings,
-    Parameters_job_openings
-}
+export {default as Authentication} from './authentication/Authentication'
+export {default as FilteringVacancies} from './filtering-vacancies/FilteringVacancies'
+export {default as ListJobOpenings} from './list-job-openings/ListJobOpenings'
+export {default as ParametersJobOpenings} from './parameters-job-openings/ParametersJobOpenings'
+export {default as SearchJobOpenings} from './search-job-openings/SearchJob'

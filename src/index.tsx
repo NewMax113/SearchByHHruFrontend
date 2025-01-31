@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './app/App';
 import { Provider } from 'react-redux';
-import { store } from './widgets/Parameters_job_openings/model/reducer';
+import { store } from './app/model/reducer';
+import AppContainer from './app/components/AppContainer';
 
 
 const root = ReactDOM.createRoot(
@@ -11,10 +11,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    {/* <React.StrictMode> */}
-      <App />
-    {/* </React.StrictMode> */}
+    <React.StrictMode>
+      <AppContainer />
+    </React.StrictMode>
   </Provider>
-
 );
 

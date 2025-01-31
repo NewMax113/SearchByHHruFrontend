@@ -1,23 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer utilities {
   .custom-left-neg-4 {
     left: -4px;
   }
+
   .custom-top-neg-14 {
     top: -13px;
   }
+
+  .border-l-1 {
+    border-left: 1px solid rgb(230, 230, 230)
+  }
+
+  .border-r-1 {
+    border-right: 1px solid rgb(243, 243, 243)
+  }
+
+  .border-b-1-blue {
+    border-bottom: 2px solid rgb(59, 130, 246)
+  }
+
+  .border-t-1-emerald {
+    border-top: 3px solid rgb(52, 211, 153)
+  }
+
+  .min-h-100 {
+    min-height: 24rem;
+  }
+
+  .min-h-main {
+    min-height: 50.3rem;
+  }
+
+  .shadow-inside-red {
+    box-shadow: 0px 5px 10px 5px rgba(180, 21, 21, 0.22) inset;
+  }
+
+  .max-w-grid-lg {
+    max-width: 1000px;
+  }
+
+  .max-w-grid-sm {
+    max-width: 668px;
+  }
+
+  /* .max-w-grid-ms {
+    max-width: 1000px;
+  } */
+  
 }
 
+
+  
+
+
 body {
+  overflow-y: scroll;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('фон.jpg');
 }
 
 code {
