@@ -11,15 +11,16 @@ export interface IUseFetch {
 }
 
 type IError = string | { err_status: number, err_description: string } | null
-type ILoading = boolean | null
+type ILoading = boolean
 
 const useFetch = <T,>({url, linkBody, method, headers, bodyPost}: IUseFetch) => {
     let [data, setData] = useState<T | null>(null)
     let [error, setError] = useState<IError>(null)
-    let [loading, setLoading] = useState<ILoading>(null)
+    let [isLoading, setIsLoading] = useState<ILoading>(false)
 
     useEffect(() => {
         let fetchData = async () => {
+            setIsLoading(true)
 
             try {
                 await fetch(`${url}?${linkBody}`, {
@@ -29,7 +30,7 @@ const useFetch = <T,>({url, linkBody, method, headers, bodyPost}: IUseFetch) => 
                 })
                     .then(response => {
                         if (!response.ok) {
-                            setLoading(false)
+                            setIsLoading(false)
                             const errorMessage = response.json();
                             errorMessage.then(e => {
                                 setError({ err_status: response.status, err_description: e.error });
@@ -40,22 +41,22 @@ const useFetch = <T,>({url, linkBody, method, headers, bodyPost}: IUseFetch) => 
                     })
                     .then((data) => {
                         if (data) {
-                           setLoading(true) 
                            setData(data)
                            setError(null)
                         }
                     })
             }
             catch (error: any) {
-                setLoading(false)
                 setError('Ошибка сети');
-                //throw error
+            }
+            finally {
+                setIsLoading(false)
             }
         }
         fetchData()
     }, [url, linkBody, bodyPost])
 
-    return { data, error, loading }
+    return { data, error, isLoading }
 }
 
 export default useFetch

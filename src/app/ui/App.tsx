@@ -5,11 +5,11 @@ import { IApp } from '../type/TypeApp';
 import { GetCookie } from '../../shared/hooks';
 
 
-const App: FC<IApp> = ({ cookieToken, darkeningTheBackground, setDarkeningTheBackground, loading }) => {
+const App: FC<IApp> = ({ cookieToken, darkeningTheBackground, setDarkeningTheBackground, error }) => {
 
   return (
     <>
-      {(cookieToken || loading) ? (
+      {(cookieToken) ? (
         <>
           <div className={darkeningTheBackground ? 'opacity-30 blur-sm pointer-events-none' : ''}>
             <PageStructure />
@@ -17,7 +17,7 @@ const App: FC<IApp> = ({ cookieToken, darkeningTheBackground, setDarkeningTheBac
           <ParametersJobOpenings setDarkeningTheBackground={setDarkeningTheBackground} />
         </>
       )
-        : (loading === false) && (<Authentication />)
+        : (error) && (<Authentication />)
       }
     </>
   );

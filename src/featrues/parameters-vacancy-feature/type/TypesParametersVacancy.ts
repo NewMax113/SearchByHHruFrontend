@@ -42,7 +42,7 @@ export interface IRadioInput {
 export interface IDataGetListCountries {
     data: IListCountry[] | null,
     error: string | { err_status: number, err_description: string } | null,
-    loading: boolean | null 
+    isLoading: boolean 
 }
 
 export interface IUseOutputCitiesList {

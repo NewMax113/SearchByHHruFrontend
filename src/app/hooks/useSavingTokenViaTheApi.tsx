@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import GetCookie from "../../shared/utils/GetCookie"
-import { SetCookie, useFetch } from "../../shared/hooks"
+import { useFetch } from "../../shared/hooks"
 import { DataToken, IDataApp } from "../type/TypeApp"
+import { SetCookie } from "../../shared/utils"
 
 const useSavingTokenViaTheApi = ({ code }: { code: string | null }) => {
     let [cookieToken, setCookieToken] = useState('')
     let [cookieTokenRef, setCookieTokenRef] = useState('')
+    
     const [body, setBody] = useState(
         `code=${code}
     &grant_type=authorization_code
@@ -14,7 +16,7 @@ const useSavingTokenViaTheApi = ({ code }: { code: string | null }) => {
     &redirect_uri=http://localhost:3000`
     )
 
-    let { data, loading }: IDataApp = useFetch<DataToken>({
+    let { data, isLoading, error }: IDataApp = useFetch<DataToken>({
             url: 'https://api.hh.ru/token',
             linkBody: body,
             method: 'POST',
@@ -51,14 +53,22 @@ const useSavingTokenViaTheApi = ({ code }: { code: string | null }) => {
     }
 
     useEffect(() => {
-        setCookieToken(GetCookie('token'))
-        setCookieTokenRef(GetCookie('refresh_token'))
-        if (loading) {
+        if (data) {
+            setCookieToken(data.access_token)
+            setCookieTokenRef(data.refresh_token)
+        }
+
+        if (!isLoading && data?.access_token) {
             addingTokenToCookie()
         }
-    }, [loading, data])
+    }, [data, isLoading])
 
-    return { cookieToken, loading }
+    useEffect(() => {
+        setCookieToken(GetCookie('token'))
+        setCookieTokenRef(GetCookie('refresh_token'))
+    }, [])
+
+    return { cookieToken, isLoading, error }
 }
 
 export default useSavingTokenViaTheApi

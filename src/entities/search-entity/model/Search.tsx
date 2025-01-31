@@ -11,7 +11,7 @@ const Search: FC<ISearch> = ({
 
   return (
     <div className='flex justify-center mt-1 xl:mr-20 sm:mr-8 w-full mx-1'>
-      <form className='flex mt-1 w-full' onSubmit={(e: FormEvent<HTMLFormElement>) => { handleClick(); e.preventDefault() }}>
+      <form data-testid="search-form" className='flex mt-1 w-full' onSubmit={(e: FormEvent<HTMLFormElement>) => { handleClick(); e.preventDefault() }}>
         <Input
           typeInput='text'
           value={textInput}

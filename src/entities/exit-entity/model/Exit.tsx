@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { Button } from "../../../shared/ui"
-import DeleteCookie from "../../../shared/hooks/DeleteCookie"
+import DeleteCookie from "../../../shared/utils/DeleteCookie"
 
 
 const Exit: FC = () => {

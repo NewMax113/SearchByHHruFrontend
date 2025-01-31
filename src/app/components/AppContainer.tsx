@@ -8,14 +8,14 @@ const AppContainer = () => {
   const parsedUrl = new URL(window.location.href);
   const code = parsedUrl.searchParams.get("code")
 
-  const { cookieToken, loading } = useSavingTokenViaTheApi({ code })
-
+  const { cookieToken, isLoading, error } = useSavingTokenViaTheApi({ code })
+console.log(cookieToken, isLoading, error)
   return (
     <App
       darkeningTheBackground={darkeningTheBackground}
       setDarkeningTheBackground={setDarkeningTheBackground}
-      loading={loading}
       cookieToken={cookieToken}
+      error={error}
     />
   );
 }
