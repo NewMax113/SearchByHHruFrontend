@@ -1,5 +1,5 @@
 export {default as ButtonsVacancy} from './ButtonsVacancy'
 export {default as DescriptionVacancy} from './DescriptionVacancy'
 export {default as NameVacancy} from './NameVacancy'
-export {default as ParametersVacancy} from './ParametersVacancy'
+export {default as ParametersVacancy} from '../model/ParametersVacancy'
 export {default as StatisticsVacancy} from './StatisticslVacancy'

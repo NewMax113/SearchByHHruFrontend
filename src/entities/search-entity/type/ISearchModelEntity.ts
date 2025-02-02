@@ -1,7 +1,6 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 
-export interface ISearch {
-  textInput: string,
-  onChangeEvent: (e: ChangeEvent<HTMLInputElement>) => void,
+export interface ISearchModal {
   handleClick: () => void
+  children: ReactNode
 }

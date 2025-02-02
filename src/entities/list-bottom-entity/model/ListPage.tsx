@@ -1,5 +1,8 @@
 import { FC } from "react"
 import { IListPage } from "../type/TypeListPage"
+import SpanAction from "../ui/PaginationButton"
+import PaginationContainer from "../ui/PaginationContainer"
+
 
 const ListPage: FC<IListPage> = ({
     arrPageButtonVisible,
@@ -9,32 +12,31 @@ const ListPage: FC<IListPage> = ({
     resetPage,
     lastPage
 }) => {
+    const spanTextStyle = "px-2 py-0.5 cursor-pointer hover:border-x hover:border-emerald-400"
 
     return (
-        <div className="text-blue-500 text-xl border-t-1-emerald">
-            {!arrPageButtonVisible.includes(1 || 2 || 3) && (<>
-                <span className="px-2 py-0.5 cursor-pointer hover:border-x hover:border-emerald-400" onClick={resetPage} >{'«'}</span>
-                <span className="px-2 py-0.5 cursor-pointer hover:border-x hover:border-emerald-400" onClick={() => onClickHandle(page - 1)} >{'‹'}</span>
-            </>
+        <PaginationContainer>
+            {!arrPageButtonVisible.includes(1) && (
+                <>
+                    <SpanAction className={spanTextStyle} callback={resetPage} value={'«'} />
+                    <SpanAction className={spanTextStyle} callback={() => onClickHandle(page - 1)} value={'‹'} />
+                </>
             )}
 
-            <span>
-                {arrPageButtonVisible.map((value: number) =>
-                    <span
-                        className={`px-2 py-0.5 cursor-pointer hover:border-x hover:border-emerald-400 ${page === value && 'text-emerald-400 border-emerald-400 border'}`}
-                        onClick={() => onClickHandle(value)}>
-                        {value}
-                    </span>
-                )}
-            </span>
+            {arrPageButtonVisible.map((value: number) =>
+                <SpanAction
+                    className={`${spanTextStyle} ${page === value && 'text-emerald-400 border-emerald-400 border'}`}
+                    callback={() => onClickHandle(value)}
+                    value={value} />
+            )}
 
             {!arrPageButtonVisible.includes(maxPage) && (
                 <>
-                    <span className="px-2 py-0.5 cursor-pointer hover:border-x hover:border-emerald-400" onClick={() => onClickHandle(page + 1)} >{'›'}</span>
-                    <span className="px-2 py-0.5 cursor-pointer hover:border-x hover:border-emerald-400" onClick={lastPage} >{'»'}</span>
+                    <SpanAction className={spanTextStyle} callback={() => onClickHandle(page + 1)} value={'›'} />
+                    <SpanAction className={spanTextStyle} callback={lastPage} value={'»'} />
                 </>
             )}
-        </div>
+        </PaginationContainer>
 
     )
 }

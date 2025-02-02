@@ -46,3 +46,4 @@ export interface IArgument {
     employer_id: string,
     token: string | null
 }
+

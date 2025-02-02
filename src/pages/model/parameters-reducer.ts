@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
 import { IinitialStateParameters } from "../type/TypeParameters"
+import { area, country } from "../configuration"
 
 
 let initialState: IinitialStateParameters = {
     requestBody: {
-        area: '113',
+        area,
         only_with_salary: false
     },
-    country: { id: 113, country: 'Россия' },
+    country,
     city: { id: null, city: null },
     listCities: [],
     salary: '',

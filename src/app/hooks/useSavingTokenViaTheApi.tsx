@@ -68,7 +68,7 @@ const useSavingTokenViaTheApi = ({ code }: { code: string | null }) => {
         setCookieTokenRef(GetCookie('refresh_token'))
     }, [])
 
-    return { cookieToken, isLoading, error }
+    return { cookieToken, error }
 }
 
 export default useSavingTokenViaTheApi
