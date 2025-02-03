@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { VacancyModelEntity } from '../../../entities';
+import { VacancyContent } from '../../../entities';
 import { IJob_opening_Array } from '../../../pages/type/TypeJobOpening';
 import { IhtmlString } from '../type/IVacancyFeature';
 import GetCookie from '../../../shared/utils/GetCookie';
@@ -17,7 +17,7 @@ const VacancyFeature: FC<IJob_opening_Array> = ({ vacancy }) => {
     const { color, count } = useRange({ saveResultVacancy });
 
     return (
-        <VacancyModelEntity
+        <VacancyContent
             vacancy={vacancy}
             theObj={theObj}
             saveResultVacancy={saveResultVacancy}

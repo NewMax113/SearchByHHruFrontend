@@ -1,5 +1,4 @@
 import { FC } from "react"
-import logo_img from '../img/logo.png'
 
 const Logo: FC = () => {
     return (
@@ -12,9 +11,9 @@ const Logo: FC = () => {
         sm:mr-8 sm:text-4xl  
         xs:hidden
         ">
-        
-           <span ><span className="text-orange-500">Job</span>
-            <span className="text-blue-500">Search</span></span>
+
+            <span ><span className="text-orange-500">Job</span>
+                <span className="text-blue-500">Search</span></span>
         </div>
     )
 }

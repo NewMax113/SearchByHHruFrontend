@@ -7,27 +7,23 @@ import { newPage } from "../../../pages/model/pages-reducer"
 
 const ButtonParametersVacancy: FC<{ status: string }> = ({ status }) => {
     const dispatch = useDispatch<AppDispatch>()
+    const styleButton = "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+    
     if (status === 'addParams') {
         return (
-            <Button classButton={"bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"} text={'Принять'} onClick={() => {
+            <Button classButton={styleButton} text={'Принять'} onClick={() => {
                 dispatch(setBodyRequest(),
                     dispatch(newPage(0)))
-            }
-
-            }></Button>
+            }} />
         )
     }
 
     return (
-        <Button classButton={"bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"} text={'Сбросить'} onClick={() => {
+        <Button classButton={styleButton} text={'Сбросить'} onClick={() => {
             dispatch(resetBodyRequest(),
                 dispatch(newPage(0)))
-        }
-
-        }></Button>
+        }} />
     )
-
-
 }
 
 export default ButtonParametersVacancy

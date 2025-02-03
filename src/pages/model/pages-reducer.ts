@@ -1,17 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
-import { IinitialStatePages, IActionSetPage } from "../type/TypePage"
+import { IActionSetPage } from "../type/TypePage"
+import initialState from "../config/initialStatePages"
 
-
-let initialState: IinitialStatePages = {
-    pages: 0, //стр всего
-    found: 0, //максимум элементов
-    found_now: 8, //элементов на данный момент на стр.
-    page: 0, //стр на данынй момет (начинается с 0)
-    per_page_max: 8, //кол-во элеметов которое покажем на странице
-    per_page_min: null, //остаток элементов
-    name: '' // название в поиске
-}
 
 let pagesReducer = createSlice({
     name: 'pagesReducer',

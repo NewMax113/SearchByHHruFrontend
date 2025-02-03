@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom";
-import Select from "./select"
+import Select from "../ui/select"
 import userEvent from "@testing-library/user-event";
 
 

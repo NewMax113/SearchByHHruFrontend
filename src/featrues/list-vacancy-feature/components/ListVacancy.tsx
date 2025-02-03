@@ -14,7 +14,7 @@ const ListVacancy: FC<IListVacancy> = ({ setLoading }) => {
     return (
         <div className={"sm:grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 xs:grid-cols-2 gap-3"}>
             {vacancies.map((vacanciesList: IJob_opening_Array) =>
-                <VacancyFeature vacancy={vacanciesList.vacancy} />
+                <VacancyFeature key={vacanciesList.vacancy.id} vacancy={vacanciesList.vacancy} />
             )}
         </div>
     )

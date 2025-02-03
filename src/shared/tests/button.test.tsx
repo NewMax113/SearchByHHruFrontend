@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom";
-import Button from "./button"
+import Button from "../ui/button"
 
 test('Отрисовка кнопки с определенным текстом', ()=> {
     render(<Button classButton="" text="Кликни на меня"></Button>)
