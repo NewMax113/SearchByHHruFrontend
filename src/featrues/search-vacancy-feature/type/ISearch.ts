@@ -30,6 +30,5 @@ export interface IUseCreatingQueryParameters {
 
 export interface IUseResetPage {
   pages?: IActionSetPage
-  resetPages: boolean
   setResetPages: Dispatch<SetStateAction<boolean>>
 }

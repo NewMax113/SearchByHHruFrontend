@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent } from "react"
+import { ChangeEvent, FocusEvent, ReactNode } from "react"
 
 export interface IInput {
     value: string
@@ -10,12 +10,11 @@ export interface IInput {
     placeholder?: string
     checkedInput?: boolean
     onBlur?: (e: FocusEvent<HTMLInputElement>) => void
-    //onClickInput?: (e: ChangeEvent<HTMLInputElement>) => any
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export interface IButton {
-    text: string
+    text: string | ReactNode
     classButton: string
     onClick?: () => void
 }

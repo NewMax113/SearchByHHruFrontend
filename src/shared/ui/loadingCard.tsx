@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const LoadingBlock: FC = () => {
+const LoadingCard: FC = () => {
     return (
         <div style={{ minWidth: '19rem' }} className="sm:mb-0 xs:mb-4 animate-pulse rounded max-h-72 min-h-100 bg-gray-100 w-full">
             <div className="flex">
@@ -11,4 +11,4 @@ const LoadingBlock: FC = () => {
     )
 }
 
-export default LoadingBlock
+export default LoadingCard

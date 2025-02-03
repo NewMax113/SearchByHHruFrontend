@@ -3,7 +3,7 @@ import { ISearchContainer } from '../type/ISearch'
 import useActionOnTheText from '../hooks/useActionOnTheText'
 import useSaveVacancies from '../hooks/useSaveVacancies'
 import { Button, Input } from '../../../shared/ui'
-import { SearchModal } from '../../../entities'
+import { SearchVacancy } from '../../../entities'
 
 
 const SearchContainer: FC<ISearchContainer> = ({ setLoading, setBeingVacansies }) => {
@@ -11,7 +11,7 @@ const SearchContainer: FC<ISearchContainer> = ({ setLoading, setBeingVacansies }
   useSaveVacancies({ setLoading, setBeingVacansies })
 
   return (
-    <SearchModal
+    <SearchVacancy
       handleClick={handleClick}
     >
       <Input
@@ -26,7 +26,7 @@ const SearchContainer: FC<ISearchContainer> = ({ setLoading, setBeingVacansies }
         text='Поиск'
         onClick={handleClick}
       />
-    </SearchModal>
+    </SearchVacancy>
   )
 }
 

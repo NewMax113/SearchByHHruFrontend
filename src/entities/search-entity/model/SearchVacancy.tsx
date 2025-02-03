@@ -1,8 +1,8 @@
 import { FC, FormEvent } from "react"
-import { ISearchModal } from "../type/ISearchModelEntity";
+import { ISearchVacancy } from "../type/ISearchModelEntity";
 
 
-const SearchModal: FC<ISearchModal> = ({ handleClick, children }) => {
+const SearchVacancy: FC<ISearchVacancy> = ({ handleClick, children }) => {
 
   return (
     <div className='flex justify-center mt-1 xl:mr-20 sm:mr-8 w-full mx-1'>
@@ -13,4 +13,4 @@ const SearchModal: FC<ISearchModal> = ({ handleClick, children }) => {
   )
 }
 
-export default SearchModal
+export default SearchVacancy

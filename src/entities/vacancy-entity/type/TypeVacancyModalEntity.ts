@@ -3,41 +3,37 @@ import { IColor, IhtmlString } from "../../../featrues/vacancy-feature/type/IVac
 import { IVacancy } from "../../../pages/type/TypeJobOpening";
 import { IResultVacancy } from "../../../pages/type/type";
 
-export interface IVacancyModelEntity {
-    vacancy: IVacancy,
-    theObj: IhtmlString,
-    saveResultVacancy: IResultVacancy | null,
-    count: number,
-    color: IColor,
-    isLoading: boolean,
-    onClickHandle: ()=>void,
+
+interface IBaseStatistics {
+    saveResultVacancy: IResultVacancy | null;
+    count: number;
+    color: IColor;
 }
 
-export interface IStatisticslVacancy {
-    saveResultVacancy: IResultVacancy | null,
-    count: number,
-    color: IColor,
-    isLoading: boolean,
-    onClickHandle: ()=>void
+interface ILoadingHandler {
+    isLoading: boolean;
+    onClickHandle: () => void;
 }
 
-export interface IDescriptionVacancy {
-    theObj: IhtmlString
-    vacancy: IVacancy
-    setDesc: Dispatch<SetStateAction<boolean>>
-    desc: boolean
+interface IDescriptionHandler {
+    desc: boolean;
+    setDesc: Dispatch<SetStateAction<boolean>>;
 }
 
-export interface IButtonsVacancy {
-    vacancy: IVacancy
-    setDesc: Dispatch<SetStateAction<boolean>>
-    desc: boolean
+export interface IVacancyContent extends IBaseStatistics, ILoadingHandler {
+    vacancy: IVacancy;
+    theObj: IhtmlString;
 }
 
-export interface INameVacancy {
-    vacancy: IVacancy
+export interface IStatisticsVacancyBlock extends IBaseStatistics, ILoadingHandler {}
+
+export interface IStatisticsVacancy extends IBaseStatistics {}
+
+export interface IButtonsVacancy extends IDescriptionHandler {
+    vacancy: IVacancy;
 }
 
-export interface IParametersVacancy {
-    vacancy: IVacancy
+export interface IDescriptionVacancy extends IDescriptionHandler {
+    theObj: IhtmlString;
+    vacancy: IVacancy;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { IColor } from "../type/IVacancyFeature";
-import { COLOR_CHANGE_STEP, COLOR_COUNTER_LIMITED, COLOR_MAX_RGB, COLOR_START, RELIABILITY_LIMIT } from "../utils/constant";
+import { COLOR_CHANGE_STEP, COLOR_COUNTER_LIMITED, COLOR_MAX_RGB, COLOR_START, RELIABILITY_LIMIT } from "../config/constant";
 import { IResultVacancy } from "../../../pages/type/type";
 
 const useRange = ({ saveResultVacancy }: { saveResultVacancy: IResultVacancy | null }) => {

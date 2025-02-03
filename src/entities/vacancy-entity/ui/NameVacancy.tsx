@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { INameVacancy } from "../type/TypeVacancyModalEntity";
+import { IVacancy } from "../../../pages/type/TypeJobOpening";
 
-const NameVacancy: FC<INameVacancy> = ({vacancy}) => {
+const NameVacancy: FC<{vacancy: IVacancy}> = ({vacancy}) => {
     return (
         <div className="w-full flex items-center">
             <div

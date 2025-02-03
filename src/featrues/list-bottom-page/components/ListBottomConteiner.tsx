@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux"
 import { newPage } from "../../../pages/model/pages-reducer"
 import ListPage from "../../../entities/list-bottom-entity/model/ListPage"
 import { IListBottomConteiner } from "../type/TypeListBottomContainer"
+import { MAX_PAGE_VISIBLE } from "../config/constants"
+
 
 const ListBottomConteiner: FC<IListBottomConteiner> = ({ setLoading }) => {
-    let maxPageVisible = 7
+    let maxPageVisible = MAX_PAGE_VISIBLE
     let page = useSelector<IRootState, number>(state => state.pages.page + 1)
     let maxPage = useSelector<IRootState, number>(state => state.pages.pages)
     let [arrPageButtonVisible, setArrPageButtonVisible] = useState<number[]>([])

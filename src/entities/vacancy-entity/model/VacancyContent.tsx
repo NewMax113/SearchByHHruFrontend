@@ -1,12 +1,12 @@
-import { FC, ReactNode, useState } from "react"
-import { IVacancyModelEntity } from "../type/TypeVacancyModalEntity"
-import { ButtonsVacancy, DescriptionVacancy, NameVacancy, ParametersVacancy } from "../ui"
-import StatisticslVacancy from "../ui/StatisticslVacancy"
-import { ArcticalBlock, ContentBlock, HeaderContentBlock } from "../ui/VacancyBlocksUi"
+import { FC, useState } from "react"
+import { IVacancyContent } from "../type/TypeVacancyModalEntity"
+import { ButtonsVacancy, DescriptionVacancy, NameVacancy, VacancyDetailsPanel  } from "../ui"
+import StatisticsVacancyBlock from "./StatisticsVacancyBlock"
+import { ArcticalBlock, VacancyInfoBlock, HeaderVacancyInfo } from "../ui/VacancyBlocksUi"
 
 
 
-const VacancyModelEntity: FC<IVacancyModelEntity> = (props) => {
+const VacancyContent: FC<IVacancyContent> = (props) => {
     const [desc, setDesc] = useState<boolean>(false)
     if (desc) {
         return (
@@ -16,22 +16,22 @@ const VacancyModelEntity: FC<IVacancyModelEntity> = (props) => {
 
     return (
         <ArcticalBlock>
-            <ContentBlock>
-                <HeaderContentBlock>
+            <VacancyInfoBlock >
+                <HeaderVacancyInfo>
                     <NameVacancy vacancy={props.vacancy} />
-                    <ParametersVacancy vacancy={props.vacancy} />
-                </HeaderContentBlock>
-                <StatisticslVacancy
+                    <VacancyDetailsPanel  vacancy={props.vacancy} />
+                </HeaderVacancyInfo>
+                <StatisticsVacancyBlock
                     saveResultVacancy={props.saveResultVacancy}
                     count={props.count}
                     color={props.color}
                     isLoading={props.isLoading}
                     onClickHandle={props.onClickHandle}
                 />
-            </ContentBlock>
+            </VacancyInfoBlock >
             <ButtonsVacancy desc={desc} setDesc={setDesc} vacancy={props.vacancy} />
         </ArcticalBlock>
     )
 }
 
-export default VacancyModelEntity
+export default VacancyContent

@@ -1,0 +1,1 @@
+export let MAX_PAGE_VISIBLE = 7

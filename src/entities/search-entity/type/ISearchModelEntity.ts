@@ -1,6 +1,6 @@
-import { ChangeEvent, ReactNode } from "react";
+import { ReactNode } from "react";
 
-export interface ISearchModal {
+export interface ISearchVacancy {
   handleClick: () => void
   children: ReactNode
 }

@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { IParametersVacancy } from "../type/TypeVacancyModalEntity";
 import VacancySalary from "../ui/VacancySalary";
 import VacancyHeadPararms from "../ui/VacancyHeadParams";
+import { IVacancy } from "../../../pages/type/TypeJobOpening";
 
-const ParametersVacancy: FC<IParametersVacancy> = ({vacancy}) => {
+const VacancyDetailsPanel : FC<{vacancy: IVacancy} > = ({vacancy}) => {
     const style = 'border border-blue-200 text-orange-500 rounded-lg'
     const styleTextSalary = 'text-xs p-1 font-thin'
     const styleInterval = 'border border-blue-200 ml-auto mr-auto m-0.5"'
@@ -24,4 +24,4 @@ const ParametersVacancy: FC<IParametersVacancy> = ({vacancy}) => {
     )
 }
 
-export default ParametersVacancy
+export default VacancyDetailsPanel 

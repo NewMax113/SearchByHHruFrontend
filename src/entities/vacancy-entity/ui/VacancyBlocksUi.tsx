@@ -8,7 +8,7 @@ export const ArcticalBlock: FC<{ children: ReactNode }> = ({ children }) => {
     )
 }
 
-export const ContentBlock: FC<{ children: ReactNode }> = ({ children }) => {
+export const VacancyInfoBlock : FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <div className="flex flex-col justify-between">
             {children}
@@ -16,7 +16,7 @@ export const ContentBlock: FC<{ children: ReactNode }> = ({ children }) => {
     )
 }
 
-export const HeaderContentBlock: FC<{ children: ReactNode }> = ({ children }) => {
+export const HeaderVacancyInfo: FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <div className='h-52 overflow-auto flex flex-col justify-between'>
             {children}

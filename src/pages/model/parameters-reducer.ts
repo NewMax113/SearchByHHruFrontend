@@ -1,21 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
 import { IinitialStateParameters } from "../type/TypeParameters"
-import { area, country } from "../configuration"
+import initialState from '../config/initialStateParams'
 
-
-let initialState: IinitialStateParameters = {
-    requestBody: {
-        area,
-        only_with_salary: false
-    },
-    country,
-    city: { id: null, city: null },
-    listCities: [],
-    salary: '',
-    experience: '',
-    schedule: [],
-}
 
 let params = createSlice({
     name: 'paramsSearch',
@@ -27,7 +14,7 @@ let params = createSlice({
         setCountryRedux(state, action: PayloadAction<IinitialStateParameters['country']>) {
             state.country = { id: action.payload.id, country: action.payload.country }
         },
-        setCityRedux(state, action: PayloadAction<any>) {
+        setCityRedux(state, action: PayloadAction<IinitialStateParameters['city']>) {
             state.city = { id: action.payload.id, city: action.payload.city }
         },
         setEarningRedux(state, action: PayloadAction<IinitialStateParameters['salary']>) {
@@ -60,13 +47,7 @@ let params = createSlice({
             }
         },
         resetBodyRequest(state) {
-            state.requestBody.area = '113'
-            state.requestBody.only_with_salary = false
-            state.city = { id: null, city: null }
-            state.country = { id: 113, country: 'Россия' }
-            state.experience = ''
-            state.salary = ''
-            state.schedule = []
+            Object.assign(state, initialState);
         },
     },
 })
