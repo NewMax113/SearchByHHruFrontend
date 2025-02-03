@@ -25,6 +25,7 @@ const ListPage: FC<IListPage> = ({
 
             {arrPageButtonVisible.map((value: number) =>
                 <SpanAction
+                    key={value}
                     className={`${spanTextStyle} ${page === value && 'text-emerald-400 border-emerald-400 border'}`}
                     callback={() => onClickHandle(value)}
                     value={value} />
