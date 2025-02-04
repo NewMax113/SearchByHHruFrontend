@@ -23,7 +23,7 @@ const Authentication: FC = () => {
                                 <div className="relative">
                                     <a
                                         className="border-2 bg-indigo-300 p-2 text-indigo-900 hover:bg-purple-300 hover:text-purple-900 rounded transition duration-500 ease-in-out font-medium"
-                                        href="https://hh.ru/oauth/authorize?response_type=code&client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA&redirect_uri=http://localhost:3000">
+                                        href="https://hh.ru/oauth/authorize?response_type=code&client_id=IEARBF6UD0NH8B140TJNCR2I6G885SI1Q7OHFN2VPN6MUMPT3IJI9QIJI2IO44GA&redirect_uri=http://localhost:3000/auth">
                                         Вход</a>
                                 </div>
                             </div>

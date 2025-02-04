@@ -2,8 +2,8 @@ import { FC } from "react"
 import { Button } from "../../../shared/ui"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "../../../app/model/reducer"
-import { resetBodyRequest, setBodyRequest } from "../../../pages/model/parameters-reducer"
-import { newPage } from "../../../pages/model/pages-reducer"
+import { resetBodyRequest, setBodyRequest } from "../../../pages/list-vacancyes-page/model/parameters-reducer"
+import { newPage } from "../../../pages/list-vacancyes-page/model/pages-reducer"
 
 const ButtonParametersVacancy: FC<{ status: string }> = ({ status }) => {
     const dispatch = useDispatch<AppDispatch>()

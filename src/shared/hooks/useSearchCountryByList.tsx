@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { IListCountry } from "../../pages/type/type";
+import { IListCountry } from "../../pages/list-vacancyes-page/type/type";
 
 export interface IUseSearchCountryByList {
     listCountries: IListCountry[] | []

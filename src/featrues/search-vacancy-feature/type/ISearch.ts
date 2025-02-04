@@ -1,6 +1,6 @@
 import { SetStateAction, Dispatch } from "react";
-import { IJob_opening_Array } from "../../../pages/type/TypeJobOpening";
-import { IActionSetPage } from "../../../pages/type/TypePage";
+import { IJob_opening_Array } from "../../../pages/list-vacancyes-page/type/TypeJobOpening";
+import { IActionSetPage } from "../../../pages/list-vacancyes-page/type/TypePage";
 
 export interface ISearchContainer {
   setLoading: Dispatch<SetStateAction<boolean>>,

@@ -3,7 +3,7 @@ import useOutputCitiesList from "./useOutputCitiesList"
 import { IUseOutputCitiesList } from "../type/TypesParametersVacancy"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "../../../app/model/reducer"
-import { setListCities } from "../../../pages/model/parameters-reducer"
+import { setListCities } from "../../../pages/list-vacancyes-page/model/parameters-reducer"
 
 const useDispatchListCities = ({listCountries, country}: IUseOutputCitiesList) => {
     let { listCities } = useOutputCitiesList({ listCountries, country})

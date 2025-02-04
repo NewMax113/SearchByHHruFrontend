@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import useGetListCountries from '../hooks/useGetListCountries'
 import { Select } from '../../../shared/ui'
 import { AppDispatch, IRootState } from '../../../app/model/reducer'
-import { setCityRedux, setCountryRedux } from '../../../pages/model/parameters-reducer'
+import { setCityRedux, setCountryRedux } from '../../../pages/list-vacancyes-page/model/parameters-reducer'
 import { ICountry } from '../type/TypesParametersVacancy'
-import { IListCountry } from '../../../pages/type/type'
+import { IListCountry } from '../../../pages/list-vacancyes-page/type/type'
 import useDispatchListCities from '../hooks/useDispatchListCities'
 
 

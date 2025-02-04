@@ -4,6 +4,8 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { store } from './app/model/reducer';
 import AppContainer from './app/components/AppContainer';
+import { RouterProvider } from 'react-router';
+import { router } from './app/router';
 
 
 const root = ReactDOM.createRoot(
@@ -12,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <AppContainer />
+      <RouterProvider router={router} />
     </React.StrictMode>
   </Provider>
 );

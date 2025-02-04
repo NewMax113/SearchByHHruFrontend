@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { IVacancy } from "../../../pages/type/TypeJobOpening"
+import { IVacancy } from "../../../pages/list-vacancyes-page/type/TypeJobOpening"
 
 const VacancyHeadPararms: FC<{style: string, styleInterval: string, vacancy: IVacancy}> = ({style, styleInterval, vacancy}) => {
     return (

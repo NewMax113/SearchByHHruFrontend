@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { IRootState } from "../../../app/model/reducer"
-import { IRequestBody } from "../../../pages/type/TypeParameters"
+import { IRequestBody } from "../../../pages/list-vacancyes-page/type/TypeParameters"
 import GetCookie from "../../../shared/utils/GetCookie"
 import { useEffect, useState } from "react"
 
