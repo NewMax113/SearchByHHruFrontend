@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { IRootState } from "../../../app/model/reducer"
 import { VacancyFeature } from "../../"
 import { IListVacancy } from "./type/IListVacancy"
-import { IJob_opening_Array } from "../../../pages/type/TypeJobOpening"
+import { IJob_opening_Array } from "../../../pages/list-vacancyes-page/type/TypeJobOpening"
 
 
 const ListVacancy: FC<IListVacancy> = ({ setLoading }) => {

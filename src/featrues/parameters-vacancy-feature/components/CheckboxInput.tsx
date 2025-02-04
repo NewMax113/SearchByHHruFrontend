@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Input } from '../../../shared/ui'
 import { AppDispatch, IRootState } from '../../../app/model/reducer'
-import { setWorkScheduleRedux } from '../../../pages/model/parameters-reducer'
+import { setWorkScheduleRedux } from '../../../pages/list-vacancyes-page/model/parameters-reducer'
 import { ICheckboxInput } from '../type/TypesParametersVacancy'
 
 

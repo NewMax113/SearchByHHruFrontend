@@ -1,7 +1,7 @@
 import { FC } from "react";
 import VacancySalary from "../ui/VacancySalary";
 import VacancyHeadPararms from "../ui/VacancyHeadParams";
-import { IVacancy } from "../../../pages/type/TypeJobOpening";
+import { IVacancy } from "../../../pages/list-vacancyes-page/type/TypeJobOpening";
 
 const VacancyDetailsPanel : FC<{vacancy: IVacancy} > = ({vacancy}) => {
     const style = 'border border-blue-200 text-orange-500 rounded-lg'

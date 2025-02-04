@@ -2,7 +2,7 @@ import { FC, useState, ChangeEvent, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '../../../shared/ui';
 import { AppDispatch, IRootState } from '../../../app/model/reducer';
-import { setEarningRedux } from '../../../pages/model/parameters-reducer';
+import { setEarningRedux } from '../../../pages/list-vacancyes-page/model/parameters-reducer';
 
 
 const Salary: FC<{ id: string }> = ({ id }) => {

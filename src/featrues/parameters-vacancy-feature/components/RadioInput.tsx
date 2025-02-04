@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Input } from '../../../shared/ui'
 import { AppDispatch, IRootState } from '../../../app/model/reducer'
-import { setWorkExperienceRedux } from '../../../pages/model/parameters-reducer'
+import { setWorkExperienceRedux } from '../../../pages/list-vacancyes-page/model/parameters-reducer'
 import { IRadioInput } from '../type/TypesParametersVacancy'
 
 

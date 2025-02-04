@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { IColor, IhtmlString } from "../../../featrues/vacancy-feature/type/IVacancyFeature";
-import { IVacancy } from "../../../pages/type/TypeJobOpening";
-import { IResultVacancy } from "../../../pages/type/type";
+import { IVacancy } from "../../../pages/list-vacancyes-page/type/TypeJobOpening";
+import { IResultVacancy } from "../../../pages/list-vacancyes-page/type/type";
 
 
 interface IBaseStatistics {

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { VacancyContent } from '../../../entities';
-import { IJob_opening_Array } from '../../../pages/type/TypeJobOpening';
+import { IJob_opening_Array } from '../../../pages/list-vacancyes-page/type/TypeJobOpening';
 import { IhtmlString } from '../type/IVacancyFeature';
 import GetCookie from '../../../shared/utils/GetCookie';
 import useRange from '../hooks/useRange';

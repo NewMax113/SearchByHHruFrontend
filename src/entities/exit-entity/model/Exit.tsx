@@ -1,12 +1,14 @@
 import { FC } from "react"
 import { Button } from "../../../shared/ui"
 import DeleteCookie from "../../../shared/utils/DeleteCookie"
+import { useNavigate } from "react-router"
 
 
 const Exit: FC = () => {
+    const navigate = useNavigate()
     const handleClick = () => {
         DeleteCookie('token')
-        window.location.reload();
+        navigate('/auth')
     }
     
     return (
