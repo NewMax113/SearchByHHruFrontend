@@ -1,3 +1,7 @@
+Если будете запускать проект, то рекоментудется его запускать параллельно с репозиторием SearchByHHruBackend
+
+Запускается Frontend и Backend через npm start
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
