@@ -5,11 +5,10 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "@tanstack/react-query": "^5.64.1",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.91",
-    "@types/react": "^18.2.69",
+    "@types/react": "^18.3.18",
     "@types/react-dom": "^18.2.22",
     "@types/react-redux": "^7.1.33",
     "cors": "^2.8.5",
@@ -54,6 +53,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "envify": "^4.1.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-replace": "^2.2.0",

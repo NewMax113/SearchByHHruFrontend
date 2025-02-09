@@ -10,11 +10,19 @@ const Logo: FC = () => {
         lg:block
         sm:hidden
         sm:mr-8 sm:text-4xl  
+<<<<<<< Updated upstream
         xs:hidden
         ">
         
            <span ><span className="text-orange-500">Job</span>
             <span className="text-blue-500">Search</span></span>
+=======
+        xs:hidden"
+            data-testid='logo'>
+
+            <span ><span className="text-orange-500">Job</span>
+                <span className="text-blue-500">Search</span></span>
+>>>>>>> Stashed changes
         </div>
     )
 }
