@@ -6,3 +6,9 @@ export interface IListPage {
     resetPage: ()=>void
     lastPage: ()=>void
 }
+
+export interface IPaginationButton {
+    className: string
+    callback: ()=> void
+    value: string | number
+}

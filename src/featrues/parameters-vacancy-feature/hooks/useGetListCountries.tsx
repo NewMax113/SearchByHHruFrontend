@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import useFetch from '../../../shared/hooks/useFetch'
 import { IDataGetListCountries, IUseGetListCountries } from '../type/TypesParametersVacancy'
-import { IListCountry } from '../../../pages/type/type';
+import { IListCountry } from '../../../pages/list-vacancyes-page/type/type';
 
 
 const useGetListCountries = ({ setListCountries }: IUseGetListCountries) => { 

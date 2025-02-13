@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
-import { IListCountry } from "../../../pages/type/type"
+import { IListCountry } from "../../../pages/list-vacancyes-page/type/type"
 
 export interface ICheckboxInput {
     typeInput: string

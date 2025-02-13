@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IVacancy } from "../../../pages/type/TypeJobOpening";
+import { IVacancy } from "../../../pages/list-vacancyes-page/type/TypeJobOpening";
 import { useFetchSearchResultsQuery } from "../../search-vacancy-feature/hooks/useFetchSearchResultsQuery";
 import { IArgument } from "../../../shared/type/type";
 

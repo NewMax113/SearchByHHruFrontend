@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { IRootState } from "../../../app/model/reducer"
 import { VacancyFeature } from "../../"
 import { IListVacancy } from "./type/IListVacancy"
-import { IJob_opening_Array } from "../../../pages/type/TypeJobOpening"
+import { IJob_opening_Array } from "../../../pages/list-vacancyes-page/type/TypeJobOpening"
 
 
 const ListVacancy: FC<IListVacancy> = ({ setLoading }) => {
@@ -14,7 +14,7 @@ const ListVacancy: FC<IListVacancy> = ({ setLoading }) => {
     return (
         <div className={"sm:grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 xs:grid-cols-2 gap-3"}>
             {vacancies.map((vacanciesList: IJob_opening_Array) =>
-                <VacancyFeature vacancy={vacanciesList.vacancy} />
+                <VacancyFeature key={vacanciesList.vacancy.id} vacancy={vacanciesList.vacancy} />
             )}
         </div>
     )

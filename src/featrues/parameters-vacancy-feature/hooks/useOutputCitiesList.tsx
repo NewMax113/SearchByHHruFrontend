@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import useSearchCountryByList from "../../../shared/hooks/useSearchCountryByList"
 import { IUseOutputCitiesList } from "../type/TypesParametersVacancy"
-import { IListCountry } from "../../../pages/type/type"
+import { IListCountry } from "../../../pages/list-vacancyes-page/type/type"
 
 
 const useOutputCitiesList = ({ listCountries, country }: IUseOutputCitiesList) => {

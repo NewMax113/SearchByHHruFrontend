@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IVacancy } from "../../../pages/type/TypeJobOpening";
+import { IVacancy } from "../../../pages/list-vacancyes-page/type/TypeJobOpening";
 import { IArgument } from "../../../shared/type/type";
 
 const useSaveArg = ({vacancy, token}: {vacancy: IVacancy, token: string | null}) => {
